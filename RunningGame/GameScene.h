@@ -8,6 +8,8 @@
 
 #import <SpriteKit/SpriteKit.h>
 
-@interface MyScene : SKScene
+@interface GameScene : SKScene
+
+- (instancetype)initWithSize:(CGSize)size andGameType:(GameType)gameType;
 
 @end

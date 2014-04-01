@@ -2,12 +2,13 @@
 //  ViewController.m
 //  RunningGame
 //
-//  Created by Mick on 3/28/14.
+//  Created by Michael MacCallum on 3/28/14.
 //  Copyright (c) 2014 MacCDevTeam LLC. All rights reserved.
 //
 
 #import "ViewController.h"
-#import "MyScene.h"
+#import "MenuScene.h"
+@import iAd;
 
 @implementation ViewController
 
@@ -15,37 +16,33 @@
 {
     [super viewDidLoad];
 
-    // Configure the view.
-    SKView * skView = (SKView *)self.view;
-    skView.showsFPS = YES;
-    skView.showsNodeCount = YES;
+    SKView *skView = (SKView *)self.view;
     
-    // Create and configure the scene.
-    SKScene * scene = [MyScene sceneWithSize:skView.bounds.size];
-    scene.scaleMode = SKSceneScaleModeAspectFill;
+    MenuScene *scene = [[MenuScene alloc] initWithSize:skView.bounds.size];
+    [scene setScaleMode:SKSceneScaleModeFill];
     
-    // Present the scene.
     [skView presentScene:scene];
 }
 
-- (BOOL)shouldAutorotate
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    [self setCanDisplayBannerAds:YES];
+}
+
+- (BOOL)prefersStatusBarHidden
 {
     return YES;
 }
 
-- (NSUInteger)supportedInterfaceOrientations
+- (BOOL)shouldAutorotate
 {
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        return UIInterfaceOrientationMaskAllButUpsideDown;
-    } else {
-        return UIInterfaceOrientationMaskAll;
-    }
+    return NO;
 }
 
-- (void)didReceiveMemoryWarning
+- (NSUInteger)supportedInterfaceOrientations
 {
-    [super didReceiveMemoryWarning];
-    // Release any cached data, images, etc that aren't in use.
+    return UIInterfaceOrientationMaskPortrait;
 }
 
 @end

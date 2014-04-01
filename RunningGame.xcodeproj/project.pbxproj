@@ -16,14 +16,28 @@
 		0046208A18E62B7000DAD16A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0046208918E62B7000DAD16A /* AppDelegate.m */; };
 		0046208D18E62B7000DAD16A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0046208B18E62B7000DAD16A /* Main.storyboard */; };
 		0046209018E62B7000DAD16A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0046208F18E62B7000DAD16A /* ViewController.m */; };
-		0046209318E62B7000DAD16A /* MyScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 0046209218E62B7000DAD16A /* MyScene.m */; };
-		0046209518E62B7000DAD16A /* Spaceship.png in Resources */ = {isa = PBXBuildFile; fileRef = 0046209418E62B7000DAD16A /* Spaceship.png */; };
+		0046209318E62B7000DAD16A /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 0046209218E62B7000DAD16A /* GameScene.m */; };
 		0046209718E62B7000DAD16A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0046209618E62B7000DAD16A /* Images.xcassets */; };
 		0046209E18E62B7100DAD16A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0046209D18E62B7100DAD16A /* XCTest.framework */; };
 		0046209F18E62B7100DAD16A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0046207718E62B7000DAD16A /* Foundation.framework */; };
 		004620A018E62B7100DAD16A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0046207B18E62B7000DAD16A /* UIKit.framework */; };
 		004620A818E62B7100DAD16A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 004620A618E62B7100DAD16A /* InfoPlist.strings */; };
 		004620AA18E62B7100DAD16A /* RunningGameTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 004620A918E62B7100DAD16A /* RunningGameTests.m */; };
+		004620B418E62BA600DAD16A /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 004620B318E62BA600DAD16A /* iAd.framework */; };
+		004620B718E62FA400DAD16A /* SKColor+Colors.m in Sources */ = {isa = PBXBuildFile; fileRef = 004620B618E62FA400DAD16A /* SKColor+Colors.m */; };
+		004620BA18E65AF600DAD16A /* MenuScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 004620B918E65AF600DAD16A /* MenuScene.m */; };
+		004620BD18E662DB00DAD16A /* MenuButtonNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 004620BC18E662DB00DAD16A /* MenuButtonNode.m */; };
+		004620C018E7089300DAD16A /* CountDownNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 004620BF18E7089300DAD16A /* CountDownNode.m */; };
+		004620C918E7288200DAD16A /* ComicNeueSansID.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 004620C818E7288200DAD16A /* ComicNeueSansID.ttf */; };
+		004620CF18E73CF500DAD16A /* GameOverScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 004620CE18E73CF500DAD16A /* GameOverScene.m */; };
+		004620D218E74C2600DAD16A /* ScoreDisplayNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 004620D118E74C2600DAD16A /* ScoreDisplayNode.m */; };
+		006C26BD18E87EE8006EAAB6 /* tap.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 006C26BC18E87EE8006EAAB6 /* tap.mp3 */; };
+		006C26C018E88263006EAAB6 /* NodeAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 006C26BF18E88263006EAAB6 /* NodeAdditions.m */; };
+		006C26C218E896B5006EAAB6 /* beep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 006C26C118E896B5006EAAB6 /* beep.mp3 */; };
+		006C26C418E8A907006EAAB6 /* win.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 006C26C318E8A907006EAAB6 /* win.mp3 */; };
+		006C26C618E8AB47006EAAB6 /* lose.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 006C26C518E8AB47006EAAB6 /* lose.mp3 */; };
+		00CEC67618EA47E7009B7CF1 /* TutorialOverlayNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 00CEC67518EA47E7009B7CF1 /* TutorialOverlayNode.m */; };
+		00CEC67918EA4902009B7CF1 /* CancelButtonNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 00CEC67818EA4902009B7CF1 /* CancelButtonNode.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,15 +65,39 @@
 		0046208C18E62B7000DAD16A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0046208E18E62B7000DAD16A /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		0046208F18E62B7000DAD16A /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		0046209118E62B7000DAD16A /* MyScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyScene.h; sourceTree = "<group>"; };
-		0046209218E62B7000DAD16A /* MyScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyScene.m; sourceTree = "<group>"; };
-		0046209418E62B7000DAD16A /* Spaceship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Spaceship.png; sourceTree = "<group>"; };
+		0046209118E62B7000DAD16A /* GameScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
+		0046209218E62B7000DAD16A /* GameScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameScene.m; sourceTree = "<group>"; };
 		0046209618E62B7000DAD16A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		0046209C18E62B7100DAD16A /* RunningGameTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RunningGameTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0046209D18E62B7100DAD16A /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		004620A518E62B7100DAD16A /* RunningGameTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RunningGameTests-Info.plist"; sourceTree = "<group>"; };
 		004620A718E62B7100DAD16A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		004620A918E62B7100DAD16A /* RunningGameTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RunningGameTests.m; sourceTree = "<group>"; };
+		004620B318E62BA600DAD16A /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
+		004620B518E62FA400DAD16A /* SKColor+Colors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKColor+Colors.h"; sourceTree = "<group>"; };
+		004620B618E62FA400DAD16A /* SKColor+Colors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SKColor+Colors.m"; sourceTree = "<group>"; };
+		004620B818E65AF600DAD16A /* MenuScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuScene.h; sourceTree = "<group>"; };
+		004620B918E65AF600DAD16A /* MenuScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuScene.m; sourceTree = "<group>"; };
+		004620BB18E662DB00DAD16A /* MenuButtonNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuButtonNode.h; sourceTree = "<group>"; };
+		004620BC18E662DB00DAD16A /* MenuButtonNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuButtonNode.m; sourceTree = "<group>"; };
+		004620BE18E7089300DAD16A /* CountDownNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountDownNode.h; sourceTree = "<group>"; };
+		004620BF18E7089300DAD16A /* CountDownNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountDownNode.m; sourceTree = "<group>"; };
+		004620C818E7288200DAD16A /* ComicNeueSansID.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ComicNeueSansID.ttf; sourceTree = "<group>"; };
+		004620CD18E73CF500DAD16A /* GameOverScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOverScene.h; sourceTree = "<group>"; };
+		004620CE18E73CF500DAD16A /* GameOverScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameOverScene.m; sourceTree = "<group>"; };
+		004620D018E74C2600DAD16A /* ScoreDisplayNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoreDisplayNode.h; sourceTree = "<group>"; };
+		004620D118E74C2600DAD16A /* ScoreDisplayNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScoreDisplayNode.m; sourceTree = "<group>"; };
+		006C26BB18E87CAE006EAAB6 /* Globals.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Globals.h; sourceTree = "<group>"; };
+		006C26BC18E87EE8006EAAB6 /* tap.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = tap.mp3; sourceTree = "<group>"; };
+		006C26BE18E88263006EAAB6 /* NodeAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NodeAdditions.h; sourceTree = "<group>"; };
+		006C26BF18E88263006EAAB6 /* NodeAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NodeAdditions.m; sourceTree = "<group>"; };
+		006C26C118E896B5006EAAB6 /* beep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = beep.mp3; sourceTree = "<group>"; };
+		006C26C318E8A907006EAAB6 /* win.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = win.mp3; sourceTree = "<group>"; };
+		006C26C518E8AB47006EAAB6 /* lose.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = lose.mp3; sourceTree = "<group>"; };
+		00CEC67418EA47E7009B7CF1 /* TutorialOverlayNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialOverlayNode.h; sourceTree = "<group>"; };
+		00CEC67518EA47E7009B7CF1 /* TutorialOverlayNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialOverlayNode.m; sourceTree = "<group>"; };
+		00CEC67718EA4902009B7CF1 /* CancelButtonNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CancelButtonNode.h; sourceTree = "<group>"; };
+		00CEC67818EA4902009B7CF1 /* CancelButtonNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CancelButtonNode.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +105,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				004620B418E62BA600DAD16A /* iAd.framework in Frameworks */,
 				0046207A18E62B7000DAD16A /* CoreGraphics.framework in Frameworks */,
 				0046207C18E62B7000DAD16A /* UIKit.framework in Frameworks */,
 				0046207E18E62B7000DAD16A /* SpriteKit.framework in Frameworks */,
@@ -109,6 +148,7 @@
 		0046207618E62B7000DAD16A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				004620B318E62BA600DAD16A /* iAd.framework */,
 				0046207718E62B7000DAD16A /* Foundation.framework */,
 				0046207918E62B7000DAD16A /* CoreGraphics.framework */,
 				0046207B18E62B7000DAD16A /* UIKit.framework */,
@@ -126,9 +166,14 @@
 				0046208B18E62B7000DAD16A /* Main.storyboard */,
 				0046208E18E62B7000DAD16A /* ViewController.h */,
 				0046208F18E62B7000DAD16A /* ViewController.m */,
-				0046209118E62B7000DAD16A /* MyScene.h */,
-				0046209218E62B7000DAD16A /* MyScene.m */,
-				0046209418E62B7000DAD16A /* Spaceship.png */,
+				004620CB18E73CDF00DAD16A /* Menu Scene */,
+				004620CA18E737D600DAD16A /* Game Scene */,
+				004620CC18E73CE600DAD16A /* Game Over Scene */,
+				004620B518E62FA400DAD16A /* SKColor+Colors.h */,
+				004620B618E62FA400DAD16A /* SKColor+Colors.m */,
+				006C26BE18E88263006EAAB6 /* NodeAdditions.h */,
+				006C26BF18E88263006EAAB6 /* NodeAdditions.m */,
+				006C26BB18E87CAE006EAAB6 /* Globals.h */,
 				0046209618E62B7000DAD16A /* Images.xcassets */,
 				0046208018E62B7000DAD16A /* Supporting Files */,
 			);
@@ -138,6 +183,11 @@
 		0046208018E62B7000DAD16A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				006C26C518E8AB47006EAAB6 /* lose.mp3 */,
+				006C26C118E896B5006EAAB6 /* beep.mp3 */,
+				006C26C318E8A907006EAAB6 /* win.mp3 */,
+				006C26BC18E87EE8006EAAB6 /* tap.mp3 */,
+				004620C818E7288200DAD16A /* ComicNeueSansID.ttf */,
 				0046208118E62B7000DAD16A /* RunningGame-Info.plist */,
 				0046208218E62B7000DAD16A /* InfoPlist.strings */,
 				0046208518E62B7000DAD16A /* main.m */,
@@ -162,6 +212,43 @@
 				004620A618E62B7100DAD16A /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		004620CA18E737D600DAD16A /* Game Scene */ = {
+			isa = PBXGroup;
+			children = (
+				0046209118E62B7000DAD16A /* GameScene.h */,
+				0046209218E62B7000DAD16A /* GameScene.m */,
+				00CEC67718EA4902009B7CF1 /* CancelButtonNode.h */,
+				00CEC67818EA4902009B7CF1 /* CancelButtonNode.m */,
+				00CEC67418EA47E7009B7CF1 /* TutorialOverlayNode.h */,
+				00CEC67518EA47E7009B7CF1 /* TutorialOverlayNode.m */,
+				004620BE18E7089300DAD16A /* CountDownNode.h */,
+				004620BF18E7089300DAD16A /* CountDownNode.m */,
+			);
+			name = "Game Scene";
+			sourceTree = "<group>";
+		};
+		004620CB18E73CDF00DAD16A /* Menu Scene */ = {
+			isa = PBXGroup;
+			children = (
+				004620B818E65AF600DAD16A /* MenuScene.h */,
+				004620B918E65AF600DAD16A /* MenuScene.m */,
+				004620BB18E662DB00DAD16A /* MenuButtonNode.h */,
+				004620BC18E662DB00DAD16A /* MenuButtonNode.m */,
+			);
+			name = "Menu Scene";
+			sourceTree = "<group>";
+		};
+		004620CC18E73CE600DAD16A /* Game Over Scene */ = {
+			isa = PBXGroup;
+			children = (
+				004620CD18E73CF500DAD16A /* GameOverScene.h */,
+				004620CE18E73CF500DAD16A /* GameOverScene.m */,
+				004620D018E74C2600DAD16A /* ScoreDisplayNode.h */,
+				004620D118E74C2600DAD16A /* ScoreDisplayNode.m */,
+			);
+			name = "Game Over Scene";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -241,8 +328,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				0046208418E62B7000DAD16A /* InfoPlist.strings in Resources */,
+				004620C918E7288200DAD16A /* ComicNeueSansID.ttf in Resources */,
+				006C26C418E8A907006EAAB6 /* win.mp3 in Resources */,
 				0046209718E62B7000DAD16A /* Images.xcassets in Resources */,
-				0046209518E62B7000DAD16A /* Spaceship.png in Resources */,
+				006C26BD18E87EE8006EAAB6 /* tap.mp3 in Resources */,
+				006C26C618E8AB47006EAAB6 /* lose.mp3 in Resources */,
+				006C26C218E896B5006EAAB6 /* beep.mp3 in Resources */,
 				0046208D18E62B7000DAD16A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -262,10 +353,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0046209318E62B7000DAD16A /* MyScene.m in Sources */,
+				00CEC67618EA47E7009B7CF1 /* TutorialOverlayNode.m in Sources */,
+				0046209318E62B7000DAD16A /* GameScene.m in Sources */,
+				004620CF18E73CF500DAD16A /* GameOverScene.m in Sources */,
+				004620C018E7089300DAD16A /* CountDownNode.m in Sources */,
+				00CEC67918EA4902009B7CF1 /* CancelButtonNode.m in Sources */,
 				0046209018E62B7000DAD16A /* ViewController.m in Sources */,
+				004620B718E62FA400DAD16A /* SKColor+Colors.m in Sources */,
+				004620BA18E65AF600DAD16A /* MenuScene.m in Sources */,
+				006C26C018E88263006EAAB6 /* NodeAdditions.m in Sources */,
 				0046208A18E62B7000DAD16A /* AppDelegate.m in Sources */,
 				0046208618E62B7000DAD16A /* main.m in Sources */,
+				004620BD18E662DB00DAD16A /* MenuButtonNode.m in Sources */,
+				004620D218E74C2600DAD16A /* ScoreDisplayNode.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -472,6 +572,7 @@
 				004620AF18E62B7100DAD16A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		004620B018E62B7100DAD16A /* Build configuration list for PBXNativeTarget "RunningGameTests" */ = {
 			isa = XCConfigurationList;
@@ -480,6 +581,7 @@
 				004620B218E62B7100DAD16A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
