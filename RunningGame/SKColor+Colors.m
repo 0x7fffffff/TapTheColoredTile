@@ -11,7 +11,66 @@
 
 @implementation SKColor (Colors)
 
++ (SKColor *)_stepConfirmationColor
+{
+    NSArray *array = [SKColor confirmationColors];
+    
+    SKColor *color = array[arc4random_uniform((uint32_t)array.count)];
+    
+    return color;
+}
+
++ (SKColor *)_stepDestructiveColor
+{
+    NSArray *array = [SKColor destructiveColors];
+    
+    SKColor *color = array[arc4random_uniform((uint32_t)array.count)];
+    
+    return color;
+}
+
 + (SKColor *)_stepTileColor
+{
+    NSArray *array = [SKColor allColorsArray];
+    
+    static uint32_t previous = UINT32_MAX;
+    static uint32_t next = 0;
+    do {
+        next = arc4random_uniform((u_int32_t)array.count);
+    } while (next == previous);
+
+    uint32_t finally = next;
+    previous = next;
+    next = 0;
+    
+    return (SKColor *)array[finally];
+}
+
++ (NSArray *)confirmationColors
+{
+    static NSArray *array = nil;
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        array = @[[self peterRiverColor],[self _emeraldcolor],[self amethystColor],[self turquoiseColor],[self _wet_asfault]];
+    });
+    
+    return array;
+}
+
++ (NSArray *)destructiveColors
+{
+    static NSArray *array = nil;
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        array = @[[self _alizarinColor],[self _sunFlowerColor],[self carrotColor]];
+    });
+    
+    return array;
+}
+
++ (NSArray *)allColorsArray
 {
     static NSArray *array = nil;
     
@@ -20,16 +79,7 @@
         array = @[[self peterRiverColor],[self _alizarinColor],[self _emeraldcolor],[self _sunFlowerColor],[self amethystColor],[self turquoiseColor],[self carrotColor],[self _wet_asfault]];
     });
     
-    static uint32_t lastRand = 0;
-    uint32_t rand = arc4random_uniform((uint32_t)array.count);
-    
-    while (lastRand == rand) {
-        rand = arc4random_uniform((uint32_t)array.count);
-    }
-    
-    lastRand = rand;
-    
-    return (SKColor *)array[rand];
+    return array;
 }
 
 + (SKColor *)_nonStepTileColor

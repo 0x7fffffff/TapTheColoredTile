@@ -12,6 +12,8 @@
 
 + (SKColor *)_stepTileColor;
 + (SKColor *)_nonStepTileColor;
++ (SKColor *)_stepConfirmationColor;
++ (SKColor *)_stepDestructiveColor;
 
 + (SKColor *) _alizarinColor;
 + (SKColor *) _sunFlowerColor;

@@ -12,7 +12,7 @@
 #import "MenuScene.h"
 #import "SKColor+Colors.h"
 #import "NodeAdditions.h"
-#import "MenuButtonNode.h"
+#import "SKButton.h"
 //@import GameKit;
 
 @interface GameOverScene ()
@@ -136,20 +136,30 @@
         [subTitleNode setPosition:CGPointMake(size.width / 2.0, scoresNode.frame.origin.y + scoresNode.frame.size.height + 22)];
         [self addChild:subTitleNode];
         
-        MenuButtonNode *retryButton = [[MenuButtonNode alloc] initWithColor:[SKColor _stepTileColor] size:CGSizeMake(120.0, 44.0)];
-        [retryButton setName:@"retryButton"];
-        [retryButton setText:@"RETRY"];
-        [retryButton setAnchorPoint:CGPointMake(0.0, 0.0)];
-        [retryButton setPosition:CGPointMake(scoresNode.frame.origin.x, scoresNode.frame.origin.y - 64.0)];
+        CGSize buttonSize = CGSizeMake(120.0, 44.0);
         
+        SKButton *retryButton = [[SKButton alloc] initWithColor:[SKColor _stepConfirmationColor] size:buttonSize];
+        [retryButton setName:@"retryButton"];
+        [retryButton setText:@"Retry"];
+        [retryButton setPosition:CGPointMake(scoresNode.frame.origin.x + buttonSize.width / 2.0, scoresNode.frame.origin.y - 54.0)];
+        [retryButton addActionOfType:SKButtonActionTypeTouchUpInside withBlock:^{
+            GameScene *scene = [[GameScene alloc] initWithSize:self.size andGameType:self.returningGameType];
+            [scene setScaleMode:SKSceneScaleModeFill];
+            
+            [self.view presentScene:scene transition:[SKTransition flipVerticalWithDuration:0.35]];
+        }];
         [self addChild:retryButton];
         
-        MenuButtonNode *quitButton = [[MenuButtonNode alloc] initWithColor:[SKColor _stepTileColor] size:CGSizeMake(120.0, 44.0)];
-        [quitButton setName:@"quitButton"];
-        [quitButton setText:@"QUIT"];
-        [quitButton setAnchorPoint:CGPointMake(0.0, 0.0)];
-        [quitButton setPosition:CGPointMake(scoresNode.frame.origin.x + scoresNode.frame.size.width / 2.0 + 10.0, retryButton.frame.origin.y)];
-        
+        SKButton *quitButton = [[SKButton alloc] initWithColor:[SKColor _stepDestructiveColor] size:buttonSize];
+        [quitButton setName:@"retryButton"];
+        [quitButton setText:@"Quit"];
+        [quitButton setPosition:CGPointMake(scoresNode.frame.origin.x + scoresNode.frame.size.width - buttonSize.width / 2.0, scoresNode.frame.origin.y - 54.0)];
+        [quitButton addActionOfType:SKButtonActionTypeTouchUpInside withBlock:^{
+            MenuScene *scene = [[MenuScene alloc] initWithSize:self.size];
+            [scene setScaleMode:SKSceneScaleModeFill];
+            
+            [self.view presentScene:scene transition:[SKTransition doorsCloseHorizontalWithDuration:0.35]];
+        }];
         [self addChild:quitButton];
     }
     
@@ -179,41 +189,5 @@
 
     return (int64_t)input;
 }
-
-
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    [super touchesBegan:touches withEvent:event];
-    
-    CGPoint location = [[touches anyObject] locationInNode:self];
-    
-    if ([self nodesAtPoint:location].count > 0) {
-        
-        
-        for (SKNode *node in [self nodesAtPoint:location]) {
-            if ([node.name isEqualToString:@"retryButton"]) {
-                if ([self shouldPlaySounds]) {
-                    [self runAction:[self _tapSoundAction]];
-                }
-
-                GameScene *scene = [[GameScene alloc] initWithSize:self.size andGameType:self.returningGameType];
-                [scene setScaleMode:SKSceneScaleModeFill];
-                
-                [self.view presentScene:scene transition:[SKTransition flipVerticalWithDuration:0.35]];
-                
-            }else if ([node.name isEqualToString:@"quitButton"]) {
-                if ([self shouldPlaySounds]) {
-                    [self runAction:[self _tapSoundAction]];
-                }
-
-                MenuScene *scene = [[MenuScene alloc] initWithSize:self.size];
-                [scene setScaleMode:SKSceneScaleModeFill];
-                
-                [self.view presentScene:scene transition:[SKTransition doorsCloseHorizontalWithDuration:0.35]];
-            }
-        }
-    }
-}
-
 
 @end

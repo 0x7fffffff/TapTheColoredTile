@@ -11,6 +11,8 @@
 #import "GameScene.h"
 #import "SKColor+Colors.h"
 #import "NodeAdditions.h"
+#import "SKButton.h"
+#import "GameOverScene.h"
 
 @implementation MenuScene
 
@@ -25,70 +27,73 @@
         [titleLabelNode setHorizontalAlignmentMode:SKLabelHorizontalAlignmentModeCenter];
         [titleLabelNode setVerticalAlignmentMode:SKLabelVerticalAlignmentModeCenter];
         [titleLabelNode setFontColor:[SKColor _stepTileColor]];
-        [titleLabelNode setFontSize:28.0];
+        [titleLabelNode setFontSize:30.0];
         [self addChild:titleLabelNode];
-
         
-        MenuButtonNode *sprintButton = [[MenuButtonNode alloc] initWithColor:[SKColor _stepTileColor] size:CGSizeMake(self.frame.size.width, 50.0)];
-        [sprintButton setAnchorPoint:CGPointMake(0.0, 0.0)];
-        [sprintButton setPosition:CGPointMake(0.0, size.height / 2.0 + 10.0)];
+        CGSize buttonSize = CGSizeMake(size.width, 50.0);
+        CGFloat xStart = size.width / 2.0;
+        CGFloat yStart = titleLabelNode.position.y / 2.0;
+        
+        SKButton *sprintButton = [[SKButton alloc] initWithColor:[SKColor _stepTileColor] size:buttonSize];
+        [sprintButton setPosition:CGPointMake(xStart, yStart + 120.0)];
         [sprintButton setName:@"sprintButton"];
         [sprintButton setText:@"Sprint"];
+        [sprintButton addActionOfType:SKButtonActionTypeTouchUpInside withBlock:^{
+            [self presentGameSceneWithGameType:GameTypeSprint];
+        }];
         [self addChild:sprintButton];
-
-        MenuButtonNode *marathonButton = [[MenuButtonNode alloc] initWithColor:[SKColor _stepTileColor] size:CGSizeMake(self.frame.size.width, 50.0)];
-        [marathonButton setAnchorPoint:CGPointMake(0.0, 0.0)];
-        [marathonButton setPosition:CGPointMake(0.0, size.height / 2.0 - 50.0)];
+        
+        SKButton *marathonButton = [[SKButton alloc] initWithColor:[SKColor _stepTileColor] size:buttonSize];
+        [marathonButton setPosition:CGPointMake(xStart, yStart + 60.0)];
         [marathonButton setName:@"marathonButton"];
         [marathonButton setText:@"Marathon"];
+        [marathonButton addActionOfType:SKButtonActionTypeTouchUpInside withBlock:^{
+            [self presentGameSceneWithGameType:GameTypeMarathon];
+        }];
         [self addChild:marathonButton];
         
-        MenuButtonNode *enduranceButton = [[MenuButtonNode alloc] initWithColor:[SKColor _stepTileColor] size:CGSizeMake(self.frame.size.width, 50.0)];
-        [enduranceButton setAnchorPoint:CGPointMake(0.0, 0.0)];
-        [enduranceButton setPosition:CGPointMake(0.0, size.height / 2.0 - 110.0)];
-        [enduranceButton setName:@"enduranceButton"];
+        SKButton *enduranceButton = [[SKButton alloc] initWithColor:[SKColor _stepTileColor] size:buttonSize];
+        [enduranceButton setPosition:CGPointMake(xStart, yStart)];
+        [enduranceButton setName:@"enduranceName"];
         [enduranceButton setText:@"Endurance"];
+        [enduranceButton addActionOfType:SKButtonActionTypeTouchUpInside withBlock:^{
+            [self presentGameSceneWithGameType:GameTypeEndurance];
+        }];
         [self addChild:enduranceButton];
+        
+        SKButton *gameMode4Button = [[SKButton alloc] initWithColor:[SKColor _stepTileColor] size:buttonSize];
+        [gameMode4Button setPosition:CGPointMake(xStart, yStart - 60.0)];
+        [gameMode4Button setName:@"gameMode4Button"];
+        [gameMode4Button setText:@"Game Mode 4"];
+        [gameMode4Button addActionOfType:SKButtonActionTypeTouchUpInside withBlock:^{
+            NSLog(@"Game Mode 4 Button");
+        }];
+        [self addChild:gameMode4Button];
+        
+        SKButton *settingsButton = [[SKButton alloc] initWithColor:[SKColor _stepTileColor] size:buttonSize];
+        [settingsButton setPosition:CGPointMake(xStart, yStart - 120.0)];
+        [settingsButton setName:@"settingsButton"];
+        [settingsButton setText:@"Settings"];
+        [settingsButton addActionOfType:SKButtonActionTypeTouchUpInside withBlock:^{
+
+            GameOverScene *scene = [[GameOverScene alloc] initWithSize:self.size andReturningGameType:GameTypeSprint andDidWin:NO withTapCount:12023231];
+            [scene setScaleMode:SKSceneScaleModeFill];
+            
+            [self.view presentScene:scene transition:[SKTransition doorwayWithDuration:0.35]];
+        }];
+        [self addChild:settingsButton];
     }
     
     return self;
 }
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+- (void)presentGameSceneWithGameType:(GameType)gameType
 {
-    [super touchesBegan:touches withEvent:event];
+    GameScene *scene = [[GameScene alloc] initWithSize:self.size andGameType:gameType];
+    [scene setScaleMode:SKSceneScaleModeFill];
     
-    CGPoint location = [[touches anyObject] locationInNode:self];
-    
-    if ([self nodesAtPoint:location].count > 0) {
-        
-        if ([self shouldPlaySounds]) {
-            [self removeAllActions];
-            [self runAction:[self _tapSoundAction]];
-        }
-        
-        for (SKNode *touchedNode in [self nodesAtPoint:location]) {
-            
-            if (touchedNode == [self childNodeWithName:@"sprintButton"]) {
-                GameScene *scene = [[GameScene alloc] initWithSize:self.size andGameType:GameTypeSprint];
-                [scene setScaleMode:SKSceneScaleModeFill];
-                
-                [self.view presentScene:scene transition:[SKTransition doorwayWithDuration:0.35]];
-            }else if (touchedNode == [self childNodeWithName:@"marathonButton"]) {
-                GameScene *scene = [[GameScene alloc] initWithSize:self.size andGameType:GameTypeMarathon];
-                [scene setScaleMode:SKSceneScaleModeFill];
-                
-                [self.view presentScene:scene transition:[SKTransition doorwayWithDuration:0.35]];
-                
-            }else if (touchedNode == [self childNodeWithName:@"enduranceButton"]) {
-                GameScene *scene = [[GameScene alloc] initWithSize:self.size andGameType:GameTypeEndurance];
-                [scene setScaleMode:SKSceneScaleModeFill];
-                
-                [self.view presentScene:scene transition:[SKTransition doorwayWithDuration:0.35]];
-
-            }
-        }
-    }
+    [self.view presentScene:scene transition:[SKTransition doorwayWithDuration:0.35]];
 }
+
 
 @end

@@ -7,8 +7,8 @@
 //
 
 typedef enum : NSUInteger {
-    GameTypeSprint = 0,
-    GameTypeMarathon = 1,
-    GameTypeEndurance = 2
+    GameTypeSprint = 1,
+    GameTypeMarathon,
+    GameTypeEndurance
 } GameType;
 

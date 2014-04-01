@@ -24,7 +24,7 @@
         [self.labelNode setFontColor:[SKColor _nonStepTileColor]];
         [self.labelNode setHorizontalAlignmentMode:SKLabelHorizontalAlignmentModeCenter];
         [self.labelNode setVerticalAlignmentMode:SKLabelVerticalAlignmentModeCenter];
-        [self.labelNode setPosition:CGPointMake(size.width / 2.0, size.height / 2.0)];
+        [self.labelNode setPosition:CGPointMake(size.width / 2.0, 0.0)];
         [self addChild:self.labelNode];
     }
     

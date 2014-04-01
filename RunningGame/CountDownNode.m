@@ -34,7 +34,9 @@
         [self.labelNode setPosition:CGPointMake(size.width / 2.0, size.height / 2.0)];
         [self addChild:self.labelNode];
         
-        [self.labelNode runAction:[self _beepSoundAction]];
+        if ([self shouldPlaySounds]) {
+            [self.labelNode runAction:[self _beepSoundAction]];
+        }
     }
     
     return self;
@@ -47,15 +49,21 @@
     SKAction *increment = [SKAction runBlock:^{
         i -- ;
         if (i == 0) {
-            [self.labelNode runAction:[self _tapSoundAction]];
+            if ([self shouldPlaySounds]) {
+                [self.labelNode runAction:[self _tapSoundAction]];
+            }
             i = 3;
         }else{
             [self.labelNode setText:[NSString stringWithFormat:@"%d",i]];
             if (i == 2) {
-                [self.labelNode runAction:[self _beepSoundAction]];
+                if ([self shouldPlaySounds]) {
+                    [self.labelNode runAction:[self _beepSoundAction]];
+                }
                 [self.labelNode setFontColor:[SKColor _sunFlowerColor]];
             }else if (i == 1) {
-                [self.labelNode runAction:[self _beepSoundAction]];
+                if ([self shouldPlaySounds]) {
+                    [self.labelNode runAction:[self _beepSoundAction]];
+                }
                 [self.labelNode setFontColor:[SKColor _emeraldcolor]];
             }else{
                 [self.labelNode setFontColor:[SKColor _alizarinColor]];

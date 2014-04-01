@@ -36,6 +36,7 @@
 		006C26C218E896B5006EAAB6 /* beep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 006C26C118E896B5006EAAB6 /* beep.mp3 */; };
 		006C26C418E8A907006EAAB6 /* win.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 006C26C318E8A907006EAAB6 /* win.mp3 */; };
 		006C26C618E8AB47006EAAB6 /* lose.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 006C26C518E8AB47006EAAB6 /* lose.mp3 */; };
+		00B026DD18EB304B0058E591 /* SKButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B026DC18EB304B0058E591 /* SKButton.m */; };
 		00CEC67618EA47E7009B7CF1 /* TutorialOverlayNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 00CEC67518EA47E7009B7CF1 /* TutorialOverlayNode.m */; };
 		00CEC67918EA4902009B7CF1 /* CancelButtonNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 00CEC67818EA4902009B7CF1 /* CancelButtonNode.m */; };
 /* End PBXBuildFile section */
@@ -94,6 +95,8 @@
 		006C26C118E896B5006EAAB6 /* beep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = beep.mp3; sourceTree = "<group>"; };
 		006C26C318E8A907006EAAB6 /* win.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = win.mp3; sourceTree = "<group>"; };
 		006C26C518E8AB47006EAAB6 /* lose.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = lose.mp3; sourceTree = "<group>"; };
+		00B026DB18EB304B0058E591 /* SKButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKButton.h; sourceTree = "<group>"; };
+		00B026DC18EB304B0058E591 /* SKButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKButton.m; sourceTree = "<group>"; };
 		00CEC67418EA47E7009B7CF1 /* TutorialOverlayNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialOverlayNode.h; sourceTree = "<group>"; };
 		00CEC67518EA47E7009B7CF1 /* TutorialOverlayNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialOverlayNode.m; sourceTree = "<group>"; };
 		00CEC67718EA4902009B7CF1 /* CancelButtonNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CancelButtonNode.h; sourceTree = "<group>"; };
@@ -129,7 +132,7 @@
 		0046206B18E62B7000DAD16A = {
 			isa = PBXGroup;
 			children = (
-				0046207F18E62B7000DAD16A /* RunningGame */,
+				0046207F18E62B7000DAD16A /* TapTheColoredTile */,
 				004620A318E62B7100DAD16A /* RunningGameTests */,
 				0046207618E62B7000DAD16A /* Frameworks */,
 				0046207518E62B7000DAD16A /* Products */,
@@ -158,7 +161,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		0046207F18E62B7000DAD16A /* RunningGame */ = {
+		0046207F18E62B7000DAD16A /* TapTheColoredTile */ = {
 			isa = PBXGroup;
 			children = (
 				0046208818E62B7000DAD16A /* AppDelegate.h */,
@@ -166,17 +169,15 @@
 				0046208B18E62B7000DAD16A /* Main.storyboard */,
 				0046208E18E62B7000DAD16A /* ViewController.h */,
 				0046208F18E62B7000DAD16A /* ViewController.m */,
+				00B026DF18EB3F6E0058E591 /* All Scenes */,
 				004620CB18E73CDF00DAD16A /* Menu Scene */,
 				004620CA18E737D600DAD16A /* Game Scene */,
 				004620CC18E73CE600DAD16A /* Game Over Scene */,
-				004620B518E62FA400DAD16A /* SKColor+Colors.h */,
-				004620B618E62FA400DAD16A /* SKColor+Colors.m */,
-				006C26BE18E88263006EAAB6 /* NodeAdditions.h */,
-				006C26BF18E88263006EAAB6 /* NodeAdditions.m */,
-				006C26BB18E87CAE006EAAB6 /* Globals.h */,
+				00B026DE18EB3F560058E591 /* Settings Screen */,
 				0046209618E62B7000DAD16A /* Images.xcassets */,
 				0046208018E62B7000DAD16A /* Supporting Files */,
 			);
+			name = TapTheColoredTile;
 			path = RunningGame;
 			sourceTree = "<group>";
 		};
@@ -249,6 +250,27 @@
 				004620D118E74C2600DAD16A /* ScoreDisplayNode.m */,
 			);
 			name = "Game Over Scene";
+			sourceTree = "<group>";
+		};
+		00B026DE18EB3F560058E591 /* Settings Screen */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Settings Screen";
+			sourceTree = "<group>";
+		};
+		00B026DF18EB3F6E0058E591 /* All Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				00B026DB18EB304B0058E591 /* SKButton.h */,
+				00B026DC18EB304B0058E591 /* SKButton.m */,
+				004620B518E62FA400DAD16A /* SKColor+Colors.h */,
+				004620B618E62FA400DAD16A /* SKColor+Colors.m */,
+				006C26BE18E88263006EAAB6 /* NodeAdditions.h */,
+				006C26BF18E88263006EAAB6 /* NodeAdditions.m */,
+				006C26BB18E87CAE006EAAB6 /* Globals.h */,
+			);
+			name = "All Scenes";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -360,6 +382,7 @@
 				00CEC67918EA4902009B7CF1 /* CancelButtonNode.m in Sources */,
 				0046209018E62B7000DAD16A /* ViewController.m in Sources */,
 				004620B718E62FA400DAD16A /* SKColor+Colors.m in Sources */,
+				00B026DD18EB304B0058E591 /* SKButton.m in Sources */,
 				004620BA18E65AF600DAD16A /* MenuScene.m in Sources */,
 				006C26C018E88263006EAAB6 /* NodeAdditions.m in Sources */,
 				0046208A18E62B7000DAD16A /* AppDelegate.m in Sources */,
@@ -493,6 +516,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "RunningGame/TapTheColoredTile-Prefix.pch";
 				INFOPLIST_FILE = "RunningGame/TapTheColoredTile-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = TapTheColoredTile;
 				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
 				WRAPPER_EXTENSION = app;
@@ -507,6 +531,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "RunningGame/TapTheColoredTile-Prefix.pch";
 				INFOPLIST_FILE = "RunningGame/TapTheColoredTile-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = TapTheColoredTile;
 				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
 				WRAPPER_EXTENSION = app;
