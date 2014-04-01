@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 @import SpriteKit;
 @import AVFoundation;
-//@import GameKit;
+@import GameKit;
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -30,16 +30,16 @@
 
 -(void)authenticateLocalPlayer
 {
-//    if(![GKLocalPlayer localPlayer].authenticated) {
-//        
-//        [[NSNotificationCenter defaultCenter] addObserverForName:GKPlayerDidChangeNotificationName object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
-//            NSLog(@"%@",note.userInfo);
-//        }];
-//        
-//        [[GKLocalPlayer localPlayer] setAuthenticateHandler:^(UIViewController *viewController, NSError *error) {
-//            NSLog(@"Error%@",error);
-//        }];
-//    }
+    if(![GKLocalPlayer localPlayer].authenticated) {
+        
+        [[NSNotificationCenter defaultCenter] addObserverForName:GKPlayerDidChangeNotificationName object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
+            NSLog(@"%@",note.userInfo);
+        }];
+        
+        [[GKLocalPlayer localPlayer] setAuthenticateHandler:^(UIViewController *viewController, NSError *error) {
+            NSLog(@"Error%@",error);
+        }];
+    }
 }
 
 
@@ -85,7 +85,7 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+
 }
 
 @end

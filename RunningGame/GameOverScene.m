@@ -13,7 +13,7 @@
 #import "SKColor+Colors.h"
 #import "NodeAdditions.h"
 #import "SKButton.h"
-//@import GameKit;
+@import GameKit;
 
 @interface GameOverScene ()
 @property (strong, nonatomic) NSArray *scores;
@@ -35,13 +35,13 @@
         NSString *lastTimeKey = nil;
         
         if (returningGameType == GameTypeSprint) {
-            bestTimesKey = @"bestSprintTimeKey";
+            bestTimesKey = @"SprintLeaderBoard";
             lastTimeKey = @"lastSprintTimeKey";
         }else if (returningGameType == GameTypeMarathon) {
-            bestTimesKey = @"bestMarathonTimeKey";
+            bestTimesKey = @"MarathonLeaderBoard";
             lastTimeKey = @"lastMarathonTimeKey";
         }else if (returningGameType == GameTypeEndurance) {
-            bestTimesKey = @"bestEnduranceScoresKey";
+            bestTimesKey = @"EnduranceLeaderBoard";
             lastTimeKey = @"lastEnduranceScoreKey";
         }else{
             return self;
@@ -168,25 +168,33 @@
 
 - (void)reportHighestScore
 {
-//    NSLog(@"%s",__PRETTY_FUNCTION__);
-//    
-//    uint64_t scoreValue = [self scorePreparedForGameCenter];
-//    NSLog(@"%llu",scoreValue);
-//    
-//    GKScore *score = [[GKScore alloc] initWithLeaderboardIdentifier:self.leaderboardID];
-//    [score setValue:scoreValue];
-//    
-//    [GKScore reportScores:@[score] withCompletionHandler:^(NSError *error) {
-//        if (error != nil) {
-//            NSLog(@"%@", [error localizedDescription]);
-//        }
-//    }];
+    NSLog(@"%s",__PRETTY_FUNCTION__);
+
+    uint64_t scoreValue = [self scorePreparedForGameCenter];
+    
+    GKScore *score = [[GKScore alloc] initWithLeaderboardIdentifier:self.leaderboardID];
+    [score setValue:scoreValue];
+    
+    [GKScore reportScores:@[score] withCompletionHandler:^(NSError *error) {
+        if (error != nil) {
+            NSLog(@"%@", [error localizedDescription]);
+        }
+    }];
 }
 
 - (int64_t)scorePreparedForGameCenter
 {
-    double input = [self.scores[0] doubleValue] * 1000;
-
+    double input = DBL_MAX;
+    
+    if (self.scores.count > 0) {
+        if (self.returningGameType == GameTypeSprint || self.returningGameType == GameTypeMarathon) {
+            input = [self.scores[0] doubleValue] * 1000;
+            
+        }else if (self.returningGameType == GameTypeEndurance) {
+            input = [self.scores[0] longValue];
+        }
+    }
+    
     return (int64_t)input;
 }
 

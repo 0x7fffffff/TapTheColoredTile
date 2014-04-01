@@ -37,6 +37,7 @@
 		006C26C418E8A907006EAAB6 /* win.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 006C26C318E8A907006EAAB6 /* win.mp3 */; };
 		006C26C618E8AB47006EAAB6 /* lose.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 006C26C518E8AB47006EAAB6 /* lose.mp3 */; };
 		00B026DD18EB304B0058E591 /* SKButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B026DC18EB304B0058E591 /* SKButton.m */; };
+		00B026E218EB4A8C0058E591 /* DSMultilineLabelNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B026E118EB4A8C0058E591 /* DSMultilineLabelNode.m */; };
 		00CEC67618EA47E7009B7CF1 /* TutorialOverlayNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 00CEC67518EA47E7009B7CF1 /* TutorialOverlayNode.m */; };
 		00CEC67918EA4902009B7CF1 /* CancelButtonNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 00CEC67818EA4902009B7CF1 /* CancelButtonNode.m */; };
 /* End PBXBuildFile section */
@@ -97,6 +98,8 @@
 		006C26C518E8AB47006EAAB6 /* lose.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = lose.mp3; sourceTree = "<group>"; };
 		00B026DB18EB304B0058E591 /* SKButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKButton.h; sourceTree = "<group>"; };
 		00B026DC18EB304B0058E591 /* SKButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKButton.m; sourceTree = "<group>"; };
+		00B026E018EB4A8C0058E591 /* DSMultilineLabelNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSMultilineLabelNode.h; sourceTree = "<group>"; };
+		00B026E118EB4A8C0058E591 /* DSMultilineLabelNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSMultilineLabelNode.m; sourceTree = "<group>"; };
 		00CEC67418EA47E7009B7CF1 /* TutorialOverlayNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialOverlayNode.h; sourceTree = "<group>"; };
 		00CEC67518EA47E7009B7CF1 /* TutorialOverlayNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialOverlayNode.m; sourceTree = "<group>"; };
 		00CEC67718EA4902009B7CF1 /* CancelButtonNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CancelButtonNode.h; sourceTree = "<group>"; };
@@ -262,6 +265,8 @@
 		00B026DF18EB3F6E0058E591 /* All Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				00B026E018EB4A8C0058E591 /* DSMultilineLabelNode.h */,
+				00B026E118EB4A8C0058E591 /* DSMultilineLabelNode.m */,
 				00B026DB18EB304B0058E591 /* SKButton.h */,
 				00B026DC18EB304B0058E591 /* SKButton.m */,
 				004620B518E62FA400DAD16A /* SKColor+Colors.h */,
@@ -386,6 +391,7 @@
 				004620BA18E65AF600DAD16A /* MenuScene.m in Sources */,
 				006C26C018E88263006EAAB6 /* NodeAdditions.m in Sources */,
 				0046208A18E62B7000DAD16A /* AppDelegate.m in Sources */,
+				00B026E218EB4A8C0058E591 /* DSMultilineLabelNode.m in Sources */,
 				0046208618E62B7000DAD16A /* main.m in Sources */,
 				004620BD18E662DB00DAD16A /* MenuButtonNode.m in Sources */,
 				004620D218E74C2600DAD16A /* ScoreDisplayNode.m in Sources */,
