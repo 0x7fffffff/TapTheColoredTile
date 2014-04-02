@@ -27,7 +27,7 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-//    [self setCanDisplayBannerAds:YES];
+    [self setCanDisplayBannerAds:YES];
 }
 
 - (BOOL)prefersStatusBarHidden

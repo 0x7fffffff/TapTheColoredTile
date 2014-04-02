@@ -15,8 +15,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//    [defaults setBool:NO forKey:@"shouldPlaySounds"];
-//    [defaults synchronize];
+    [defaults setBool:YES forKey:@"shouldPlaySounds"];
+    [defaults synchronize];
     
     if (![defaults boolForKey:@"prefsSet"]) {
         [defaults setBool:YES forKey:@"prefsSet"];
@@ -45,9 +45,13 @@
 
 - (SKView *)getSKViewSubview
 {
-    for (UIView *subview in self.window.rootViewController.view.subviews) {
-        if ([subview isKindOfClass:[SKView class]]) {
-            return (SKView *)subview;
+    if ([self.window.rootViewController.view respondsToSelector:@selector(scene)]) {
+        return (SKView *)self.window.rootViewController.view;
+    }else{
+        for (UIView *subview in self.window.rootViewController.view.subviews) {
+            if ([subview isKindOfClass:[SKView class]]) {
+                return (SKView *)subview;
+            }
         }
     }
     return nil;
@@ -75,6 +79,8 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
+    [[AVAudioSession sharedInstance] setActive:YES error:nil];
+    
     [self authenticateLocalPlayer];
 
     SKView *view = [self getSKViewSubview];
@@ -83,9 +89,5 @@
     }
 }
 
-- (void)applicationWillTerminate:(UIApplication *)application
-{
-
-}
 
 @end

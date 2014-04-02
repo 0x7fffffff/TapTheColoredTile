@@ -7,7 +7,6 @@
 //
 
 #import "MenuScene.h"
-#import "MenuButtonNode.h"
 #import "GameScene.h"
 #import "SKColor+Colors.h"
 #import "NodeAdditions.h"
@@ -34,45 +33,50 @@
         CGFloat xStart = size.width / 2.0;
         CGFloat yStart = titleLabelNode.position.y / 2.0;
         
+        
+        
         SKButton *sprintButton = [[SKButton alloc] initWithColor:[SKColor _stepTileColor] size:buttonSize];
         [sprintButton setPosition:CGPointMake(xStart, yStart + 120.0)];
-        [sprintButton setName:@"sprintButton"];
         [sprintButton setText:@"Sprint"];
         [sprintButton addActionOfType:SKButtonActionTypeTouchUpInside withBlock:^{
             [self presentGameSceneWithGameType:GameTypeSprint];
         }];
         [self addChild:sprintButton];
         
+        
+        
         SKButton *marathonButton = [[SKButton alloc] initWithColor:[SKColor _stepTileColor] size:buttonSize];
         [marathonButton setPosition:CGPointMake(xStart, yStart + 60.0)];
-        [marathonButton setName:@"marathonButton"];
         [marathonButton setText:@"Marathon"];
         [marathonButton addActionOfType:SKButtonActionTypeTouchUpInside withBlock:^{
             [self presentGameSceneWithGameType:GameTypeMarathon];
         }];
         [self addChild:marathonButton];
         
+        
+        
         SKButton *enduranceButton = [[SKButton alloc] initWithColor:[SKColor _stepTileColor] size:buttonSize];
         [enduranceButton setPosition:CGPointMake(xStart, yStart)];
-        [enduranceButton setName:@"enduranceName"];
         [enduranceButton setText:@"Endurance"];
         [enduranceButton addActionOfType:SKButtonActionTypeTouchUpInside withBlock:^{
             [self presentGameSceneWithGameType:GameTypeEndurance];
         }];
         [self addChild:enduranceButton];
         
+        
+        
         SKButton *gameMode4Button = [[SKButton alloc] initWithColor:[SKColor _stepTileColor] size:buttonSize];
         [gameMode4Button setPosition:CGPointMake(xStart, yStart - 60.0)];
-        [gameMode4Button setName:@"gameMode4Button"];
-        [gameMode4Button setText:@"Game Mode 4"];
+        [gameMode4Button setText:@"Practice"];
         [gameMode4Button addActionOfType:SKButtonActionTypeTouchUpInside withBlock:^{
-            NSLog(@"Game Mode 4 Button");
+            [self presentGameSceneWithGameType:GameTypeFreePlay];
         }];
         [self addChild:gameMode4Button];
         
+        
+        
         SKButton *settingsButton = [[SKButton alloc] initWithColor:[SKColor _stepTileColor] size:buttonSize];
         [settingsButton setPosition:CGPointMake(xStart, yStart - 120.0)];
-        [settingsButton setName:@"settingsButton"];
         [settingsButton setText:@"Settings"];
         [settingsButton addActionOfType:SKButtonActionTypeTouchUpInside withBlock:^{
 

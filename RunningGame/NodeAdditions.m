@@ -22,7 +22,7 @@
     
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        action = [SKAction playSoundFileNamed:@"win.mp3" waitForCompletion:NO];
+        action = [SKAction playSoundFileNamed:@"win.m4a" waitForCompletion:YES];
     });
     
     return action;
@@ -35,7 +35,7 @@
     
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        action = [SKAction playSoundFileNamed:@"lose.mp3" waitForCompletion:NO];
+        action = [SKAction playSoundFileNamed:@"lose.m4a" waitForCompletion:YES];
     });
     
     return action;
@@ -47,7 +47,7 @@
     
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        action = [SKAction playSoundFileNamed:@"tap.mp3" waitForCompletion:NO];
+        action = [SKAction playSoundFileNamed:@"tap.m4a" waitForCompletion:YES];
     });
     
     return action;
@@ -60,7 +60,7 @@
     
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        action = [SKAction playSoundFileNamed:@"beep.mp3" waitForCompletion:NO];
+        action = [SKAction playSoundFileNamed:@"beep.m4a" waitForCompletion:YES];
     });
     
     return action;

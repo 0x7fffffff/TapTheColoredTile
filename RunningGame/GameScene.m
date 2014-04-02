@@ -13,8 +13,8 @@
 #import "GameOverScene.h"
 #import "NodeAdditions.h"
 #import "TutorialOverlayNode.h"
-#import "CancelButtonNode.h"
-//@import GameKit;
+#import "SKButton.h"
+@import GameKit;
 
 static NSString *tileName = @"Tile";
 static CGFloat tileWidth = 80.0;
@@ -32,6 +32,7 @@ static CGFloat leadingSpace = 35.0;
 @property (nonatomic, strong) NSMutableArray *last15Taps;
 @property (strong, nonatomic) NSTimer *tapTimer;
 @property (getter = isFirstRun, assign) BOOL firstRun;
+@property (nonatomic, assign) BOOL isInFreePlay;
 @end
 
 @implementation GameScene
@@ -40,7 +41,9 @@ static CGFloat leadingSpace = 35.0;
 {
     if (self = [super initWithSize:size]) {
         
+        [self setIsInFreePlay:gameType == GameTypeFreePlay];
         [self setFirstRun:![self hasShownTutorial]];
+        
         if (self.tapTimer.isValid) {
             [self.tapTimer invalidate];
         }
@@ -63,20 +66,30 @@ static CGFloat leadingSpace = 35.0;
                 [self setRequiredSteps:NSIntegerMax];
             }break;
                 
+            case GameTypeFreePlay:{
+                [self setRequiredSteps:NSIntegerMax];
+            }break;
+                
             default:
                 break;
         }
         
         [self setRowsProduced:0];
         [self setCanContinuePlaying:NO];
-        
-        CancelButtonNode *backButton = [[CancelButtonNode alloc] initWithColor:[SKColor _stepTileColor]
-                                                                          size:CGSizeMake(88.0, 88.0)];
-        [backButton setAnchorPoint:CGPointMake(0.5, 0.5)];
-        [backButton setZPosition:1000.0];
-        [backButton setPosition:CGPointMake(self.frame.size.width - 44.0, self.frame.size.height - 44.0)];
-        [backButton setName:@"backButton"];
-        [self addChild:backButton];
+
+        SKButton *cancelButtonNode = [[SKButton alloc] initWithColor:[SKColor _stepDestructiveColor] size:CGSizeMake(44.0, 44.0)];
+        [cancelButtonNode setZPosition:50];
+        [cancelButtonNode setText:@"x"];
+        [cancelButtonNode setPosition:CGPointMake(size.width - 44.0, size.height - 44.0)];
+        [cancelButtonNode addActionOfType:SKButtonActionTypeTouchUpInside withBlock:^{
+            MenuScene *scene = [[MenuScene alloc] initWithSize:self.size];
+            [scene setScaleMode:SKSceneScaleModeAspectFill];
+            
+            [self.view presentScene:scene
+                         transition:[SKTransition doorsCloseHorizontalWithDuration:0.35]];
+
+        }];
+        [self addChild:cancelButtonNode];
         
         if (!self.isFirstRun) {
             CountDownNode *countDownNode = [[CountDownNode alloc] initWithColor:[SKColor _nonStepTileColor]
@@ -270,25 +283,11 @@ static CGFloat leadingSpace = 35.0;
         }
     }else{
         if (self.canContinuePlaying) {
-            for (SKNode *node in [self nodesAtPoint:touchLocation]) {
-                if (self.tapTimer.isValid) {
-                    [self.tapTimer invalidate];
-                }
-                if ([node isEqual:[self childNodeWithName:@"backButton"]]) {
-                    if ([self shouldPlaySounds]) {
-                        [self runAction:[self _loseSoundAction]];
-                    }
-                    MenuScene *scene = [[MenuScene alloc] initWithSize:self.size];
-                    [scene setScaleMode:SKSceneScaleModeAspectFill];
-                    
-                    [self.view presentScene:scene
-                                 transition:[SKTransition doorsCloseHorizontalWithDuration:0.35]];
-                    break;
-                }else{
-                    [self lose];
-                    break;
-                }
+            if (self.tapTimer.isValid) {
+                [self.tapTimer invalidate];
             }
+            
+            [self lose];
         }
     }
 }
@@ -380,13 +379,15 @@ static CGFloat leadingSpace = 35.0;
             [self runAction:[self _winSoundAction]];
         }
         
-        if (self.gameType == GameTypeEndurance) {
-            [[NSUserDefaults standardUserDefaults] setObject:@(self.currentStep) forKey:@"lastEnduranceScoreKey"];
-            [[NSUserDefaults standardUserDefaults] synchronize];
+        if (!self.isInFreePlay) {
+            if (self.gameType == GameTypeEndurance) {
+                [[NSUserDefaults standardUserDefaults] setObject:@(self.currentStep) forKey:@"lastEnduranceScoreKey"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+            }
+            
+            [self gameOverWithWin:YES];
+            [self setCanContinuePlaying:NO];
         }
-        
-        [self gameOverWithWin:YES];
-        [self setCanContinuePlaying:NO];
     }
 }
 
@@ -401,14 +402,16 @@ static CGFloat leadingSpace = 35.0;
             [self runAction:[self _loseSoundAction]];
         }
         
-        if (self.gameType == GameTypeEndurance) {
-            [[NSUserDefaults standardUserDefaults] setObject:@(self.currentStep) forKey:@"lastEnduranceScoreKey"];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-            [self gameOverWithWin:YES];
-        }else{
-            [self gameOverWithWin:NO];
+        if (!self.isInFreePlay) {
+            if (self.gameType == GameTypeEndurance) {
+                [[NSUserDefaults standardUserDefaults] setObject:@(self.currentStep) forKey:@"lastEnduranceScoreKey"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+                [self gameOverWithWin:YES];
+            }else{
+                [self gameOverWithWin:NO];
+            }
+            [self setCanContinuePlaying:NO];        
         }
-        [self setCanContinuePlaying:NO];
     }
 }
 
@@ -423,6 +426,23 @@ static CGFloat leadingSpace = 35.0;
                  transition:[SKTransition flipVerticalWithDuration:0.35]];
 }
 
+
+- (void)reportAchievementWithIdentifier:(NSString *)identifier
+{
+    GKAchievement *achievement = [[GKAchievement alloc] initWithIdentifier:identifier forPlayer:[GKLocalPlayer localPlayer].playerID];
+    if (achievement)
+    {
+        [achievement setPercentComplete:100.0];
+        [achievement setShowsCompletionBanner:YES];
+
+        [GKAchievement reportAchievements:@[achievement] withCompletionHandler:^(NSError *error) {
+            if (error != nil)
+            {
+                NSLog(@"Error in reporting achievements: %@", error);
+            }
+        }];
+    }
+}
 
 
 @end
