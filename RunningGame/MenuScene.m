@@ -11,7 +11,7 @@
 #import "SKColor+Colors.h"
 #import "NodeAdditions.h"
 #import "SKButton.h"
-#import "GameOverScene.h"
+#import "SettingsScene.h"
 
 @implementation MenuScene
 
@@ -79,11 +79,10 @@
         [settingsButton setPosition:CGPointMake(xStart, yStart - 120.0)];
         [settingsButton setText:@"Settings"];
         [settingsButton addActionOfType:SKButtonActionTypeTouchUpInside withBlock:^{
-
-            GameOverScene *scene = [[GameOverScene alloc] initWithSize:self.size andReturningGameType:GameTypeSprint andDidWin:NO withTapCount:12023231];
+            SettingsScene *scene = [[SettingsScene alloc] initWithSize:self.size];
             [scene setScaleMode:SKSceneScaleModeFill];
             
-            [self.view presentScene:scene transition:[SKTransition doorwayWithDuration:0.35]];
+            [self.view presentScene:scene transition:[SKTransition revealWithDirection:SKTransitionDirectionLeft duration:0.35]];
         }];
         [self addChild:settingsButton];
     }
