@@ -28,6 +28,7 @@
         [self setUserInteractionEnabled:YES];
         [self setStartingTouchLocation:CGPointZero];
         [self setActionBitmask:0];
+        [self setOverrideSoundSettings:NO];
         [self addChild:self.label];
     }
     
@@ -72,8 +73,14 @@
             CGPoint location = [[touches anyObject] locationInNode:self];
             
             if (fabs(location.x - self.startingTouchLocation.x) <= self.frame.size.width / 2.0 && fabs(location.y - self.startingTouchLocation.y) <= self.frame.size.height / 2.0) {
-                if ([self shouldPlaySounds]) {
-                    [self runAction:[self _tapSoundAction]];
+                if (self.overrideSoundSettings) {
+                    if (![self shouldPlaySounds]) {
+                        [self runAction:[self _tapSoundAction]];
+                    }
+                }else{
+                    if ([self shouldPlaySounds]) {
+                        [self runAction:[self _tapSoundAction]];
+                    }
                 }
 
                 self.touchUpInsideBlock();

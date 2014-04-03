@@ -6,9 +6,21 @@
 //  Copyright (c) 2014 MacCDevTeam LLC. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 @class SKColor;
+
+#if TARGET_OS_IPHONE
+
+#import <UIKit/UIKit.h>
 @interface UIColor (Colors)
+
+#else
+
+#import <Cocoa/Cocoa.h>
+@interface NSColor (Colors)
+
+#endif
+
++ (SKColor *)_switchBackgroundColor;
 
 + (SKColor *)_stepTileColor;
 + (SKColor *)_nonStepTileColor;

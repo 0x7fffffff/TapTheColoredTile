@@ -15,8 +15,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setBool:YES forKey:@"shouldPlaySounds"];
-    [defaults synchronize];
+//    [defaults setBool:YES forKey:@"shouldPlaySounds"];
+//    [defaults synchronize];
     
     if (![defaults boolForKey:@"prefsSet"]) {
         [defaults setBool:YES forKey:@"prefsSet"];
@@ -25,6 +25,16 @@
         [defaults synchronize];
     }
     
+    return YES;
+}
+
+- (BOOL)application:(UIApplication *)application shouldRestoreApplicationState:(NSCoder *)coder
+{
+    return YES;
+}
+
+- (BOOL)application:(UIApplication *)application shouldSaveApplicationState:(NSCoder *)coder
+{
     return YES;
 }
 

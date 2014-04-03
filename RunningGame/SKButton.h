@@ -21,7 +21,8 @@ typedef void(^ActionBlock)(void);
 @property (strong, nonatomic) NSString *fontName;
 @property (strong, nonatomic) SKColor *textColor;
 @property (nonatomic, assign) CGFloat textSize;
-
+@property (nonatomic, assign) NSInteger tag;
+@property (nonatomic, assign) BOOL overrideSoundSettings;
 @property (strong, nonatomic) SKLabelNode *label;
 
 - (void)addActionOfType:(SKButtonActionType)type withBlock:(ActionBlock)actionBlock;

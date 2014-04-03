@@ -11,6 +11,19 @@
 
 @implementation SKColor (Colors)
 
++ (SKColor *)_switchBackgroundColor
+{
+    static SKColor *color = nil;
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+            //rgb(189, 195, 199)
+        color = [SKColor colorWithRed:189.0 / 255.0 green:195.0 / 255.0 blue:199.0 / 255.0 alpha:1.0];
+    });
+    
+    return color;
+}
+
 + (SKColor *)_stepConfirmationColor
 {
     NSArray *array = [SKColor confirmationColors];
