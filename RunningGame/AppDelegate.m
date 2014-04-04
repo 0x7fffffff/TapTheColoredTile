@@ -15,8 +15,6 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//    [defaults setBool:YES forKey:@"shouldPlaySounds"];
-//    [defaults synchronize];
     
     if (![defaults boolForKey:@"prefsSet"]) {
         [defaults setBool:YES forKey:@"prefsSet"];

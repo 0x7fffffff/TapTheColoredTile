@@ -8,6 +8,8 @@
 	<string>Tap the Tile</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
+	<key>iTunesURL</key>
+	<string>itms-apps://itunes.apple.com/app/id851869611</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.MacCDevTeam.StepOnTheColoredTile</string>
 	<key>CFBundleInfoDictionaryVersion</key>
