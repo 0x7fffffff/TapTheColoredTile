@@ -7,11 +7,14 @@
 		<string>vibrant</string>
 		<key>colors</key>
 		<array>
-			<string></string>
-			<string></string>
-			<string></string>
-			<string></string>
-			<string></string>
+			<string>26,188,156</string>
+			<string>46,204,113</string>
+			<string>52,152,219</string>
+			<string>155,89,182</string>
+			<string>52,73,94</string>
+			<string>241,196,15</string>
+			<string>230,126,34</string>
+			<string>231,76,60</string>
 		</array>
 	</dict>
 	<dict>
@@ -19,11 +22,14 @@
 		<string>vibrant dark</string>
 		<key>colors</key>
 		<array>
-			<string></string>
-			<string></string>
-			<string></string>
-			<string></string>
-			<string></string>
+			<string>22,160,133</string>
+			<string>39,174,96</string>
+			<string>41,128,185</string>
+			<string>142,68,173</string>
+			<string>44,62,80</string>
+			<string>243,156,18</string>
+			<string>211,84,0</string>
+			<string>192,57,43</string>
 		</array>
 	</dict>
 	<dict>

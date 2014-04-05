@@ -20,7 +20,7 @@
     
     MenuScene *scene = [[MenuScene alloc] initWithSize:skView.bounds.size];
     [scene setScaleMode:SKSceneScaleModeFill];
-    
+
     [skView presentScene:scene];
 }
 

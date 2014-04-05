@@ -28,7 +28,7 @@
         self.labelNode = [[SKLabelNode alloc] initWithFontNamed:@"ComicNeueSansID"];
         [self.labelNode setText:@"3"];
         [self.labelNode setFontSize:248.0];
-        [self.labelNode setFontColor:[SKColor _alizarinColor]];
+        [self.labelNode setFontColor:[SKColor _stepTileColor]];
         [self.labelNode setHorizontalAlignmentMode:SKLabelHorizontalAlignmentModeCenter];
         [self.labelNode setVerticalAlignmentMode:SKLabelVerticalAlignmentModeCenter];
         [self.labelNode setPosition:CGPointMake(size.width / 2.0, size.height / 2.0)];
@@ -59,14 +59,14 @@
                 if ([self shouldPlaySounds]) {
                     [self.labelNode runAction:[self _beepSoundAction]];
                 }
-                [self.labelNode setFontColor:[SKColor _sunFlowerColor]];
+                [self.labelNode setFontColor:[SKColor _stepTileColor]];
             }else if (i == 1) {
                 if ([self shouldPlaySounds]) {
                     [self.labelNode runAction:[self _beepSoundAction]];
                 }
-                [self.labelNode setFontColor:[SKColor _emeraldcolor]];
+                [self.labelNode setFontColor:[SKColor _stepTileColor]];
             }else{
-                [self.labelNode setFontColor:[SKColor _alizarinColor]];
+                [self.labelNode setFontColor:[SKColor _stepTileColor]];
             }
         }
     }];

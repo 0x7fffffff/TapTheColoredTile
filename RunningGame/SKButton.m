@@ -15,6 +15,7 @@
 @property (nonatomic, assign) CGPoint startingTouchLocation;
 @property (strong, nonatomic) ActionBlock touchDownBlock;
 @property (strong, nonatomic) ActionBlock touchUpInsideBlock;
+//@property (strong, nonatomic) UIColor *highlightColor;
 @end
 
 @implementation SKButton

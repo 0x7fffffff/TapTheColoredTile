@@ -19,12 +19,14 @@
     if (![defaults boolForKey:@"prefsSet"]) {
         [defaults setBool:YES forKey:@"prefsSet"];
         [defaults setBool:YES forKey:@"shouldPlaySounds"];
+        [defaults setInteger:0 forKey:@"theme"];
         
         [defaults synchronize];
     }
     
     return YES;
 }
+
 
 - (BOOL)application:(UIApplication *)application shouldRestoreApplicationState:(NSCoder *)coder
 {
@@ -41,11 +43,11 @@
     if(![GKLocalPlayer localPlayer].authenticated) {
         
         [[NSNotificationCenter defaultCenter] addObserverForName:GKPlayerDidChangeNotificationName object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
-            NSLog(@"%@",note.userInfo);
+//            NSLog(@"%@",note.userInfo);
         }];
         
         [[GKLocalPlayer localPlayer] setAuthenticateHandler:^(UIViewController *viewController, NSError *error) {
-            NSLog(@"Error%@",error);
+//            NSLog(@"Error%@",error);
         }];
     }
 }

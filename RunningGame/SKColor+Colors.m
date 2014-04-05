@@ -7,6 +7,8 @@
 //
 
 #import "SKColor+Colors.h"
+#import "NSString+MD5.h"
+
 @import SpriteKit;
 
 @implementation SKColor (Colors)
@@ -35,24 +37,36 @@
     
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-            //rgb(189, 195, 199)
         color = [SKColor colorWithRed:189.0 / 255.0 green:195.0 / 255.0 blue:199.0 / 255.0 alpha:1.0];
     });
     
     return color;
 }
 
-+ (SKColor *)colorFromCurrentTheme
++ (SKColor *)_stepTileColor
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
     NSInteger theme = [defaults integerForKey:@"theme"];
 
-    NSArray *colors = [self colorSchemes][theme];
-
-    NSLog(@"%@",colors);
-
-    return colors[arc4random_uniform((u_int32_t)colors.count)];
+    NSArray *schemes = [self colorSchemes];
+    if (schemes) {
+        if (theme < schemes.count) {
+            NSArray *colors = schemes[theme];
+            
+            static uint32_t previous = 0;
+            uint32_t new = 0;
+            
+            while (previous == new) {
+                new = arc4random_uniform((u_int32_t)colors.count);
+            }
+            previous = new;
+            
+            SKColor *color = colors[new];
+            return color;
+        }
+    }
+    return nil;
 }
 
 + (NSArray *)colorSchemes
@@ -62,7 +76,7 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         NSArray *plistArray = [[NSArray alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"ColorSchemes" ofType:@"plist"]];
-
+//        NSLog(@"%@",[[plistArray componentsJoinedByString:@","] MD5]);
         NSMutableArray *output = [NSMutableArray new];
 
         for (NSDictionary *dictionary in plistArray) {
@@ -70,10 +84,12 @@
             NSMutableArray *colorsForCurrentTheme = [NSMutableArray new];
 
             for (NSString *numbersListString in dictionary[@"colors"]) {
-                NSArray *numbersList = [numbersListString componentsSeparatedByString:@","];
-                SKColor *color = [SKColor colorWith255RangeRed:[numbersList[0] doubleValue]
-                                                         green:[numbersList[1] doubleValue]
-                                                          blue:[numbersList[2] doubleValue]];
+                
+                NSArray *numberListArray = [numbersListString componentsSeparatedByString:@","];
+
+                SKColor *color = [SKColor colorWith255RangeRed:[numberListArray[0] doubleValue]
+                                                         green:[numberListArray[1] doubleValue]
+                                                          blue:[numberListArray[2] doubleValue]];
                 [colorsForCurrentTheme addObject:color];
             }
             [output addObject:colorsForCurrentTheme];
@@ -84,174 +100,18 @@
     return array;
 }
 
-//+ (SKColor *)_stepConfirmationColor
-//{
-//    NSArray *array = [SKColor confirmationColors];
-//    
-//    SKColor *color = array[arc4random_uniform((uint32_t)array.count)];
-//    
-//    return color;
-//}
-//
-//+ (SKColor *)_stepDestructiveColor
-//{
-//    NSArray *array = [SKColor destructiveColors];
-//    
-//    SKColor *color = array[arc4random_uniform((uint32_t)array.count)];
-//    
-//    return color;
-//}
-//
-//+ (SKColor *)_stepTileColor
-//{
-//    NSArray *array = [SKColor allColorsArray];
-//    
-//    static uint32_t previous = UINT32_MAX;
-//    static uint32_t next = 0;
-//    do {
-//        next = arc4random_uniform((u_int32_t)array.count);
-//    } while (next == previous);
-//
-//    uint32_t finally = next;
-//    previous = next;
-//    next = 0;
-//    
-//    return (SKColor *)array[finally];
-//}
-//
-//+ (NSArray *)confirmationColors
-//{
-//    static NSArray *array = nil;
-//    
-//    static dispatch_once_t onceToken;
-//    dispatch_once(&onceToken, ^{
-//        array = @[[self peterRiverColor],[self _emeraldcolor],[self amethystColor],[self turquoiseColor],[self _wet_asfault]];
-//    });
-//    
-//    return array;
-//}
-//
-//+ (NSArray *)destructiveColors
-//{
-//    static NSArray *array = nil;
-//    
-//    static dispatch_once_t onceToken;
-//    dispatch_once(&onceToken, ^{
-//        array = @[[self _alizarinColor],[self _sunFlowerColor],[self carrotColor]];
-//    });
-//    
-//    return array;
-//}
-//
-//+ (NSArray *)allColorsArray
-//{
-//    static NSArray *array = nil;
-//    
-//    static dispatch_once_t onceToken;
-//    dispatch_once(&onceToken, ^{
-//        array = @[[self peterRiverColor],[self _alizarinColor],[self _emeraldcolor],[self _sunFlowerColor],[self amethystColor],[self turquoiseColor],[self carrotColor],[self _wet_asfault]];
-//    });
-//    
-//    return array;
-//}
-//
-//
-//+ (SKColor *) turquoiseColor
-//{
-//    static SKColor *color = nil;
-//    
-//    static dispatch_once_t onceToken;
-//    dispatch_once(&onceToken, ^{
-//        color = [SKColor colorWithRed:26.0 / 255.0 green:188.0 / 255.0 blue:156.0 / 255.0 alpha:1.0];
-//    });
-//    
-//    return color;
-//}
-//
-//+ (SKColor *) _emeraldcolor
-//{
-//    static SKColor *color = nil;
-//    
-//    static dispatch_once_t onceToken;
-//    dispatch_once(&onceToken, ^{
-//        color = [SKColor colorWithRed:46.0 / 255.0 green:204.0 / 255.0 blue:113.0 / 255.0 alpha:1.0];
-//    });
-//    
-//    return color;
-//}
-//
-//+ (SKColor *) peterRiverColor
-//{
-//    static SKColor *color = nil;
-//    
-//    static dispatch_once_t onceToken;
-//    dispatch_once(&onceToken, ^{
-//        color = [SKColor colorWithRed:52.0 / 255.0 green:152.0 / 255.0 blue:219.0 / 255.0 alpha:1.0];
-//    });
-//    
-//    return color;
-//}
-//
-//+ (SKColor *) amethystColor
-//{
-//    static SKColor *color = nil;
-//    
-//    static dispatch_once_t onceToken;
-//    dispatch_once(&onceToken, ^{
-//        color = [SKColor colorWithRed:155.0 / 255.0 green:89.0 / 255.0 blue:182.0 / 255.0 alpha:1.0];
-//    });
-//    
-//    return color;
-//}
-//
-//+ (SKColor *) _sunFlowerColor
-//{
-//    static SKColor *color = nil;
-//    
-//    static dispatch_once_t onceToken;
-//    dispatch_once(&onceToken, ^{
-//        color = [SKColor colorWithRed:241.0 / 255.0 green:196.0 / 255.0 blue:15.0 / 255.0 alpha:1.0];
-//    });
-//    
-//    return color;
-//}
-//
-//+ (SKColor *) carrotColor
-//{
-//    static SKColor *color = nil;
-//    
-//    static dispatch_once_t onceToken;
-//    dispatch_once(&onceToken, ^{
-//        color = [SKColor colorWithRed:230.0 / 255.0 green:126.0 / 255.0 blue:34.0 / 255.0 alpha:1.0];
-//    });
-//    
-//    return color;
-//}
-//
-//+ (SKColor *) _alizarinColor
-//{
-//    static SKColor *color = nil;
-//    
-//    static dispatch_once_t onceToken;
-//    dispatch_once(&onceToken, ^{
-//        color = [SKColor colorWithRed:231.0 / 255.0 green:76.0 / 255.0 blue:60.0 / 255.0 alpha:1.0];
-//    });
-//    
-//    return color;
-//}
-//
-//+ (SKColor *) _wet_asfault
-//{
-//    static SKColor *color = nil;
-//    
-//    static dispatch_once_t onceToken;
-//    dispatch_once(&onceToken, ^{
-//        color = [SKColor colorWithRed:52.0 / 255.0 green:73.0 / 255.0 blue:94.0 / 255.0 alpha:1.0];
-//    });
-//    
-//    return color;
-//}
-//
+
++ (SKColor *) _alizarinColor
+{
+    static SKColor *color = nil;
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        color = [SKColor colorWithRed:231.0 / 255.0 green:76.0 / 255.0 blue:60.0 / 255.0 alpha:1.0];
+    });
+    
+    return color;
+}
 
 @end
 

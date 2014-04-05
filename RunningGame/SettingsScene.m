@@ -10,6 +10,11 @@
 #import "SKColor+Colors.h"
 #import "SKButton.h"
 #import "MenuScene.h"
+#import <sys/utsname.h>
+@import MessageUI;
+@interface SettingsScene () < UIAlertViewDelegate , MFMailComposeViewControllerDelegate >
+
+@end
 
 @implementation SettingsScene
 
@@ -111,33 +116,67 @@
         
         SKButton *rateButton = [[SKButton alloc] initWithColor:[SKColor _stepTileColor] size:buttonSize];
         
-        __weak SKButton *weakRate = rateButton;
-        
         [rateButton setPosition:CGPointMake(size.width / 2.0, yStart - 60.0)];
         [rateButton setText:@"Rate This App!"];
+        [rateButton setName:@"rateButton"];
         [rateButton addActionOfType:SKButtonActionTypeTouchUpInside withBlock:^{
-            
-            NSDictionary *info = [[[NSBundle mainBundle] infoDictionary] copy];
-            
-            NSURL *url = [NSURL URLWithString:info[@"iTunesURL"]];
-            if (url && [[UIApplication sharedApplication] canOpenURL:url]) {
-                [[UIApplication sharedApplication] openURL:url];
-            }else{
-                [weakRate setText:@"Error: Try later"];
-            }
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Attention" message:@"You are about to exit this app and switch to the App Store." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Continue", nil];
+            [alertView show];
         }];
         [self addChild:rateButton];
         
         SKButton *supporButton = [[SKButton alloc] initWithColor:[SKColor _stepTileColor] size:buttonSize];
         [supporButton setPosition:CGPointMake(size.width / 2.0, yStart - 120.0)];
         [supporButton setText:@"Customer Support"];
+        
+        __weak SKButton *weakSupport = supporButton;
+        
         [supporButton addActionOfType:SKButtonActionTypeTouchUpInside withBlock:^{
-            
+            if ([MFMailComposeViewController canSendMail]) {
+                MFMailComposeViewController *composer = [[MFMailComposeViewController alloc] init];
+                [composer setMailComposeDelegate:self];
+                [composer setMessageBody:[NSString stringWithFormat:@"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPlease leave the lines below intact for diagnostic purposes.\n%@\n%@",[self machineName],[[UIDevice currentDevice] systemVersion]] isHTML:NO];
+                [composer setSubject:@"Customer Support - Tap the Colored Tile"];
+                [composer setTitle:@"Customer Support"];
+                [composer setToRecipients:@[@"help.happtech@gmail.com"]];
+                [self.view.window.rootViewController presentViewController:composer animated:YES completion:nil];
+            }else{
+                [weakSupport setText:@"Can't Send Mail"];
+            }
         }];
         [self addChild:supporButton];
     }
     
     return self;
+}
+
+- (NSString *)machineName
+{
+    struct utsname systemInfo;
+    uname(&systemInfo);
+    
+    return [NSString stringWithCString:systemInfo.machine
+                              encoding:NSUTF8StringEncoding];
+}
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    NSLog(@"%s",__PRETTY_FUNCTION__);
+    [controller dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex != alertView.cancelButtonIndex) {
+        NSDictionary *info = [[[NSBundle mainBundle] infoDictionary] copy];
+        
+        NSURL *url = [NSURL URLWithString:info[@"iTunesURL"]];
+        if (url && [[UIApplication sharedApplication] canOpenURL:url]) {
+            [[UIApplication sharedApplication] openURL:url];
+        }else{
+            [(SKButton *)[self childNodeWithName:@"rateButton"] setText:@"Error: Try later"];
+        }
+    }
 }
 
 @end

@@ -35,6 +35,7 @@
 		004C159F18EB996F00B58DBA /* tap.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 004C159718EB96CC00B58DBA /* tap.m4a */; };
 		004C15A018EB997200B58DBA /* win.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 004C159818EB96CC00B58DBA /* win.m4a */; };
 		004C15A318EBAF2F00B58DBA /* SettingsScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 004C15A218EBAF2F00B58DBA /* SettingsScene.m */; };
+		005DFBC618EEEF60000EE378 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 005DFBC518EEEF60000EE378 /* NSString+MD5.m */; };
 		006C26C018E88263006EAAB6 /* NodeAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 006C26BF18E88263006EAAB6 /* NodeAdditions.m */; };
 		00B026DD18EB304B0058E591 /* SKButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B026DC18EB304B0058E591 /* SKButton.m */; };
 		00B026E218EB4A8C0058E591 /* DSMultilineLabelNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B026E118EB4A8C0058E591 /* DSMultilineLabelNode.m */; };
@@ -93,6 +94,8 @@
 		004C159818EB96CC00B58DBA /* win.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = win.m4a; sourceTree = "<group>"; };
 		004C15A118EBAF2F00B58DBA /* SettingsScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsScene.h; sourceTree = "<group>"; };
 		004C15A218EBAF2F00B58DBA /* SettingsScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsScene.m; sourceTree = "<group>"; };
+		005DFBC418EEEF60000EE378 /* NSString+MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5.h"; sourceTree = "<group>"; };
+		005DFBC518EEEF60000EE378 /* NSString+MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5.m"; sourceTree = "<group>"; };
 		006C26BB18E87CAE006EAAB6 /* Globals.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Globals.h; sourceTree = "<group>"; };
 		006C26BE18E88263006EAAB6 /* NodeAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NodeAdditions.h; sourceTree = "<group>"; };
 		006C26BF18E88263006EAAB6 /* NodeAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NodeAdditions.m; sourceTree = "<group>"; };
@@ -271,6 +274,8 @@
 				004620B618E62FA400DAD16A /* SKColor+Colors.m */,
 				006C26BE18E88263006EAAB6 /* NodeAdditions.h */,
 				006C26BF18E88263006EAAB6 /* NodeAdditions.m */,
+				005DFBC418EEEF60000EE378 /* NSString+MD5.h */,
+				005DFBC518EEEF60000EE378 /* NSString+MD5.m */,
 				006C26BB18E87CAE006EAAB6 /* Globals.h */,
 			);
 			name = "All Scenes";
@@ -391,6 +396,7 @@
 				0046208A18E62B7000DAD16A /* AppDelegate.m in Sources */,
 				00B026E218EB4A8C0058E591 /* DSMultilineLabelNode.m in Sources */,
 				004C15A318EBAF2F00B58DBA /* SettingsScene.m in Sources */,
+				005DFBC618EEEF60000EE378 /* NSString+MD5.m in Sources */,
 				0046208618E62B7000DAD16A /* main.m in Sources */,
 				004620D218E74C2600DAD16A /* ScoreDisplayNode.m in Sources */,
 			);

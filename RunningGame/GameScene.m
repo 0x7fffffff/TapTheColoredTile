@@ -77,7 +77,7 @@ static CGFloat leadingSpace = 35.0;
         [self setRowsProduced:0];
         [self setCanContinuePlaying:NO];
 
-        SKButton *cancelButtonNode = [[SKButton alloc] initWithColor:[SKColor _stepDestructiveColor] size:CGSizeMake(44.0, 44.0)];
+        SKButton *cancelButtonNode = [[SKButton alloc] initWithColor:[SKColor _alizarinColor] size:CGSizeMake(44.0, 44.0)];
         [cancelButtonNode setZPosition:50];
         [cancelButtonNode setText:@"x"];
         [cancelButtonNode setPosition:CGPointMake(size.width - 44.0, size.height - 44.0)];
@@ -233,7 +233,7 @@ static CGFloat leadingSpace = 35.0;
                 [backgroundCountLabel setText:[NSString stringWithFormat:@"%li",(long)self.rowsProduced + 1]];
                 [backgroundCountLabel setFontSize:50.0];
                 [backgroundCountLabel setAlpha:1.0];
-                [backgroundCountLabel setFontColor:[SKColor _stepTileColor]];
+                [backgroundCountLabel setFontColor:[SKColor darkGrayColor]];
                 [backgroundCountLabel setHorizontalAlignmentMode:SKLabelHorizontalAlignmentModeCenter];
                 [backgroundCountLabel setVerticalAlignmentMode:SKLabelVerticalAlignmentModeCenter];
                 [self insertChild:backgroundCountLabel atIndex:0];
