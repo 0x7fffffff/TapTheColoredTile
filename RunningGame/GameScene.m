@@ -77,7 +77,7 @@ static CGFloat leadingSpace = 35.0;
         [self setRowsProduced:0];
         [self setCanContinuePlaying:NO];
 
-        SKButton *cancelButtonNode = [[SKButton alloc] initWithColor:[SKColor _alizarinColor] size:CGSizeMake(44.0, 44.0)];
+        SKButton *cancelButtonNode = [[SKButton alloc] initWithColor:[SKColor _stepDestructiveColor] size:CGSizeMake(44.0, 44.0)];
         [cancelButtonNode setZPosition:50];
         [cancelButtonNode setText:@"x"];
         [cancelButtonNode setPosition:CGPointMake(size.width - 44.0, size.height - 44.0)];

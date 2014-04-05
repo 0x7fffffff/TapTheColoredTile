@@ -138,7 +138,7 @@
         
         CGSize buttonSize = CGSizeMake(120.0, 44.0);
         
-        SKButton *retryButton = [[SKButton alloc] initWithColor:[SKColor _stepTileColor] size:buttonSize];
+        SKButton *retryButton = [[SKButton alloc] initWithColor:[SKColor _stepConfirmationColor] size:buttonSize];
         [retryButton setName:@"retryButton"];
         [retryButton setText:@"Retry"];
         [retryButton setPosition:CGPointMake(scoresNode.frame.origin.x + buttonSize.width / 2.0, scoresNode.frame.origin.y - 54.0)];
@@ -150,7 +150,7 @@
         }];
         [self addChild:retryButton];
         
-        SKButton *quitButton = [[SKButton alloc] initWithColor:[SKColor _stepTileColor] size:buttonSize];
+        SKButton *quitButton = [[SKButton alloc] initWithColor:[SKColor _stepDestructiveColor] size:buttonSize];
         [quitButton setName:@"retryButton"];
         [quitButton setText:@"Quit"];
         [quitButton setPosition:CGPointMake(scoresNode.frame.origin.x + scoresNode.frame.size.width - buttonSize.width / 2.0, scoresNode.frame.origin.y - 54.0)];

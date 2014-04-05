@@ -35,12 +35,11 @@
 		004C159F18EB996F00B58DBA /* tap.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 004C159718EB96CC00B58DBA /* tap.m4a */; };
 		004C15A018EB997200B58DBA /* win.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 004C159818EB96CC00B58DBA /* win.m4a */; };
 		004C15A318EBAF2F00B58DBA /* SettingsScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 004C15A218EBAF2F00B58DBA /* SettingsScene.m */; };
-		005DFBC618EEEF60000EE378 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 005DFBC518EEEF60000EE378 /* NSString+MD5.m */; };
 		006C26C018E88263006EAAB6 /* NodeAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 006C26BF18E88263006EAAB6 /* NodeAdditions.m */; };
 		00B026DD18EB304B0058E591 /* SKButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B026DC18EB304B0058E591 /* SKButton.m */; };
 		00B026E218EB4A8C0058E591 /* DSMultilineLabelNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B026E118EB4A8C0058E591 /* DSMultilineLabelNode.m */; };
 		00CEC67618EA47E7009B7CF1 /* TutorialOverlayNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 00CEC67518EA47E7009B7CF1 /* TutorialOverlayNode.m */; };
-		00E55E0C18EE48B8000188C9 /* ColorSchemes.plist in Resources */ = {isa = PBXBuildFile; fileRef = 00E55E0B18EE48B8000188C9 /* ColorSchemes.plist */; };
+		00FC7F3C18F0ACE10010A302 /* Colors.plist in Resources */ = {isa = PBXBuildFile; fileRef = 00FC7F3B18F0ACE10010A302 /* Colors.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,8 +93,6 @@
 		004C159818EB96CC00B58DBA /* win.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = win.m4a; sourceTree = "<group>"; };
 		004C15A118EBAF2F00B58DBA /* SettingsScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsScene.h; sourceTree = "<group>"; };
 		004C15A218EBAF2F00B58DBA /* SettingsScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsScene.m; sourceTree = "<group>"; };
-		005DFBC418EEEF60000EE378 /* NSString+MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5.h"; sourceTree = "<group>"; };
-		005DFBC518EEEF60000EE378 /* NSString+MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5.m"; sourceTree = "<group>"; };
 		006C26BB18E87CAE006EAAB6 /* Globals.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Globals.h; sourceTree = "<group>"; };
 		006C26BE18E88263006EAAB6 /* NodeAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NodeAdditions.h; sourceTree = "<group>"; };
 		006C26BF18E88263006EAAB6 /* NodeAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NodeAdditions.m; sourceTree = "<group>"; };
@@ -105,7 +102,7 @@
 		00B026E118EB4A8C0058E591 /* DSMultilineLabelNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSMultilineLabelNode.m; sourceTree = "<group>"; };
 		00CEC67418EA47E7009B7CF1 /* TutorialOverlayNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialOverlayNode.h; sourceTree = "<group>"; };
 		00CEC67518EA47E7009B7CF1 /* TutorialOverlayNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialOverlayNode.m; sourceTree = "<group>"; };
-		00E55E0B18EE48B8000188C9 /* ColorSchemes.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ColorSchemes.plist; sourceTree = "<group>"; };
+		00FC7F3B18F0ACE10010A302 /* Colors.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Colors.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,7 +192,7 @@
 				004C159718EB96CC00B58DBA /* tap.m4a */,
 				004C159818EB96CC00B58DBA /* win.m4a */,
 				0046208118E62B7000DAD16A /* TapTheColoredTile-Info.plist */,
-				00E55E0B18EE48B8000188C9 /* ColorSchemes.plist */,
+				00FC7F3B18F0ACE10010A302 /* Colors.plist */,
 				0046208218E62B7000DAD16A /* InfoPlist.strings */,
 				0046208518E62B7000DAD16A /* main.m */,
 				0046208718E62B7000DAD16A /* TapTheColoredTile-Prefix.pch */,
@@ -274,8 +271,6 @@
 				004620B618E62FA400DAD16A /* SKColor+Colors.m */,
 				006C26BE18E88263006EAAB6 /* NodeAdditions.h */,
 				006C26BF18E88263006EAAB6 /* NodeAdditions.m */,
-				005DFBC418EEEF60000EE378 /* NSString+MD5.h */,
-				005DFBC518EEEF60000EE378 /* NSString+MD5.m */,
 				006C26BB18E87CAE006EAAB6 /* Globals.h */,
 			);
 			name = "All Scenes";
@@ -357,10 +352,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00FC7F3C18F0ACE10010A302 /* Colors.plist in Resources */,
 				0046208418E62B7000DAD16A /* InfoPlist.strings in Resources */,
 				004C159E18EB996C00B58DBA /* lose.m4a in Resources */,
 				004620C918E7288200DAD16A /* ComicNeueSansID.ttf in Resources */,
-				00E55E0C18EE48B8000188C9 /* ColorSchemes.plist in Resources */,
 				004C159418EB947E00B58DBA /* Main.storyboard in Resources */,
 				004C159F18EB996F00B58DBA /* tap.m4a in Resources */,
 				004C15A018EB997200B58DBA /* win.m4a in Resources */,
@@ -396,7 +391,6 @@
 				0046208A18E62B7000DAD16A /* AppDelegate.m in Sources */,
 				00B026E218EB4A8C0058E591 /* DSMultilineLabelNode.m in Sources */,
 				004C15A318EBAF2F00B58DBA /* SettingsScene.m in Sources */,
-				005DFBC618EEEF60000EE378 /* NSString+MD5.m in Sources */,
 				0046208618E62B7000DAD16A /* main.m in Sources */,
 				004620D218E74C2600DAD16A /* ScoreDisplayNode.m in Sources */,
 			);

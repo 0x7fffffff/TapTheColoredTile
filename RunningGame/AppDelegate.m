@@ -17,24 +17,13 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     if (![defaults boolForKey:@"prefsSet"]) {
-        [defaults setBool:YES forKey:@"prefsSet"];
+        [defaults setBool:YES forKey:@"shouldShowAds"];
         [defaults setBool:YES forKey:@"shouldPlaySounds"];
-        [defaults setInteger:0 forKey:@"theme"];
-        
+        [defaults setBool:YES forKey:@"prefsSet"];
+
         [defaults synchronize];
     }
     
-    return YES;
-}
-
-
-- (BOOL)application:(UIApplication *)application shouldRestoreApplicationState:(NSCoder *)coder
-{
-    return YES;
-}
-
-- (BOOL)application:(UIApplication *)application shouldSaveApplicationState:(NSCoder *)coder
-{
     return YES;
 }
 

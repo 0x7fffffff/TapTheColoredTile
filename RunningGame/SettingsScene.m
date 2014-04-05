@@ -100,23 +100,11 @@
             
         }];
         [self addChild:toggleTutorialMode];
-        
-        
-        SKButton *toggleThemeButton = [[SKButton alloc] initWithColor:[SKColor _stepTileColor] size:buttonSize];
-        [toggleThemeButton setPosition:CGPointMake(size.width / 2.0, yStart)];
-        [toggleThemeButton setText:@"Change Theme"];
-        [toggleThemeButton addActionOfType:SKButtonActionTypeTouchUpInside withBlock:^{
-            for (SKNode *node in self.children) {
-                if ([node respondsToSelector:@selector(setColor:)]) {
-                    [(SKSpriteNode *)node setColor:[SKColor _stepTileColor]];
-                }
-            }
-        }];
-        [self addChild:toggleThemeButton];
+
         
         SKButton *rateButton = [[SKButton alloc] initWithColor:[SKColor _stepTileColor] size:buttonSize];
         
-        [rateButton setPosition:CGPointMake(size.width / 2.0, yStart - 60.0)];
+        [rateButton setPosition:CGPointMake(size.width / 2.0, yStart)];
         [rateButton setText:@"Rate This App!"];
         [rateButton setName:@"rateButton"];
         [rateButton addActionOfType:SKButtonActionTypeTouchUpInside withBlock:^{
@@ -126,7 +114,7 @@
         [self addChild:rateButton];
         
         SKButton *supporButton = [[SKButton alloc] initWithColor:[SKColor _stepTileColor] size:buttonSize];
-        [supporButton setPosition:CGPointMake(size.width / 2.0, yStart - 120.0)];
+        [supporButton setPosition:CGPointMake(size.width / 2.0, yStart - 60.0)];
         [supporButton setText:@"Customer Support"];
         
         __weak SKButton *weakSupport = supporButton;
@@ -145,6 +133,14 @@
             }
         }];
         [self addChild:supporButton];
+
+        SKButton *restorePurchasesButton = [[SKButton alloc] initWithColor:[SKColor _stepTileColor] size:buttonSize];
+        [restorePurchasesButton setPosition:CGPointMake(size.width / 2.0, yStart - 120.0)];
+        [restorePurchasesButton setText:@"Restore Purchases"];
+        [restorePurchasesButton addActionOfType:SKButtonActionTypeTouchUpInside withBlock:^{
+
+        }];
+        [self addChild:restorePurchasesButton];
     }
     
     return self;

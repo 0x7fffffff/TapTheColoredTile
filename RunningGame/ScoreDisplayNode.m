@@ -38,7 +38,7 @@
         
         SKColor *color = [SKColor _stepTileColor];
         
-        while (color == [SKColor _alizarinColor]) {
+        while (color == [SKColor _stepDestructiveColor]) {
             color = [SKColor _stepTileColor];
         }
         

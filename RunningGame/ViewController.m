@@ -27,7 +27,10 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-    [self setCanDisplayBannerAds:YES];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([defaults boolForKey:@"shouldShowAds"]) {
+        [self setCanDisplayBannerAds:YES];
+    }
 }
 
 - (BOOL)prefersStatusBarHidden
