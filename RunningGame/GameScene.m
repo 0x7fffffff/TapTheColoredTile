@@ -19,7 +19,7 @@
 static NSString *tileName = @"Tile";
 static CGFloat tileWidth = 80.0;
 static CGFloat tileHeight = 170.0;
-static CGFloat leadingSpace = 35.0;
+static CGFloat leadingSpace = 50.0;
 
 @interface GameScene ()
 @property (strong, nonatomic) NSMutableArray *tilesArray;
@@ -43,6 +43,14 @@ static CGFloat leadingSpace = 35.0;
         
         [self setIsInFreePlay:gameType == GameTypeFreePlay];
         [self setFirstRun:![self hasShownTutorial]];
+        [self setRowsProduced:0];
+        
+        if (self.isFirstRun) {
+            [self setIsInFreePlay:YES];
+            [self setCanContinuePlaying:YES];
+        }else{
+            [self setCanContinuePlaying:NO];
+        }
         
         if (self.tapTimer.isValid) {
             [self.tapTimer invalidate];
@@ -74,9 +82,7 @@ static CGFloat leadingSpace = 35.0;
                 break;
         }
         
-        [self setRowsProduced:0];
-        [self setCanContinuePlaying:NO];
-
+        
         SKButton *cancelButtonNode = [[SKButton alloc] initWithColor:[SKColor _stepDestructiveColor] size:CGSizeMake(44.0, 44.0)];
         [cancelButtonNode setZPosition:50];
         [cancelButtonNode setText:@"x"];
@@ -272,7 +278,7 @@ static CGFloat leadingSpace = 35.0;
             if ([self shouldPlaySounds]) {
                 [tappableNode runAction:[self _tapSoundAction]];
             }
-            if (!self.canContinuePlaying) {
+            if (self.isFirstRun) {
                 [(TutorialOverlayNode *)[self childNodeWithName:@"tutorialNode"] incrementTutorialIndex];
             }
             [self takeStep];
@@ -296,7 +302,7 @@ static CGFloat leadingSpace = 35.0;
 {
     double oldestTime = [self.last15Taps[0] doubleValue];
     double currentTime = CFAbsoluteTimeGetCurrent();
-    
+    NSLog(@"%f",1.0 / (CFAbsoluteTimeGetCurrent() - self.startTime));
     
     double tps = 1.0 / ((currentTime - oldestTime) / (double)self.last15Taps.count);
 

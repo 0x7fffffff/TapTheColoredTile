@@ -13,7 +13,7 @@
 - (BOOL)shouldPlaySounds
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    return [defaults boolForKey:@"shouldPlaySounds"];
+    return [defaults boolForKey:xxxShouldPlaySoundsKey];
 }
 
 - (SKAction *)_winSoundAction
@@ -22,7 +22,7 @@
     
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        action = [SKAction playSoundFileNamed:@"win.m4a" waitForCompletion:YES];
+        action = [SKAction playSoundFileNamed:xxSoundFileNameWin waitForCompletion:YES];
     });
     
     return action;
@@ -35,7 +35,7 @@
     
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        action = [SKAction playSoundFileNamed:@"lose.m4a" waitForCompletion:YES];
+        action = [SKAction playSoundFileNamed:xxSoundFileNameLose waitForCompletion:YES];
     });
     
     return action;
@@ -47,7 +47,7 @@
     
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        action = [SKAction playSoundFileNamed:@"tap.m4a" waitForCompletion:YES];
+        action = [SKAction playSoundFileNamed:xxSoundFileNameTap waitForCompletion:YES];
     });
     
     return action;
@@ -60,7 +60,7 @@
     
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        action = [SKAction playSoundFileNamed:@"beep.m4a" waitForCompletion:YES];
+        action = [SKAction playSoundFileNamed:xxSoundFileNameBeep waitForCompletion:YES];
     });
     
     return action;

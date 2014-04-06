@@ -38,14 +38,14 @@
         
         SKColor *color = [SKColor _stepTileColor];
         
-        while (color == [SKColor _stepDestructiveColor]) {
+        while ([color isEqual:[SKColor _redColor]]) {
             color = [SKColor _stepTileColor];
         }
         
         for (NSNumber *score in scores) {
             
-            SKLabelNode *scoreLabel = [[SKLabelNode alloc] initWithFontNamed:@"ComicNeueSansID"];
-            SKLabelNode *numberLabel = [[SKLabelNode alloc] initWithFontNamed:@"ComicNeueSansID"];
+            SKLabelNode *scoreLabel = [[SKLabelNode alloc] initWithFontNamed:xxFileNameComicSansNeueFont];
+            SKLabelNode *numberLabel = [[SKLabelNode alloc] initWithFontNamed:xxFileNameComicSansNeueFont];
 
             [scoreLabel setHorizontalAlignmentMode:SKLabelHorizontalAlignmentModeRight];
             [numberLabel setHorizontalAlignmentMode:SKLabelHorizontalAlignmentModeLeft];
@@ -61,6 +61,7 @@
             }else{
                 [scoreLabel setText:[NSString stringWithFormat:@"\t%.3f",score.doubleValue]];
             }
+            
             [numberLabel setText:[NSString stringWithFormat:@"%d:\t",n]];
             
             [scoreLabel setFontSize:28.0];

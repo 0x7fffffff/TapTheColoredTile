@@ -15,7 +15,6 @@
 @property (nonatomic, assign) CGPoint startingTouchLocation;
 @property (strong, nonatomic) ActionBlock touchDownBlock;
 @property (strong, nonatomic) ActionBlock touchUpInsideBlock;
-//@property (strong, nonatomic) UIColor *highlightColor;
 @end
 
 @implementation SKButton
@@ -44,7 +43,7 @@
         [_label setVerticalAlignmentMode:SKLabelVerticalAlignmentModeCenter];
         
         [_label setPosition:CGPointZero];
-        [_label setFontName:@"ComicNeueSansID"];
+        [_label setFontName:xxFileNameComicSansNeueFont];
     }
     
     return _label;

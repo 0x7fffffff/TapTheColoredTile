@@ -8,8 +8,6 @@
 	<string>Tap the Tile</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
-	<key>iTunesURL</key>
-	<string>itms-apps://itunes.apple.com/app/id851869611</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.MacCDevTeam.StepOnTheColoredTile</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -23,7 +21,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>12</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UIAppFonts</key>
@@ -35,6 +33,7 @@
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
+		<string>gamekit</string>
 	</array>
 	<key>UIStatusBarHidden</key>
 	<true/>
@@ -42,5 +41,7 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>iTunesURL</key>
+	<string>itms-apps://itunes.apple.com/app/id851869611</string>
 </dict>
 </plist>

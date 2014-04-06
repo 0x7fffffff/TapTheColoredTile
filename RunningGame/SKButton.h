@@ -27,6 +27,4 @@ typedef void(^ActionBlock)(void);
 
 - (void)addActionOfType:(SKButtonActionType)type withBlock:(ActionBlock)actionBlock;
 
-//- (instancetype)initWithColor:(UIColor *)color size:(CGSize)size;
-
 @end

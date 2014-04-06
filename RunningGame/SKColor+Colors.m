@@ -41,21 +41,26 @@
     return color;
 }
 
++ (SKColor *)_redColor
+{
+    return [self __two55ColorSpaceRed:231.0 green:76.0 blue:60.0];
+}
+
 + (SKColor *)_stepTileColor
 {
     NSArray *array = [SKColor allColorsArray];
 
-    static uint32_t previous = UINT32_MAX;
-    static uint32_t next = 0;
-    do {
-        next = arc4random_uniform((u_int32_t)array.count);
-    } while (next == previous);
-
-    uint32_t finally = next;
-    previous = next;
-    next = 0;
-
-    return (SKColor *)array[finally];
+    static uint32_t previous = 0;
+    uint32_t new = 0;
+    
+    while (previous == new) {
+        new = arc4random_uniform((u_int32_t)array.count);
+    }
+    previous = new;
+    
+    SKColor *color = array[new];
+    
+    return color;
 }
 
 + (NSArray *)colorArrayFromStringArray:(NSArray *)stringArray
@@ -121,7 +126,7 @@
 
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        color = [SKColor colorWithRed:236.0 / 255.0 green:240.0 / 255.0 blue:241.0 / 255.0 alpha:1.0];
+        color = [self __two55ColorSpaceRed:236.0 green:240.0 blue:241.0];
     });
 
     return color;

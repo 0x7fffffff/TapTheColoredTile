@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "MKiCloudSync.h"
 @import SpriteKit;
 @import AVFoundation;
 @import GameKit;
@@ -16,24 +17,27 @@
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
-    if (![defaults boolForKey:@"prefsSet"]) {
-        [defaults setBool:YES forKey:@"shouldShowAds"];
-        [defaults setBool:YES forKey:@"shouldPlaySounds"];
-        [defaults setBool:YES forKey:@"prefsSet"];
+        // Last set on V 1.1 update
+    if (![defaults boolForKey:xxxIsFirstRunKey]) {
+        [defaults setBool:YES forKey:xxxShouldShowAdsKey];
+        [defaults setBool:YES forKey:xxxShouldPlaySoundsKey];
+        [defaults setBool:YES forKey:xxxIsFirstRunKey];
 
         [defaults synchronize];
     }
     
+    [MKiCloudSync start];
+
     return YES;
 }
 
--(void)authenticateLocalPlayer
+- (void)authenticateLocalPlayer
 {
     if(![GKLocalPlayer localPlayer].authenticated) {
         
-        [[NSNotificationCenter defaultCenter] addObserverForName:GKPlayerDidChangeNotificationName object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
+//        [[NSNotificationCenter defaultCenter] addObserverForName:GKPlayerDidChangeNotificationName object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
 //            NSLog(@"%@",note.userInfo);
-        }];
+//        }];
         
         [[GKLocalPlayer localPlayer] setAuthenticateHandler:^(UIViewController *viewController, NSError *error) {
 //            NSLog(@"Error%@",error);

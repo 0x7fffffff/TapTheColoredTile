@@ -26,6 +26,7 @@
 + (SKColor *)_nonStepTileColor;
 + (SKColor *)_stepConfirmationColor;
 + (SKColor *)_stepDestructiveColor;
++ (SKColor *)_redColor;
 
 
 

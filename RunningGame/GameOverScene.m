@@ -35,14 +35,14 @@
         NSString *lastTimeKey = nil;
         
         if (returningGameType == GameTypeSprint) {
-            bestTimesKey = @"SprintLeaderBoard";
-            lastTimeKey = @"lastSprintTimeKey";
+            bestTimesKey = @"SprintLeaderBoard"; // NEVER CHANGE
+            lastTimeKey = @"lastSprintTimeKey"; // NEVER CHANGE
         }else if (returningGameType == GameTypeMarathon) {
-            bestTimesKey = @"MarathonLeaderBoard";
-            lastTimeKey = @"lastMarathonTimeKey";
+            bestTimesKey = @"MarathonLeaderBoard"; // NEVER CHANGE
+            lastTimeKey = @"lastMarathonTimeKey"; // NEVER CHANGE
         }else if (returningGameType == GameTypeEndurance) {
-            bestTimesKey = @"EnduranceLeaderBoard";
-            lastTimeKey = @"lastEnduranceScoreKey";
+            bestTimesKey = @"EnduranceLeaderBoard"; // NEVER CHANGE
+            lastTimeKey = @"lastEnduranceScoreKey"; // NEVER CHANGE
         }else{
             return self;
         }
@@ -53,7 +53,13 @@
         
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         
-        NSArray *oldScores = [defaults objectForKey:bestTimesKey];
+        NSArray *oldScores = nil;
+        NSArray *oldDefaults = [self attemptToLoadScoresByOldNames];
+        if (oldDefaults) {
+            oldScores = oldDefaults;
+        }else{
+            oldScores = [defaults objectForKey:bestTimesKey];
+        }
         
         if (oldScores) {
             [array addObjectsFromArray:oldScores];
@@ -89,6 +95,12 @@
         
         NSString *titleText = nil;
         
+        if (![defaults boolForKey:@"hasEverReportedScore"]) {
+            [self reportHighestScore];
+            [defaults setBool:YES forKey:@"hasEverReportedScore"];
+            [defaults synchronize];
+        }
+        
         if (index == 0) {
             titleText = @"New Record!";
             [self reportHighestScore];
@@ -113,7 +125,7 @@
         }
         
         ScoreDisplayNode *scoresNode = [[ScoreDisplayNode alloc] initWithSize:CGSizeMake(260.0, 308.0)
-                                                                  andPosition:CGPointMake(size.width / 2.0, size.height / 2.0)
+                                                                  andPosition:CGPointMake(size.width / 2.0, size.height / 2.0 + 25.0)
                                                               andListOfScores:self.scores
                                                           andIndexOfLastScore:index
                                                                   andGameType:returningGameType];
@@ -124,7 +136,7 @@
         [titleLabelNode setVerticalAlignmentMode:SKLabelVerticalAlignmentModeCenter];
         [titleLabelNode setText:titleText];
         [titleLabelNode setFontColor:[SKColor _stepTileColor]];
-        [titleLabelNode setPosition:CGPointMake(size.width / 2.0, scoresNode.frame.origin.y + scoresNode.frame.size.height + 52.0)];
+        [titleLabelNode setPosition:CGPointMake(size.width / 2.0, scoresNode.frame.origin.y + scoresNode.frame.size.height + 42.0)];
         [self addChild:titleLabelNode];
         
         SKLabelNode *subTitleNode = [[SKLabelNode alloc] initWithFontNamed:@"ComicNeueSansID"];
@@ -133,7 +145,7 @@
         [subTitleNode setFontSize:16.0];
         [subTitleNode setText:@"Tap a Score to Share"];
         [subTitleNode setFontColor:[SKColor _stepTileColor]];
-        [subTitleNode setPosition:CGPointMake(size.width / 2.0, scoresNode.frame.origin.y + scoresNode.frame.size.height + 22)];
+        [subTitleNode setPosition:CGPointMake(size.width / 2.0, scoresNode.frame.origin.y + scoresNode.frame.size.height + 12)];
         [self addChild:subTitleNode];
         
         CGSize buttonSize = CGSizeMake(120.0, 44.0);
@@ -141,7 +153,7 @@
         SKButton *retryButton = [[SKButton alloc] initWithColor:[SKColor _stepConfirmationColor] size:buttonSize];
         [retryButton setName:@"retryButton"];
         [retryButton setText:@"Retry"];
-        [retryButton setPosition:CGPointMake(scoresNode.frame.origin.x + buttonSize.width / 2.0, scoresNode.frame.origin.y - 54.0)];
+        [retryButton setPosition:CGPointMake(scoresNode.frame.origin.x + buttonSize.width / 2.0, scoresNode.frame.origin.y - 24.0)];
         [retryButton addActionOfType:SKButtonActionTypeTouchUpInside withBlock:^{
             GameScene *scene = [[GameScene alloc] initWithSize:self.size andGameType:self.returningGameType];
             [scene setScaleMode:SKSceneScaleModeFill];
@@ -153,7 +165,7 @@
         SKButton *quitButton = [[SKButton alloc] initWithColor:[SKColor _stepDestructiveColor] size:buttonSize];
         [quitButton setName:@"retryButton"];
         [quitButton setText:@"Quit"];
-        [quitButton setPosition:CGPointMake(scoresNode.frame.origin.x + scoresNode.frame.size.width - buttonSize.width / 2.0, scoresNode.frame.origin.y - 54.0)];
+        [quitButton setPosition:CGPointMake(scoresNode.frame.origin.x + scoresNode.frame.size.width - buttonSize.width / 2.0, scoresNode.frame.origin.y - 24.0)];
         [quitButton addActionOfType:SKButtonActionTypeTouchUpInside withBlock:^{
             MenuScene *scene = [[MenuScene alloc] initWithSize:self.size];
             [scene setScaleMode:SKSceneScaleModeFill];
@@ -166,20 +178,70 @@
     return self;
 }
 
+- (NSArray *)attemptToLoadScoresByOldNames
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+
+    if (self.returningGameType == GameTypeSprint) {
+        
+        NSString *key = @"bestSprintTimeKey";
+        
+        NSArray *candidate = [[defaults objectForKey:key] copy];
+        if (candidate) {
+            
+            [defaults removeObjectForKey:key];
+            [defaults synchronize];
+            return candidate;
+        }
+        return nil;
+        
+    }else if (self.returningGameType == GameTypeMarathon) {
+        
+        NSString *key = @"bestMarathonTimeKey";
+        
+        NSArray *candidate = [[defaults objectForKey:key] copy];
+        if (candidate) {
+            
+            [defaults removeObjectForKey:key];
+            [defaults synchronize];
+            return candidate;
+        }
+        return nil;
+        
+    }else if (self.returningGameType == GameTypeEndurance) {
+        
+        NSString *key = @"bestEnduranceScoresKey";
+        
+        NSArray *candidate = [[defaults objectForKey:key] copy];
+        if (candidate) {
+            
+            [defaults removeObjectForKey:key];
+            [defaults synchronize];
+            return candidate;
+        }
+        return nil;
+        
+    }else{
+        return nil;
+    }
+}
+
 - (void)reportHighestScore
 {
-    NSLog(@"%s",__PRETTY_FUNCTION__);
-
-    uint64_t scoreValue = [self scorePreparedForGameCenter];
-    
-    GKScore *score = [[GKScore alloc] initWithLeaderboardIdentifier:self.leaderboardID];
-    [score setValue:scoreValue];
-    
-    [GKScore reportScores:@[score] withCompletionHandler:^(NSError *error) {
-        if (error != nil) {
-            NSLog(@"%@", [error localizedDescription]);
-        }
-    }];
+    if ([GKLocalPlayer localPlayer].authenticated) {
+        NSLog(@"%s",__PRETTY_FUNCTION__);
+        
+        uint64_t scoreValue = [self scorePreparedForGameCenter];
+        
+        GKScore *score = [[GKScore alloc] initWithLeaderboardIdentifier:self.leaderboardID];
+        [score setValue:scoreValue];
+        
+        [GKScore reportScores:@[score] withCompletionHandler:^(NSError *error) {
+            if (error != nil) {
+                NSLog(@"%@", [error localizedDescription]);
+            }
+        }];        
+    }
 }
 
 - (int64_t)scorePreparedForGameCenter

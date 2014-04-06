@@ -10,6 +10,10 @@
 #import "MenuScene.h"
 @import iAd;
 
+@interface ViewController () < ADBannerViewDelegate >
+@property (weak, nonatomic) IBOutlet ADBannerView *adBanner;
+@end
+
 @implementation ViewController
 
 - (void)viewDidLoad
@@ -20,17 +24,60 @@
     
     MenuScene *scene = [[MenuScene alloc] initWithSize:skView.bounds.size];
     [scene setScaleMode:SKSceneScaleModeFill];
-
     [skView presentScene:scene];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    SKView *skView = (SKView *)self.view;
+    
+    if ([skView respondsToSelector:@selector(setPaused:)]) {
+        [skView setPaused:NO];
+    }
 }
 
 - (void)awakeFromNib
 {
     [super awakeFromNib];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if ([defaults boolForKey:@"shouldShowAds"]) {
-        [self setCanDisplayBannerAds:YES];
+    if (![defaults boolForKey:xxxShouldShowAdsKey]) {
+        [self.adBanner removeFromSuperview];
     }
+}
+
+- (void)bannerViewActionDidFinish:(ADBannerView *)banner
+{
+    SKView *skView = (SKView *)self.view;
+    
+    if ([skView respondsToSelector:@selector(setPaused:)]) {
+        [skView setPaused:NO];
+    }
+}
+
+- (void)bannerViewDidLoadAd:(ADBannerView *)banner
+{
+    [UIView animateWithDuration:0.15 animations:^{
+        [self.adBanner setAlpha:1.0];
+    }];
+}
+
+- (void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error
+{
+    [UIView animateWithDuration:0.15 animations:^{
+        [self.adBanner setAlpha:0.0];
+    }];
+}
+
+- (BOOL)bannerViewActionShouldBegin:(ADBannerView *)banner willLeaveApplication:(BOOL)willLeave
+{
+    SKView *skView = (SKView *)self.view;
+    
+    if ([skView respondsToSelector:@selector(setPaused:)]) {
+        [skView setPaused:YES];
+    }
+    return YES;
 }
 
 - (BOOL)prefersStatusBarHidden

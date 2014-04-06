@@ -9,6 +9,7 @@
 #import "TutorialOverlayNode.h"
 #import "SKColor+Colors.h"
 #import "GameScene.h"
+#import "DSMultilineLabelNode.h"
 
 @interface TutorialOverlayNode ()
 @property (nonatomic, assign) NSInteger index;
@@ -38,9 +39,9 @@
         [self addChild:tutorialLabel];
         
         
-        SKLabelNode *mainLabel = [[SKLabelNode alloc] initWithFontNamed:@"ComicNeueSansID"];
-        
-        [mainLabel setFontSize:16.0];
+        DSMultilineLabelNode *mainLabel = [[DSMultilineLabelNode alloc] initWithFontNamed:@"ComicNeueSansID"];
+        [mainLabel setParagraphWidth:size.width - 20.0];
+        [mainLabel setFontSize:24.0];
         [mainLabel setName:@"mainLabel"];
         [mainLabel setText:[self sprintModeTextArray][self.index]];
         [mainLabel setVerticalAlignmentMode:SKLabelVerticalAlignmentModeCenter];
@@ -81,7 +82,7 @@
     
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        array = @[@"Tap the tile at the bottom of the screen.",@"Now tap the next one.",@"It looks like you're getting it!",@"Go as quickly as you can.",@"Good luck!"];
+        array = @[@"Tap the tile at the bottom of the screen.",@"You can only tap the bottom most full tile.",@"Tapping anywhere else will cause you to lose!",@"Tap as quickly as you can. The faster you are the better!",@"It looks like you're getting it!"];
     });
     
     return array;

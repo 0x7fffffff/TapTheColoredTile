@@ -22,15 +22,10 @@
 {
     self = [super initWithSize:size];
     
-    if (self) {
-            // settings to add
-            // sounds on/off
-            // re-enable tutorial mode
-            // possibly color themes
-        
+    if (self) {        
         [self setBackgroundColor:[SKColor _nonStepTileColor]];
         
-        SKLabelNode *titleLabelNode = [[SKLabelNode alloc] initWithFontNamed:@"ComicNeueSansID"];
+        SKLabelNode *titleLabelNode = [[SKLabelNode alloc] initWithFontNamed:xxFileNameComicSansNeueFont];
         [titleLabelNode setText:@"Settings"];
         [titleLabelNode setPosition:CGPointMake(size.width / 2.0, size.height - 60.0)];
         [titleLabelNode setHorizontalAlignmentMode:SKLabelHorizontalAlignmentModeCenter];
@@ -44,7 +39,7 @@
         SKButton *backButton = [[SKButton alloc] initWithColor:[SKColor _stepTileColor]
                                                           size:buttonSize];
         [backButton setText:@"Back"];
-        [backButton setPosition:CGPointMake(size.width / 2.0, 60.0)];
+        [backButton setPosition:CGPointMake(size.width / 2.0, 90.0)];
         [backButton addActionOfType:SKButtonActionTypeTouchUpInside withBlock:^{
             MenuScene *scene = [[MenuScene alloc] initWithSize:self.size];
             [scene setScaleMode:SKSceneScaleModeFill];
@@ -59,52 +54,13 @@
         CGFloat yStart = (titleLabelNode.position.y + (backButton.frame.origin.y + backButton.frame.size.height)) / 2.0;
 
         
-        __block NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        
-        BOOL shouldPlaySounds = [defaults boolForKey:@"shouldPlaySounds"];
-        
-        SKButton *soundsToggleButton = [[SKButton alloc] initWithColor:shouldPlaySounds ?
-                                        [SKColor _stepTileColor] : [SKColor lightGrayColor]
-                                                                  size:buttonSize];
-        
-        [soundsToggleButton setPosition:CGPointMake(size.width / 2.0, yStart + 120.0)];
-        [soundsToggleButton setText:shouldPlaySounds ? @"Turn Sounds Off" : @"Turn Sounds On"];
-        [soundsToggleButton setTag:(NSInteger)shouldPlaySounds];
-        [soundsToggleButton setOverrideSoundSettings:YES];
-        
-        __weak SKButton *weakSound = soundsToggleButton;
-        
-        [soundsToggleButton addActionOfType:SKButtonActionTypeTouchUpInside withBlock:^{
-            if (weakSound.tag) {
-                [weakSound setTag:0];
-                [weakSound setColor:[UIColor lightGrayColor]];
-                [weakSound setText:@"Turn Sounds On"];
-            }else{
-                [weakSound setTag:1];
-
-                [weakSound setColor:[SKColor _stepTileColor]];
-                [weakSound setText:@"Turn Sounds Off"];
-            }
-            [defaults setObject:@(weakSound.tag) forKey:@"shouldPlaySounds"];
-            [defaults synchronize];
-        }];
-        
-        [self addChild:soundsToggleButton];
         
         
         
-        SKButton *toggleTutorialMode = [[SKButton alloc] initWithColor:[SKColor _stepTileColor] size:buttonSize];
-        [toggleTutorialMode setPosition:CGPointMake(size.width / 2.0, yStart + 60.0)];
-        [toggleTutorialMode setText:@"Reactivate Tutorials"];
-        [toggleTutorialMode addActionOfType:SKButtonActionTypeTouchUpInside withBlock:^{
-            
-        }];
-        [self addChild:toggleTutorialMode];
-
         
         SKButton *rateButton = [[SKButton alloc] initWithColor:[SKColor _stepTileColor] size:buttonSize];
         
-        [rateButton setPosition:CGPointMake(size.width / 2.0, yStart)];
+        [rateButton setPosition:CGPointMake(size.width / 2.0, yStart - 60.0)];
         [rateButton setText:@"Rate This App!"];
         [rateButton setName:@"rateButton"];
         [rateButton addActionOfType:SKButtonActionTypeTouchUpInside withBlock:^{
@@ -114,7 +70,7 @@
         [self addChild:rateButton];
         
         SKButton *supporButton = [[SKButton alloc] initWithColor:[SKColor _stepTileColor] size:buttonSize];
-        [supporButton setPosition:CGPointMake(size.width / 2.0, yStart - 60.0)];
+        [supporButton setPosition:CGPointMake(size.width / 2.0, yStart - 90.0)];
         [supporButton setText:@"Customer Support"];
         
         __weak SKButton *weakSupport = supporButton;
@@ -132,15 +88,64 @@
                 [weakSupport setText:@"Can't Send Mail"];
             }
         }];
-        [self addChild:supporButton];
+        
+        
+        
+        
+        
+        __block NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        
+        BOOL shouldPlaySounds = [defaults boolForKey:xxxShouldPlaySoundsKey];
+        
+        SKButton *soundsToggleButton = [[SKButton alloc] initWithColor:shouldPlaySounds ?
+                                        [SKColor _stepTileColor] : [SKColor lightGrayColor]
+                                                                  size:buttonSize];
+        
+        [soundsToggleButton setPosition:CGPointMake(size.width / 2.0, yStart + 60.0)];
+        [soundsToggleButton setText:shouldPlaySounds ? @"Turn Sounds Off" : @"Turn Sounds On"];
+        [soundsToggleButton setTag:(NSInteger)shouldPlaySounds];
+        [soundsToggleButton setOverrideSoundSettings:YES];
+        
+        __weak SKButton *weakSound = soundsToggleButton;
+        
+        [soundsToggleButton addActionOfType:SKButtonActionTypeTouchUpInside withBlock:^{
+            if (weakSound.tag) {
+                [weakSound setTag:0];
+                [weakSound setColor:[UIColor lightGrayColor]];
+                [weakSound setText:@"Turn Sounds On"];
+            }else{
+                [weakSound setTag:1];
 
-        SKButton *restorePurchasesButton = [[SKButton alloc] initWithColor:[SKColor _stepTileColor] size:buttonSize];
-        [restorePurchasesButton setPosition:CGPointMake(size.width / 2.0, yStart - 120.0)];
-        [restorePurchasesButton setText:@"Restore Purchases"];
-        [restorePurchasesButton addActionOfType:SKButtonActionTypeTouchUpInside withBlock:^{
-
+                [weakSound setColor:[SKColor _stepTileColor]];
+                [weakSound setText:@"Turn Sounds Off"];
+            }
+            [defaults setObject:@(weakSound.tag) forKey:xxxShouldPlaySoundsKey];
+            [defaults synchronize];
         }];
-        [self addChild:restorePurchasesButton];
+        
+        [self addChild:soundsToggleButton];
+        
+        
+        __block BOOL hasShownTutorial = [defaults boolForKey:xxxHasShownTutorialKey];
+        
+        SKButton *toggleTutorialMode = [[SKButton alloc] initWithColor:hasShownTutorial ? [SKColor lightGrayColor] : [SKColor _stepTileColor] size:buttonSize];
+        
+        __weak SKButton *weakTutorialButton = toggleTutorialMode;
+        
+        [toggleTutorialMode setPosition:CGPointMake(size.width / 2.0, yStart)];
+        [toggleTutorialMode setText:hasShownTutorial ? @"Reactivate Tutorials" : @"Deactivate Tutorials"];
+        [toggleTutorialMode addActionOfType:SKButtonActionTypeTouchUpInside withBlock:^{
+            if (hasShownTutorial) {
+                [weakTutorialButton setText:@"Deactivate Tutorials"];
+                [weakTutorialButton setColor:[SKColor _stepTileColor]];
+            }else{
+                [weakTutorialButton setText:@"Reactivate Tutorials"];
+                [weakTutorialButton setColor:[SKColor lightGrayColor]];
+            }
+            hasShownTutorial = !hasShownTutorial;
+            [defaults setBool:hasShownTutorial forKey:xxxHasShownTutorialKey];
+        }];
+        [self addChild:toggleTutorialMode];
     }
     
     return self;
@@ -157,7 +162,6 @@
 
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
 {
-    NSLog(@"%s",__PRETTY_FUNCTION__);
     [controller dismissViewControllerAnimated:YES completion:nil];
 }
 
