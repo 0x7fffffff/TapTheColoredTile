@@ -302,7 +302,6 @@ static CGFloat leadingSpace = 50.0;
 {
     double oldestTime = [self.last15Taps[0] doubleValue];
     double currentTime = CFAbsoluteTimeGetCurrent();
-    NSLog(@"%f",1.0 / (CFAbsoluteTimeGetCurrent() - self.startTime));
     
     double tps = 1.0 / ((currentTime - oldestTime) / (double)self.last15Taps.count);
 
@@ -433,22 +432,22 @@ static CGFloat leadingSpace = 50.0;
 }
 
 
-- (void)reportAchievementWithIdentifier:(NSString *)identifier
-{
-    GKAchievement *achievement = [[GKAchievement alloc] initWithIdentifier:identifier forPlayer:[GKLocalPlayer localPlayer].playerID];
-    if (achievement)
-    {
-        [achievement setPercentComplete:100.0];
-        [achievement setShowsCompletionBanner:YES];
-
-        [GKAchievement reportAchievements:@[achievement] withCompletionHandler:^(NSError *error) {
-            if (error != nil)
-            {
-                NSLog(@"Error in reporting achievements: %@", error);
-            }
-        }];
-    }
-}
+//- (void)reportAchievementWithIdentifier:(NSString *)identifier
+//{
+//    GKAchievement *achievement = [[GKAchievement alloc] initWithIdentifier:identifier forPlayer:[GKLocalPlayer localPlayer].playerID];
+//    if (achievement)
+//    {
+//        [achievement setPercentComplete:100.0];
+//        [achievement setShowsCompletionBanner:YES];
+//
+//        [GKAchievement reportAchievements:@[achievement] withCompletionHandler:^(NSError *error) {
+//            if (error != nil)
+//            {
+//                NSLog(@"Error in reporting achievements: %@", error);
+//            }
+//        }];
+//    }
+//}
 
 
 @end

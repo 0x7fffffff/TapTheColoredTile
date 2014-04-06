@@ -40,8 +40,8 @@
 		00B026DD18EB304B0058E591 /* SKButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B026DC18EB304B0058E591 /* SKButton.m */; };
 		00B026E218EB4A8C0058E591 /* DSMultilineLabelNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B026E118EB4A8C0058E591 /* DSMultilineLabelNode.m */; };
 		00CEC67618EA47E7009B7CF1 /* TutorialOverlayNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 00CEC67518EA47E7009B7CF1 /* TutorialOverlayNode.m */; };
-		00DA8B4F18F1048A00C4A54D /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00DA8B4E18F1048A00C4A54D /* GameKit.framework */; };
 		00DA8B5318F104F500C4A54D /* MKiCloudSync.m in Sources */ = {isa = PBXBuildFile; fileRef = 00DA8B5218F104F500C4A54D /* MKiCloudSync.m */; };
+		00DA8B5618F10C0800C4A54D /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00DA8B5518F10C0800C4A54D /* GameKit.framework */; };
 		00FC7F3C18F0ACE10010A302 /* Colors.plist in Resources */ = {isa = PBXBuildFile; fileRef = 00FC7F3B18F0ACE10010A302 /* Colors.plist */; };
 /* End PBXBuildFile section */
 
@@ -106,10 +106,10 @@
 		00B026E118EB4A8C0058E591 /* DSMultilineLabelNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSMultilineLabelNode.m; sourceTree = "<group>"; };
 		00CEC67418EA47E7009B7CF1 /* TutorialOverlayNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialOverlayNode.h; sourceTree = "<group>"; };
 		00CEC67518EA47E7009B7CF1 /* TutorialOverlayNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialOverlayNode.m; sourceTree = "<group>"; };
-		00DA8B4E18F1048A00C4A54D /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
-		00DA8B5018F104C300C4A54D /* TapTheColoredTile.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TapTheColoredTile.entitlements; sourceTree = SOURCE_ROOT; };
 		00DA8B5118F104F500C4A54D /* MKiCloudSync.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKiCloudSync.h; sourceTree = "<group>"; };
 		00DA8B5218F104F500C4A54D /* MKiCloudSync.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKiCloudSync.m; sourceTree = "<group>"; };
+		00DA8B5518F10C0800C4A54D /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		00DA8B5718F10C1600C4A54D /* TapTheColoredTile.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TapTheColoredTile.entitlements; sourceTree = SOURCE_ROOT; };
 		00FC7F3B18F0ACE10010A302 /* Colors.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Colors.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -121,7 +121,7 @@
 				004620B418E62BA600DAD16A /* iAd.framework in Frameworks */,
 				0046207A18E62B7000DAD16A /* CoreGraphics.framework in Frameworks */,
 				0046207C18E62B7000DAD16A /* UIKit.framework in Frameworks */,
-				00DA8B4F18F1048A00C4A54D /* GameKit.framework in Frameworks */,
+				00DA8B5618F10C0800C4A54D /* GameKit.framework in Frameworks */,
 				0046207E18E62B7000DAD16A /* SpriteKit.framework in Frameworks */,
 				0046207818E62B7000DAD16A /* Foundation.framework in Frameworks */,
 			);
@@ -162,7 +162,7 @@
 		0046207618E62B7000DAD16A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				00DA8B4E18F1048A00C4A54D /* GameKit.framework */,
+				00DA8B5518F10C0800C4A54D /* GameKit.framework */,
 				004620B318E62BA600DAD16A /* iAd.framework */,
 				0046207718E62B7000DAD16A /* Foundation.framework */,
 				0046207918E62B7000DAD16A /* CoreGraphics.framework */,
@@ -176,7 +176,7 @@
 		0046207F18E62B7000DAD16A /* TapTheColoredTile */ = {
 			isa = PBXGroup;
 			children = (
-				00DA8B5018F104C300C4A54D /* TapTheColoredTile.entitlements */,
+				00DA8B5718F10C1600C4A54D /* TapTheColoredTile.entitlements */,
 				0046208818E62B7000DAD16A /* AppDelegate.h */,
 				0046208918E62B7000DAD16A /* AppDelegate.m */,
 				004C159318EB947E00B58DBA /* Main.storyboard */,
