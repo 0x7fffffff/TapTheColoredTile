@@ -51,7 +51,7 @@
     NSArray *array = [SKColor allColorsArray];
 
     static uint32_t previous = 0;
-    uint32_t new = 0;
+    uint32_t new = arc4random_uniform((u_int32_t)array.count);
     
     while (previous == new) {
         new = arc4random_uniform((u_int32_t)array.count);
@@ -63,28 +63,13 @@
     return color;
 }
 
-+ (NSArray *)colorArrayFromStringArray:(NSArray *)stringArray
-{
-    NSMutableArray *output = [NSMutableArray new];
-
-    for (NSString *string in stringArray) {
-        NSArray *components = [string componentsSeparatedByString:@","];
-
-        UIColor *color = [self __two55ColorSpaceRed:[components[0] doubleValue]
-                                              green:[components[1] doubleValue]
-                                               blue:[components[2] doubleValue]];
-        [output addObject:color];
-    }
-    return [output copy];
-}
-
 + (NSArray *)confirmationColors
 {
     static NSArray *array = nil;
 
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        array = [self colorArrayFromStringArray:[[self colorsDictionary][@"confirmColors"] copy]];
+        array = @[[self __two55ColorSpaceRed:26 green:188 blue:156],[self __two55ColorSpaceRed:46 green:204 blue:113]];
     });
 
     return array;
@@ -96,7 +81,7 @@
 
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        array = [self colorArrayFromStringArray:[[self colorsDictionary][@"destructiveColors"] copy]];
+        array = @[[self __two55ColorSpaceRed:230 green:126 blue:34],[self __two55ColorSpaceRed:231 green:76 blue:60]];
     });
 
     return array;
@@ -112,7 +97,7 @@
         NSMutableArray *mutable = [NSMutableArray new];
         [mutable addObjectsFromArray:[self confirmationColors]];
         [mutable addObjectsFromArray:[self destructiveColors]];
-        [mutable addObjectsFromArray:[self colorArrayFromStringArray:[[self colorsDictionary][@"otherColors"] copy]]];
+        [mutable addObjectsFromArray:@[[self __two55ColorSpaceRed:52 green:152 blue:219],[self __two55ColorSpaceRed:155 green:89 blue:182],[self __two55ColorSpaceRed:241 green:196 blue:15]]];
 
         array = [mutable copy];
     });
@@ -138,17 +123,6 @@
     return [SKColor colorWithRed:red / 255.0 green:green / 255.0 blue:blue / 255.0 alpha:1.0];
 }
 
-+ (NSDictionary *)colorsDictionary
-{
-    static NSDictionary *dictionary = nil;
-
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        dictionary = [[NSDictionary alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Colors" ofType:@"plist"]];
-    });
-
-    return dictionary;
-}
 
 
 @end

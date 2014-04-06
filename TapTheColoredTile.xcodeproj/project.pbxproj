@@ -42,7 +42,6 @@
 		00CEC67618EA47E7009B7CF1 /* TutorialOverlayNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 00CEC67518EA47E7009B7CF1 /* TutorialOverlayNode.m */; };
 		00DA8B5318F104F500C4A54D /* MKiCloudSync.m in Sources */ = {isa = PBXBuildFile; fileRef = 00DA8B5218F104F500C4A54D /* MKiCloudSync.m */; };
 		00DA8B5618F10C0800C4A54D /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00DA8B5518F10C0800C4A54D /* GameKit.framework */; };
-		00FC7F3C18F0ACE10010A302 /* Colors.plist in Resources */ = {isa = PBXBuildFile; fileRef = 00FC7F3B18F0ACE10010A302 /* Colors.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -110,7 +109,6 @@
 		00DA8B5218F104F500C4A54D /* MKiCloudSync.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKiCloudSync.m; sourceTree = "<group>"; };
 		00DA8B5518F10C0800C4A54D /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		00DA8B5718F10C1600C4A54D /* TapTheColoredTile.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TapTheColoredTile.entitlements; sourceTree = SOURCE_ROOT; };
-		00FC7F3B18F0ACE10010A302 /* Colors.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Colors.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -203,7 +201,6 @@
 				004C159718EB96CC00B58DBA /* tap.m4a */,
 				004C159818EB96CC00B58DBA /* win.m4a */,
 				0046208118E62B7000DAD16A /* TapTheColoredTile-Info.plist */,
-				00FC7F3B18F0ACE10010A302 /* Colors.plist */,
 				0046208218E62B7000DAD16A /* InfoPlist.strings */,
 				0046208518E62B7000DAD16A /* main.m */,
 				0046208718E62B7000DAD16A /* TapTheColoredTile-Prefix.pch */,
@@ -385,7 +382,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00FC7F3C18F0ACE10010A302 /* Colors.plist in Resources */,
 				0046208418E62B7000DAD16A /* InfoPlist.strings in Resources */,
 				004C159E18EB996C00B58DBA /* lose.m4a in Resources */,
 				004620C918E7288200DAD16A /* ComicNeueSansID.ttf in Resources */,

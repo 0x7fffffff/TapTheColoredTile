@@ -21,7 +21,6 @@
 #endif
 
 + (SKColor *)_switchBackgroundColor;
-
 + (SKColor *)_stepTileColor;
 + (SKColor *)_nonStepTileColor;
 + (SKColor *)_stepConfirmationColor;
