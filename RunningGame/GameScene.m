@@ -63,7 +63,7 @@ static CGFloat leadingSpace = 50.0;
         
         switch (gameType) {
             case GameTypeSprint:{
-                [self setRequiredSteps:50];
+                [self setRequiredSteps:1];
             }break;
                 
             case GameTypeMarathon:{

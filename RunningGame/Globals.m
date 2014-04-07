@@ -8,6 +8,9 @@
 
 #import "Globals.h"
 
+    // Max
+CGFloat const xxFastestPossibleTime = 3.0;
+
 NSString * const MONConstantString = @"MONConstantString";
 
     // Sounds Names

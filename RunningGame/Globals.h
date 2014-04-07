@@ -13,6 +13,8 @@ typedef enum : NSUInteger {
     GameTypeFreePlay = 8
 } GameType;
 
+    // Max
+extern CGFloat const xxFastestPossibleTime;
 
     // Sound Names
 extern NSString * const xxSoundFileNameWin;

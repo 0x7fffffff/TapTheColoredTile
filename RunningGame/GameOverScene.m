@@ -95,15 +95,14 @@
         
         NSString *titleText = nil;
         
-        if (![defaults boolForKey:@"hasEverReportedScore"]) {
-            [self reportHighestScore];
-            [defaults setBool:YES forKey:@"hasEverReportedScore"];
-            [defaults synchronize];
-        }
+//        if (![defaults boolForKey:@"hasEverReportedScore"]) {
+//            [self reportHighestScore];
+//            [defaults setBool:YES forKey:@"hasEverReportedScore"];
+//            [defaults synchronize];
+//        }
         
         if (index == 0) {
             titleText = @"New Record!";
-            [self reportHighestScore];
         }else{
             if (returningGameType == GameTypeSprint || returningGameType == GameTypeMarathon) {
                 if (won) {
@@ -123,6 +122,9 @@
                 }
             }
         }
+        
+        [self reportHighestScore];
+
         
         ScoreDisplayNode *scoresNode = [[ScoreDisplayNode alloc] initWithSize:CGSizeMake(260.0, 308.0)
                                                                   andPosition:CGPointMake(size.width / 2.0, size.height / 2.0 + 25.0)
@@ -228,10 +230,23 @@
 
 - (void)reportHighestScore
 {
-    if ([GKLocalPlayer localPlayer].authenticated) {
-        NSLog(@"%s",__PRETTY_FUNCTION__);
-        
-        uint64_t scoreValue = [self scorePreparedForGameCenter];
+    
+    if ([GKLocalPlayer localPlayer].isAuthenticated) {
+        [self submitScore];
+    }else{
+        [[GKLocalPlayer localPlayer] setAuthenticateHandler:^(UIViewController *viewController, NSError *error) {
+            [self submitScore];
+        }];
+    }
+}
+
+- (void)submitScore
+{
+    NSLog(@"%s",__PRETTY_FUNCTION__);
+    
+    uint64_t scoreValue = [self scorePreparedForGameCenter];
+    NSLog(@"%llu",scoreValue);
+    if (scoreValue > 0) {
         
         GKScore *score = [[GKScore alloc] initWithLeaderboardIdentifier:self.leaderboardID];
         [score setValue:scoreValue];
@@ -240,7 +255,7 @@
             if (error != nil) {
                 NSLog(@"%@", [error localizedDescription]);
             }
-        }];        
+        }];
     }
 }
 
