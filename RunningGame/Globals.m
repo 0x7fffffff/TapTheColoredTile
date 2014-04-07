@@ -24,4 +24,4 @@ NSString * const xxxHasShownTutorialKey = @"hasShownTutorial";
 
 
     // File Names
-NSString * const xxFileNameComicSansNeueFont = @"ComicNeueSansID";
+NSString * const xxFileNameComicSansNeueFont = @"ComicNeue-Light";

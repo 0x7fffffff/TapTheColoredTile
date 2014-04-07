@@ -39,6 +39,7 @@
 		009C8C2818F0E3530034A7BE /* Globals.m in Sources */ = {isa = PBXBuildFile; fileRef = 009C8C2718F0E3530034A7BE /* Globals.m */; };
 		00B026DD18EB304B0058E591 /* SKButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B026DC18EB304B0058E591 /* SKButton.m */; };
 		00B026E218EB4A8C0058E591 /* DSMultilineLabelNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B026E118EB4A8C0058E591 /* DSMultilineLabelNode.m */; };
+		00BCE5DB18F2E670009F7816 /* ComicNeue-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 00BCE5DA18F2E670009F7816 /* ComicNeue-Light.ttf */; };
 		00CEC67618EA47E7009B7CF1 /* TutorialOverlayNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 00CEC67518EA47E7009B7CF1 /* TutorialOverlayNode.m */; };
 		00DA8B5318F104F500C4A54D /* MKiCloudSync.m in Sources */ = {isa = PBXBuildFile; fileRef = 00DA8B5218F104F500C4A54D /* MKiCloudSync.m */; };
 		00DA8B5618F10C0800C4A54D /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00DA8B5518F10C0800C4A54D /* GameKit.framework */; };
@@ -103,6 +104,7 @@
 		00B026DC18EB304B0058E591 /* SKButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKButton.m; sourceTree = "<group>"; };
 		00B026E018EB4A8C0058E591 /* DSMultilineLabelNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSMultilineLabelNode.h; sourceTree = "<group>"; };
 		00B026E118EB4A8C0058E591 /* DSMultilineLabelNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSMultilineLabelNode.m; sourceTree = "<group>"; };
+		00BCE5DA18F2E670009F7816 /* ComicNeue-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ComicNeue-Light.ttf"; sourceTree = "<group>"; };
 		00CEC67418EA47E7009B7CF1 /* TutorialOverlayNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialOverlayNode.h; sourceTree = "<group>"; };
 		00CEC67518EA47E7009B7CF1 /* TutorialOverlayNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialOverlayNode.m; sourceTree = "<group>"; };
 		00DA8B5118F104F500C4A54D /* MKiCloudSync.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKiCloudSync.h; sourceTree = "<group>"; };
@@ -195,6 +197,7 @@
 		0046208018E62B7000DAD16A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				00BCE5DA18F2E670009F7816 /* ComicNeue-Light.ttf */,
 				004620C818E7288200DAD16A /* ComicNeueSansID.ttf */,
 				004C159518EB96CB00B58DBA /* beep.m4a */,
 				004C159618EB96CC00B58DBA /* lose.m4a */,
@@ -386,6 +389,7 @@
 				004C159E18EB996C00B58DBA /* lose.m4a in Resources */,
 				004620C918E7288200DAD16A /* ComicNeueSansID.ttf in Resources */,
 				004C159418EB947E00B58DBA /* Main.storyboard in Resources */,
+				00BCE5DB18F2E670009F7816 /* ComicNeue-Light.ttf in Resources */,
 				004C159F18EB996F00B58DBA /* tap.m4a in Resources */,
 				004C15A018EB997200B58DBA /* win.m4a in Resources */,
 				004C159D18EB996900B58DBA /* beep.m4a in Resources */,
