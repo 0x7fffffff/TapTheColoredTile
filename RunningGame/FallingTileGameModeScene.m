@@ -46,7 +46,7 @@ static CGFloat tileHeight = 170.0;
     static NSMutableArray *previous = nil;
     
     if (!previous) {
-        previous = [[NSMutableArray alloc] initWithCapacity:3];
+        previous = [[NSMutableArray alloc] initWithCapacity:2];
     }
     
     if (previous.count > 0) {
@@ -55,7 +55,7 @@ static CGFloat tileHeight = 170.0;
 
     uint32_t randIndex = arc4random_uniform(4);
 
-    while (previous.count < 3) {
+    while (previous.count < 2) {
         while ([previous containsObject:@(randIndex)]) {
             randIndex = arc4random_uniform(4);
         }
@@ -69,6 +69,10 @@ static CGFloat tileHeight = 170.0;
 - (void)addNewTile
 {
     if (self.gameCanContinue) {
+        static int tileNumber = 0;
+        
+        tileNumber ++ ;
+        
         [self correctedRandomIndex];
         SKButton *tile = [[SKButton alloc] initWithColor:[SKColor _stepTileColor] size:CGSizeMake(tileWidth, tileHeight)];
         __weak SKButton *weakTile = tile;
@@ -96,7 +100,7 @@ static CGFloat tileHeight = 170.0;
             [self addNewTile];
         }];
         
-        SKAction *waitAction = [SKAction waitForDuration:self.tileRecursionDelay withRange:25.0 * self.tileRecursionDelay / 100.0];
+        SKAction *waitAction = [SKAction waitForDuration:self.tileRecursionDelay - self.fallTime / self.size.height withRange:self.tileRecursionDelay - self.fallTime / self.size.height];
         
         SKAction *recursiveAction = [SKAction sequence:@[waitAction, completionAction]];
         
@@ -104,7 +108,7 @@ static CGFloat tileHeight = 170.0;
         
         [tile runAction:[SKAction sequence:@[moveAction,movementCompletionAction]] withKey:@"moveAction"];
         
-        CGFloat decrement = [self children].count / 1000.0;
+        CGFloat decrement = 1.0 / [self children].count / 125.0;
         
         self.tileRecursionDelay -= decrement;
         self.fallTime -= decrement;
