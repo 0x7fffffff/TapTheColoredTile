@@ -11,6 +11,7 @@ typedef enum : NSUInteger {
     GameTypeMarathon = 2,
     GameTypeEndurance = 4,
     GameTypeFreePlay = 8,
+    GameTypeFallingTiles = 16,
     GameTypeNotInGame = 1024
 } GameType;
 

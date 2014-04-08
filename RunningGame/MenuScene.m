@@ -13,6 +13,7 @@
 #import "SKButton.h"
 #import "SettingsScene.h"
 #import "ScoreSelectionMenu.h"
+#import "FallingTileGameModeScene.h"
 
 @implementation MenuScene
 
@@ -58,9 +59,9 @@
         
         SKButton *enduranceButton = [[SKButton alloc] initWithColor:[SKColor _stepTileColor] size:buttonSize];
         [enduranceButton setPosition:CGPointMake(xStart, yStart + 27.0)];
-        [enduranceButton setText:@"Endurance"];
+        [enduranceButton setText:@"Falling Tiles"];
         [enduranceButton addActionOfType:SKButtonActionTypeTouchUpInside withBlock:^{
-            [self presentGameSceneWithGameType:GameTypeEndurance];
+            [self presentGameSceneWithGameType:GameTypeFallingTiles];
         }];
         [self addChild:enduranceButton];
         
@@ -103,7 +104,13 @@
 
 - (void)presentGameSceneWithGameType:(GameType)gameType
 {
-    GameScene *scene = [[GameScene alloc] initWithSize:self.size andGameType:gameType];
+    SKScene *scene = nil;
+    if (gameType == GameTypeFallingTiles) {
+        scene = [[FallingTileGameModeScene alloc] initWithSize:self.size];
+    }else{
+        scene = [[GameScene alloc] initWithSize:self.size andGameType:gameType];
+    }
+    
     [scene setScaleMode:SKSceneScaleModeFill];
     
     [self.view presentScene:scene transition:[SKTransition doorwayWithDuration:0.35]];
