@@ -10,7 +10,8 @@ typedef enum : NSUInteger {
     GameTypeSprint = 1,
     GameTypeMarathon = 2,
     GameTypeEndurance = 4,
-    GameTypeFreePlay = 8
+    GameTypeFreePlay = 8,
+    GameTypeNotInGame = 1024
 } GameType;
 
     // Max

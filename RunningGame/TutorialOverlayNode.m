@@ -27,7 +27,7 @@
         [self setIndex:0];
         [self setGameType:gameType];
         
-        SKLabelNode *tutorialLabel = [[SKLabelNode alloc] initWithFontNamed:@"ComicNeueSansID"];
+        SKLabelNode *tutorialLabel = [[SKLabelNode alloc] initWithFontNamed:xxFileNameComicSansNeueFont];
         
         [tutorialLabel setText:@"Tutorial Mode"];
         [tutorialLabel setFontSize:28.0];
@@ -39,7 +39,7 @@
         [self addChild:tutorialLabel];
         
         
-        DSMultilineLabelNode *mainLabel = [[DSMultilineLabelNode alloc] initWithFontNamed:@"ComicNeueSansID"];
+        DSMultilineLabelNode *mainLabel = [[DSMultilineLabelNode alloc] initWithFontNamed:xxFileNameComicSansNeueFont];
         [mainLabel setParagraphWidth:size.width - 20.0];
         [mainLabel setFontSize:24.0];
         [mainLabel setName:@"mainLabel"];

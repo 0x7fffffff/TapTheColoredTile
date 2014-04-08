@@ -49,16 +49,23 @@
 + (SKColor *)_stepTileColor
 {
     NSArray *array = [SKColor allColorsArray];
-
-    static uint32_t previous = 0;
-    uint32_t new = arc4random_uniform((u_int32_t)array.count);
     
-    while (previous == new) {
-        new = arc4random_uniform((u_int32_t)array.count);
+    static uint32_t first = 0;
+    static uint32_t middle = 0;
+    uint32_t last = arc4random_uniform((uint32_t)array.count);
+    
+    while (middle == first) {
+        middle = arc4random_uniform((uint32_t)array.count);
     }
-    previous = new;
     
-    SKColor *color = array[new];
+    while (last == middle || last == first) {
+        last = arc4random_uniform((uint32_t)array.count);
+    }
+    
+    first = middle;
+    middle = last;
+    
+    SKColor *color = array[last];
     
     return color;
 }

@@ -36,6 +36,8 @@
 		004C15A018EB997200B58DBA /* win.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 004C159818EB96CC00B58DBA /* win.m4a */; };
 		004C15A318EBAF2F00B58DBA /* SettingsScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 004C15A218EBAF2F00B58DBA /* SettingsScene.m */; };
 		006C26C018E88263006EAAB6 /* NodeAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 006C26BF18E88263006EAAB6 /* NodeAdditions.m */; };
+		0070C92918F367710044E583 /* ScoreSelectionMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 0070C92818F367710044E583 /* ScoreSelectionMenu.m */; };
+		0070C92C18F381B70044E583 /* ScoreViewOnlyScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 0070C92B18F381B70044E583 /* ScoreViewOnlyScene.m */; };
 		009C8C2818F0E3530034A7BE /* Globals.m in Sources */ = {isa = PBXBuildFile; fileRef = 009C8C2718F0E3530034A7BE /* Globals.m */; };
 		00B026DD18EB304B0058E591 /* SKButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B026DC18EB304B0058E591 /* SKButton.m */; };
 		00B026E218EB4A8C0058E591 /* DSMultilineLabelNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B026E118EB4A8C0058E591 /* DSMultilineLabelNode.m */; };
@@ -98,6 +100,10 @@
 		004C15A218EBAF2F00B58DBA /* SettingsScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsScene.m; sourceTree = "<group>"; };
 		006C26BE18E88263006EAAB6 /* NodeAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NodeAdditions.h; sourceTree = "<group>"; };
 		006C26BF18E88263006EAAB6 /* NodeAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NodeAdditions.m; sourceTree = "<group>"; };
+		0070C92718F367710044E583 /* ScoreSelectionMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoreSelectionMenu.h; sourceTree = "<group>"; };
+		0070C92818F367710044E583 /* ScoreSelectionMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScoreSelectionMenu.m; sourceTree = "<group>"; };
+		0070C92A18F381B70044E583 /* ScoreViewOnlyScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoreViewOnlyScene.h; sourceTree = "<group>"; };
+		0070C92B18F381B70044E583 /* ScoreViewOnlyScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScoreViewOnlyScene.m; sourceTree = "<group>"; };
 		009C8C2618F0E3530034A7BE /* Globals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Globals.h; sourceTree = "<group>"; };
 		009C8C2718F0E3530034A7BE /* Globals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Globals.m; sourceTree = "<group>"; };
 		00B026DB18EB304B0058E591 /* SKButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKButton.h; sourceTree = "<group>"; };
@@ -258,6 +264,10 @@
 				004620CE18E73CF500DAD16A /* GameOverScene.m */,
 				004620D018E74C2600DAD16A /* ScoreDisplayNode.h */,
 				004620D118E74C2600DAD16A /* ScoreDisplayNode.m */,
+				0070C92718F367710044E583 /* ScoreSelectionMenu.h */,
+				0070C92818F367710044E583 /* ScoreSelectionMenu.m */,
+				0070C92A18F381B70044E583 /* ScoreViewOnlyScene.h */,
+				0070C92B18F381B70044E583 /* ScoreViewOnlyScene.m */,
 			);
 			name = "Game Over Scene";
 			sourceTree = "<group>";
@@ -416,6 +426,7 @@
 				0046209318E62B7000DAD16A /* GameScene.m in Sources */,
 				004620CF18E73CF500DAD16A /* GameOverScene.m in Sources */,
 				004620C018E7089300DAD16A /* CountDownNode.m in Sources */,
+				0070C92C18F381B70044E583 /* ScoreViewOnlyScene.m in Sources */,
 				0046209018E62B7000DAD16A /* ViewController.m in Sources */,
 				004620B718E62FA400DAD16A /* SKColor+Colors.m in Sources */,
 				00B026DD18EB304B0058E591 /* SKButton.m in Sources */,
@@ -427,6 +438,7 @@
 				0046208618E62B7000DAD16A /* main.m in Sources */,
 				009C8C2818F0E3530034A7BE /* Globals.m in Sources */,
 				00DA8B5318F104F500C4A54D /* MKiCloudSync.m in Sources */,
+				0070C92918F367710044E583 /* ScoreSelectionMenu.m in Sources */,
 				004620D218E74C2600DAD16A /* ScoreDisplayNode.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

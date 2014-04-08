@@ -102,6 +102,7 @@
 //        }
         
         if (index == 0) {
+            [self reportHighestScore];
             titleText = @"New Record!";
         }else{
             if (returningGameType == GameTypeSprint || returningGameType == GameTypeMarathon) {
@@ -123,8 +124,6 @@
             }
         }
         
-        [self reportHighestScore];
-
         
         ScoreDisplayNode *scoresNode = [[ScoreDisplayNode alloc] initWithSize:CGSizeMake(260.0, 308.0)
                                                                   andPosition:CGPointMake(size.width / 2.0, size.height / 2.0 + 25.0)
@@ -133,7 +132,7 @@
                                                                   andGameType:returningGameType];
         [self addChild:scoresNode];
         
-        SKLabelNode *titleLabelNode = [[SKLabelNode alloc] initWithFontNamed:@"ComicNeueSansID"];
+        SKLabelNode *titleLabelNode = [[SKLabelNode alloc] initWithFontNamed:xxFileNameComicSansNeueFont];
         [titleLabelNode setHorizontalAlignmentMode:SKLabelHorizontalAlignmentModeCenter];
         [titleLabelNode setVerticalAlignmentMode:SKLabelVerticalAlignmentModeCenter];
         [titleLabelNode setText:titleText];
@@ -141,7 +140,7 @@
         [titleLabelNode setPosition:CGPointMake(size.width / 2.0, scoresNode.frame.origin.y + scoresNode.frame.size.height + 42.0)];
         [self addChild:titleLabelNode];
         
-        SKLabelNode *subTitleNode = [[SKLabelNode alloc] initWithFontNamed:@"ComicNeueSansID"];
+        SKLabelNode *subTitleNode = [[SKLabelNode alloc] initWithFontNamed:xxFileNameComicSansNeueFont];
         [subTitleNode setHorizontalAlignmentMode:SKLabelHorizontalAlignmentModeCenter];
         [subTitleNode setVerticalAlignmentMode:SKLabelVerticalAlignmentModeCenter];
         [subTitleNode setFontSize:16.0];
@@ -153,7 +152,6 @@
         CGSize buttonSize = CGSizeMake(120.0, 44.0);
         
         SKButton *retryButton = [[SKButton alloc] initWithColor:[SKColor _stepConfirmationColor] size:buttonSize];
-        [retryButton setName:@"retryButton"];
         [retryButton setText:@"Retry"];
         [retryButton setPosition:CGPointMake(scoresNode.frame.origin.x + buttonSize.width / 2.0, scoresNode.frame.origin.y - 24.0)];
         [retryButton addActionOfType:SKButtonActionTypeTouchUpInside withBlock:^{
@@ -165,7 +163,6 @@
         [self addChild:retryButton];
         
         SKButton *quitButton = [[SKButton alloc] initWithColor:[SKColor _stepDestructiveColor] size:buttonSize];
-        [quitButton setName:@"retryButton"];
         [quitButton setText:@"Quit"];
         [quitButton setPosition:CGPointMake(scoresNode.frame.origin.x + scoresNode.frame.size.width - buttonSize.width / 2.0, scoresNode.frame.origin.y - 24.0)];
         [quitButton addActionOfType:SKButtonActionTypeTouchUpInside withBlock:^{
@@ -242,20 +239,14 @@
 
 - (void)submitScore
 {
-    NSLog(@"%s",__PRETTY_FUNCTION__);
-    
     uint64_t scoreValue = [self scorePreparedForGameCenter];
-    NSLog(@"%llu",scoreValue);
+
     if (scoreValue > 0) {
         
         GKScore *score = [[GKScore alloc] initWithLeaderboardIdentifier:self.leaderboardID];
         [score setValue:scoreValue];
         
-        [GKScore reportScores:@[score] withCompletionHandler:^(NSError *error) {
-            if (error != nil) {
-                NSLog(@"%@", [error localizedDescription]);
-            }
-        }];
+        [GKScore reportScores:@[score] withCompletionHandler:nil];
     }
 }
 

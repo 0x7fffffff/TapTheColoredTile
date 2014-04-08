@@ -25,7 +25,7 @@
         [self setPosition:CGPointZero];
         [self setZPosition:1100.0];
         
-        self.labelNode = [[SKLabelNode alloc] initWithFontNamed:@"ComicNeueSansID"];
+        self.labelNode = [[SKLabelNode alloc] initWithFontNamed:xxFileNameComicSansNeueFont];
         [self.labelNode setText:@"3"];
         [self.labelNode setFontSize:248.0];
         [self.labelNode setFontColor:[SKColor _stepDestructiveColor]];
