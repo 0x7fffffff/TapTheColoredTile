@@ -100,18 +100,26 @@ static CGFloat tileHeight = 170.0;
             [self addNewTile];
         }];
         
-        SKAction *waitAction = [SKAction waitForDuration:self.tileRecursionDelay - self.fallTime / self.size.height withRange:self.tileRecursionDelay - self.fallTime / self.size.height];
+        SKAction *waitAction = [SKAction waitForDuration:self.tileRecursionDelay withRange:0];
         
         SKAction *recursiveAction = [SKAction sequence:@[waitAction, completionAction]];
         
         [self runAction:recursiveAction withKey:@"recursionAction"];
         
         [tile runAction:[SKAction sequence:@[moveAction,movementCompletionAction]] withKey:@"moveAction"];
-        
-        CGFloat decrement = 1.0 / [self children].count / 125.0;
-        
-        self.tileRecursionDelay -= decrement;
-        self.fallTime -= decrement;
+
+        //((-3sin(x))/x)+4
+//        CGFloat decrement = 1.0 / tileNumber;
+        CGFloat x = tileNumber + 10;
+
+//        self.fallTime -= fabs(((sin(x)) / (pow(x, 1.4))));
+//        self.tileRecursionDelay -= fabs(((sin(x)) / (pow(x, 1.3))));
+        CGFloat decrement = pow(2.0 * atan(x) / x, 2.0);
+
+        self.fallTime -= self.fallTime >= 0.5 ? decrement * 1.1 : 0.0;
+        self.tileRecursionDelay -= self.tileRecursionDelay >= 0.275 ? decrement : 0.0;
+
+        NSLog(@"Recursion time: %f                        fall time: %f",self.tileRecursionDelay,self.fallTime);
     }
 }
 
