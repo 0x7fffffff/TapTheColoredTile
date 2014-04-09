@@ -16,10 +16,10 @@ static CGFloat tileHeight = 170.0;
 #import "SKColor+Colors.h"
 #import "ViewController.h"
 
+
 @interface FallingTileGameModeScene ()
 
 @property (nonatomic, assign) CGFloat fallTime;
-@property (nonatomic, assign) CGFloat tileRecursionDelay;
 @property (nonatomic, assign) BOOL gameCanContinue;
 
 @end
@@ -33,9 +33,17 @@ static CGFloat tileHeight = 170.0;
     if (self) {
         [self setGameCanContinue:YES];
         [self setBackgroundColor:[SKColor _nonStepTileColor]];
-        [self setFallTime:2.0];
-        [self setTileRecursionDelay:1.0];
+        [self setFallTime:2.5];
         [self addNewTile];
+        
+        SKButton *backButton = [[SKButton alloc] initWithColor:[SKColor _stepTileColor] size:CGSizeMake(44.0, 44.0)];
+        [backButton setText:@"x"];
+        [backButton setZPosition:1000.0];
+        [backButton setPosition:CGPointMake(size.width - 66.0, size.height - 66.0)];
+        [backButton addActionOfType:SKButtonActionTypeTouchUpInside withBlock:^{
+            
+        }];
+        [self addChild:backButton];
     }
     
     return self;
@@ -49,20 +57,21 @@ static CGFloat tileHeight = 170.0;
     if (!previous) {
         previous = [[NSMutableArray alloc] initWithCapacity:2];
     }
-    
+
     if (previous.count > 0) {
         [previous removeObjectAtIndex:0];
     }
-
+    
     uint32_t randIndex = arc4random_uniform(4);
-
-    while (previous.count < 2) {
+    
+    while (previous.count <= 2) {
         while ([previous containsObject:@(randIndex)]) {
             randIndex = arc4random_uniform(4);
         }
         
         [previous addObject:@(randIndex)];
     }
+    
     return randIndex;
 }
 
@@ -87,13 +96,15 @@ static CGFloat tileHeight = 170.0;
         }];
         [self addChild:tile];
         
-        SKAction *moveAction = [SKAction moveTo:CGPointMake(tile.position.x, -tileHeight / 2.0) duration:self.fallTime];
+    
+        SKAction *moveAction = [SKAction moveTo:CGPointMake(tile.position.x, -tileHeight / 2.0)
+                                       duration:self.fallTime];
+        
         SKAction *movementCompletionAction = [SKAction runBlock:^{
             [self removeAllActions];
             if (self.gameCanContinue) {
                 [self setGameCanContinue:NO];
-                
-                NSLog(@"Lose");
+                [self lose];
             }
         }];
         
@@ -101,7 +112,7 @@ static CGFloat tileHeight = 170.0;
             [self addNewTile];
         }];
         
-        SKAction *waitAction = [SKAction waitForDuration:self.tileRecursionDelay withRange:0];
+        SKAction *waitAction = [SKAction waitForDuration:(self.fallTime * tileHeight) / (self.size.height + tileHeight + 70.0) withRange:0];
         
         SKAction *recursiveAction = [SKAction sequence:@[waitAction, completionAction]];
         
@@ -109,14 +120,7 @@ static CGFloat tileHeight = 170.0;
         
         [tile runAction:[SKAction sequence:@[moveAction,movementCompletionAction]] withKey:@"moveAction"];
 
-        CGFloat x = tileNumber + 10;
-
-        CGFloat decrement = pow(2.0 * atan(x) / x, 2.0);
-
-        self.fallTime -= self.fallTime >= 0.15 ? decrement * 1.3 : 0.0;
-        self.tileRecursionDelay -= self.tileRecursionDelay >= 0.25 ? decrement : 0.0;
-
-        NSLog(@"Recursion time: %f                        fall time: %f",self.tileRecursionDelay,self.fallTime);
+        self.fallTime -= self.fallTime >= 0.85 ? 0.01 : 0.0;
     }
 }
 
@@ -145,8 +149,26 @@ static CGFloat tileHeight = 170.0;
     if (viewController.isAdBannerCurrentlyVisible) {
         if (location.y <= 50.0) {
             [self setPaused:YES];
+            return;
         }
     }
+    
+    if (location.y >= self.size.height - 88.0 && location.x >= self.size.width - 88.0) {
+        NSLog(@"Back button");
+        return;
+    }
+    
+    [self lose];
+}
+
+- (void)lose
+{
+    
+}
+
+- (void)win
+{
+    
 }
 
 @end

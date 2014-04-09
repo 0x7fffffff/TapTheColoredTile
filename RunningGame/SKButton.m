@@ -56,6 +56,9 @@
         CGPoint location = [[touches anyObject] locationInNode:self];
 
         if (self.actionBitmask & SKButtonActionTypeTouchDown) {
+            if ([self shouldPlaySounds]) {
+                [self runAction:[self _tapSoundAction]];
+            }
             self.touchDownBlock();
         }else if (self.actionBitmask & SKButtonActionTypeTouchUpInside) {
             self.startingTouchLocation = location;

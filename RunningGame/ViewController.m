@@ -51,9 +51,11 @@
 {
     SKView *skView = (SKView *)self.view;
     
-    if ([skView respondsToSelector:@selector(setPaused:)]) {
-        [skView setPaused:NO];
-    }
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.35 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        if ([skView respondsToSelector:@selector(setPaused:)]) {
+            [skView setPaused:NO];
+        }        
+    });
 }
 
 - (void)bannerViewDidLoadAd:(ADBannerView *)banner
