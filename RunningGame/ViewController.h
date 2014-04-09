@@ -11,4 +11,6 @@
 
 @interface ViewController : UIViewController
 
+@property (nonatomic, assign) BOOL isAdBannerCurrentlyVisible;
+
 @end

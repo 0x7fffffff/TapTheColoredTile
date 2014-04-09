@@ -60,6 +60,8 @@
 {
     [UIView animateWithDuration:0.15 animations:^{
         [self.adBanner setAlpha:1.0];
+    } completion:^(BOOL finished) {
+        [self setIsAdBannerCurrentlyVisible:YES];
     }];
 }
 
@@ -67,6 +69,8 @@
 {
     [UIView animateWithDuration:0.15 animations:^{
         [self.adBanner setAlpha:0.0];
+    } completion:^(BOOL finished) {
+        [self setIsAdBannerCurrentlyVisible:NO];
     }];
 }
 
@@ -77,6 +81,7 @@
     if ([skView respondsToSelector:@selector(setPaused:)]) {
         [skView setPaused:YES];
     }
+    
     return YES;
 }
 

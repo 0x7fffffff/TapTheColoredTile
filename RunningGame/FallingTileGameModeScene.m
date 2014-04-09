@@ -14,6 +14,7 @@ static CGFloat tileHeight = 170.0;
 #import "FallingTileGameModeScene.h"
 #import "SKButton.h"
 #import "SKColor+Colors.h"
+#import "ViewController.h"
 
 @interface FallingTileGameModeScene ()
 
@@ -108,16 +109,12 @@ static CGFloat tileHeight = 170.0;
         
         [tile runAction:[SKAction sequence:@[moveAction,movementCompletionAction]] withKey:@"moveAction"];
 
-        //((-3sin(x))/x)+4
-//        CGFloat decrement = 1.0 / tileNumber;
         CGFloat x = tileNumber + 10;
 
-//        self.fallTime -= fabs(((sin(x)) / (pow(x, 1.4))));
-//        self.tileRecursionDelay -= fabs(((sin(x)) / (pow(x, 1.3))));
         CGFloat decrement = pow(2.0 * atan(x) / x, 2.0);
 
-        self.fallTime -= self.fallTime >= 0.5 ? decrement * 1.1 : 0.0;
-        self.tileRecursionDelay -= self.tileRecursionDelay >= 0.275 ? decrement : 0.0;
+        self.fallTime -= self.fallTime >= 0.15 ? decrement * 1.3 : 0.0;
+        self.tileRecursionDelay -= self.tileRecursionDelay >= 0.25 ? decrement : 0.0;
 
         NSLog(@"Recursion time: %f                        fall time: %f",self.tileRecursionDelay,self.fallTime);
     }
@@ -130,15 +127,26 @@ static CGFloat tileHeight = 170.0;
     }];
     
     SKAction *fade = [SKAction fadeAlphaTo:0.0 duration:0.05];
-    
+
     SKAction *remove = [SKAction removeFromParent];
     
     return [SKAction sequence:@[removeMovement,fade,remove]];
 }
 
+
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-
+    [super touchesBegan:touches withEvent:event];
+    
+    CGPoint location = [[touches anyObject] locationInNode:self];
+    
+    ViewController *viewController = (ViewController *)self.view.window.rootViewController;
+    
+    if (viewController.isAdBannerCurrentlyVisible) {
+        if (location.y <= 50.0) {
+            [self setPaused:YES];
+        }
+    }
 }
 
 @end

@@ -77,11 +77,13 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryAmbient withOptions:AVAudioSessionCategoryOptionMixWithOthers error:nil];
     [[AVAudioSession sharedInstance] setActive:YES error:nil];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryAmbient withOptions:AVAudioSessionCategoryOptionMixWithOthers error:nil];
     [[AVAudioSession sharedInstance] setActive:YES error:nil];
     
     [self authenticateLocalPlayer];
