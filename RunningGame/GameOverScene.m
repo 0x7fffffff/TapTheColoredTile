@@ -40,10 +40,10 @@
         }else if (returningGameType == GameTypeMarathon) {
             bestTimesKey = @"MarathonLeaderBoard"; // NEVER CHANGE
             lastTimeKey = @"lastMarathonTimeKey"; // NEVER CHANGE
-        }else if (returningGameType == GameTypeEndurance) {
+        }/*else if (returningGameType == GameTypeEndurance) {
             bestTimesKey = @"EnduranceLeaderBoard"; // NEVER CHANGE
             lastTimeKey = @"lastEnduranceScoreKey"; // NEVER CHANGE
-        }else{
+        }*/else{
             return self;
         }
         
@@ -72,7 +72,7 @@
             [defaults removeObjectForKey:lastTimeKey];
         }
         
-        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"self" ascending:(returningGameType == GameTypeEndurance) ? NO : YES];
+        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"self" ascending:YES];
 
         [array sortUsingDescriptors:@[sortDescriptor]];
         
@@ -207,19 +207,6 @@
         }
         return nil;
         
-    }else if (self.returningGameType == GameTypeEndurance) {
-        
-        NSString *key = @"bestEnduranceScoresKey";
-        
-        NSArray *candidate = [[defaults objectForKey:key] copy];
-        if (candidate) {
-            
-            [defaults removeObjectForKey:key];
-            [defaults synchronize];
-            return candidate;
-        }
-        return nil;
-        
     }else{
         return nil;
     }
@@ -258,8 +245,6 @@
         if (self.returningGameType == GameTypeSprint || self.returningGameType == GameTypeMarathon) {
             input = [self.scores[0] doubleValue] * 1000;
             
-        }else if (self.returningGameType == GameTypeEndurance) {
-            input = [self.scores[0] longValue];
         }
     }
     

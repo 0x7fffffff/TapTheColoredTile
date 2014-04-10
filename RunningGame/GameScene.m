@@ -71,10 +71,6 @@ static CGFloat leadingSpace = 50.0;
                 [self setRequiredSteps:250];
             }break;
                 
-            case GameTypeEndurance:{
-                [self setRequiredSteps:NSIntegerMax];
-            }break;
-                
             case GameTypeFreePlay:{
                 [self setRequiredSteps:NSIntegerMax];
             }break;
@@ -204,20 +200,9 @@ static CGFloat leadingSpace = 50.0;
             SKColor *color = nil;
             BOOL steppable = NO;
             
-            static CGFloat scale = 0.99;
-            
             if (i == rand) {
                 steppable = YES;
                 color = [SKColor _stepTileColor];
-
-                if (self.currentStep >= 15) {
-                    if (self.gameType == GameTypeEndurance) {
-                        scale -= 0.005;
-                    }
-                }else{
-                    scale = 0.99;
-                }
-
             }else{
                 color = [SKColor clearColor];
             }
@@ -231,7 +216,7 @@ static CGFloat leadingSpace = 50.0;
             SKSpriteNode *node = [[SKSpriteNode alloc] initWithColor:color
                                                                 size:CGSizeMake(tileWidth, tileHeight)];
             
-            [node setYScale:scale];
+            [node setYScale:0.99];
             [node setAnchorPoint:CGPointMake(0.0, 0.0)];
             [node setPosition:CGPointMake(i * tileWidth, yIndex)];
             [node setName:tileName];
@@ -310,60 +295,11 @@ static CGFloat leadingSpace = 50.0;
     }
 }
 
-//- (void)tapTimerDidFire:(NSTimer *)timer
-//{
-//    [self enumerateChildNodesWithName:tileName usingBlock:^(SKNode *node, BOOL *stop) {
-//        SKSpriteNode *tile = (SKSpriteNode *)node;
-//        if (tile.yScale > 0.0) {
-//            [tile setScale:tile.yScale - 0.001];
-//        }
-//    }];
-//    double oldestTime = [self.last15Taps[0] doubleValue];
-//    double currentTime = CFAbsoluteTimeGetCurrent();
-//    
-//    double tps = 1.0 / ((currentTime - oldestTime) / (double)self.last15Taps.count);
-//
-//    double offset = log(fabs(log(1.0 / (CFAbsoluteTimeGetCurrent() - self.startTime))));
-//    
-//    
-//    
-//    
-//    if (tps <= 1.0 + offset) {
-//        if (tps <= offset) {
-//            [timer invalidate];
-//            [self win];
-//            
-//            return;
-//        }
-//        [self enumerateChildNodesWithName:tileName usingBlock:^(SKNode *node, BOOL *stop) {
-//            [node setAlpha:1.0 - (2.5 - tps)];
-//        }];
-//    }
-//}
-
 
 - (void)takeStep
 {
     self.currentStep ++ ;
     
-    if (self.gameType == GameTypeEndurance) {
-        if (self.currentStep == 15) {
-            if (self.tapTimer.isValid) {
-                [self.tapTimer invalidate];
-            }
-//            self.tapTimer = [NSTimer scheduledTimerWithTimeInterval:0.01
-//                                                             target:self
-//                                                           selector:@selector(tapTimerDidFire:)
-//                                                           userInfo:nil
-//                                                            repeats:YES];
-        }
-        
-        [self.last15Taps addObject:@(CFAbsoluteTimeGetCurrent())];
-        
-        if (self.last15Taps.count >= 15) {
-            [self.last15Taps removeObjectAtIndex:0];
-        }
-    }
     
     if (self.currentStep == self.requiredSteps) {
         
@@ -406,11 +342,6 @@ static CGFloat leadingSpace = 50.0;
         }
         
         if (!self.isInFreePlay) {
-            if (self.gameType == GameTypeEndurance) {
-                [[NSUserDefaults standardUserDefaults] setObject:@(self.currentStep) forKey:@"lastEnduranceScoreKey"];
-                [[NSUserDefaults standardUserDefaults] synchronize];
-            }
-            
             [self gameOverWithWin:YES];
             [self setCanContinuePlaying:NO];
         }
@@ -429,13 +360,8 @@ static CGFloat leadingSpace = 50.0;
         }
         
         if (!self.isInFreePlay) {
-            if (self.gameType == GameTypeEndurance) {
-                [[NSUserDefaults standardUserDefaults] setObject:@(self.currentStep) forKey:@"lastEnduranceScoreKey"];
-                [[NSUserDefaults standardUserDefaults] synchronize];
-                [self gameOverWithWin:YES];
-            }else{
-                [self gameOverWithWin:NO];
-            }
+            [self gameOverWithWin:NO];
+            
             [self setCanContinuePlaying:NO];        
         }
     }

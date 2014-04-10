@@ -56,11 +56,8 @@
             [scoreLabel setUserData:[@{@"id": @(n)} mutableCopy]];
             [numberLabel setUserData:[@{@"id": @(n)} mutableCopy]];
             
-            if (gameType == GameTypeEndurance) {
-                [scoreLabel setText:[NSString stringWithFormat:@"\t%ld",(long)score.integerValue]];
-            }else{
-                [scoreLabel setText:[NSString stringWithFormat:@"\t%.3f",score.doubleValue]];
-            }
+            [scoreLabel setText:[NSString stringWithFormat:@"\t%.3f",score.doubleValue]];
+            
             
             [numberLabel setText:[NSString stringWithFormat:@"%d:\t",n]];
             
@@ -108,17 +105,15 @@
         
         NSString *sharingString = nil;
         
-        if (self.gameType == GameTypeEndurance) {
-            sharingString = [NSString stringWithFormat:@"I just scored \"%ld\" in Endurance Mode on \"Tap the Colored Tile\"",(long)[self.scores[index] integerValue]];
+        NSString *sub = nil;
+        if (self.gameType == GameTypeSprint) {
+            sub = @"Sprint";
         }else{
-            NSString *sub = nil;
-            if (self.gameType == GameTypeSprint) {
-                sub = @"Sprint";
-            }else{
-                sub = @"Marathon";
-            }
-            sharingString = [NSString stringWithFormat:@"I just scored \"%.3f\" in %@ Mode on \"Tap the Colored Tile\"",[self.scores[index] doubleValue],sub];
+            sub = @"Marathon";
         }
+        
+        sharingString = [NSString stringWithFormat:@"I just scored \"%.3f\" in %@ Mode on \"Tap the Colored Tile\"",[self.scores[index] doubleValue],sub];
+        
         
         [arr addObject:sharingString];
         if (arr.count > 0) {

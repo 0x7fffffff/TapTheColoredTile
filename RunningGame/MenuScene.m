@@ -57,13 +57,13 @@
         
         
         
-        SKButton *enduranceButton = [[SKButton alloc] initWithColor:[SKColor _stepTileColor] size:buttonSize];
-        [enduranceButton setPosition:CGPointMake(xStart, yStart + 27.0)];
-        [enduranceButton setText:@"Falling Tiles"];
-        [enduranceButton addActionOfType:SKButtonActionTypeTouchUpInside withBlock:^{
+        SKButton *fallingTilesButton = [[SKButton alloc] initWithColor:[SKColor _stepTileColor] size:buttonSize];
+        [fallingTilesButton setPosition:CGPointMake(xStart, yStart + 27.0)];
+        [fallingTilesButton setText:@"Falling Tiles"];
+        [fallingTilesButton addActionOfType:SKButtonActionTypeTouchUpInside withBlock:^{
             [self presentGameSceneWithGameType:GameTypeFallingTiles];
         }];
-        [self addChild:enduranceButton];
+        [self addChild:fallingTilesButton];
         
         
         

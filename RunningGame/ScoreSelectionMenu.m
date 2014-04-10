@@ -57,13 +57,13 @@
         [self addChild:marathonScoreButton];
         
         
-        SKButton *enduranceScoreButton = [[SKButton alloc] initWithColor:[SKColor _stepTileColor] size:buttonSize];
-        [enduranceScoreButton setPosition:CGPointMake(xStart, yStart - 27.0)];
-        [enduranceScoreButton setText:@"Endurance"];
-        [enduranceScoreButton addActionOfType:SKButtonActionTypeTouchUpInside withBlock:^{
-            [self showScoresPageForGameType:GameTypeEndurance];
+        SKButton *fallingTilesScoreButton = [[SKButton alloc] initWithColor:[SKColor _stepTileColor] size:buttonSize];
+        [fallingTilesScoreButton setPosition:CGPointMake(xStart, yStart - 27.0)];
+        [fallingTilesScoreButton setText:@"Falling Tiles"];
+        [fallingTilesScoreButton addActionOfType:SKButtonActionTypeTouchUpInside withBlock:^{
+
         }];
-        [self addChild:enduranceScoreButton];
+        [self addChild:fallingTilesScoreButton];
         
         
         SKButton *gameCenterButton = [[SKButton alloc] initWithColor:[SKColor _stepTileColor] size:buttonSize];
