@@ -28,3 +28,7 @@ NSString * const xxxHasShownTutorialKey = @"hasShownTutorial";
 
     // File Names
 NSString * const xxFileNameComicSansNeueFont = @"ComicNeue-Light";
+
+    // Dimensions
+CGFloat const xxTileHeight = 170.0;
+CGFloat const xxTileWidth = 80.0;

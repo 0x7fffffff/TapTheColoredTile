@@ -31,3 +31,7 @@ extern NSString * const xxxHasShownTutorialKey;
 
     // File Names
 extern NSString * const xxFileNameComicSansNeueFont;
+
+    // Dimensions
+extern CGFloat const xxTileHeight;
+extern CGFloat const xxTileWidth;

@@ -6,11 +6,6 @@
 //  Copyright (c) 2014 MacCDevTeam LLC. All rights reserved.
 //
 
-
-static CGFloat tileWidth = 80.0;
-static CGFloat tileHeight = 170.0;
-
-
 #import "FallingTileGameModeScene.h"
 #import "SKButton.h"
 #import "SKColor+Colors.h"
@@ -84,11 +79,11 @@ static CGFloat tileHeight = 170.0;
         tileNumber ++ ;
         
         [self correctedRandomIndex];
-        SKButton *tile = [[SKButton alloc] initWithColor:[SKColor _stepTileColor] size:CGSizeMake(tileWidth, tileHeight)];
+        SKButton *tile = [[SKButton alloc] initWithColor:[SKColor _stepTileColor] size:CGSizeMake(xxTileWidth, xxTileHeight)];
         __weak SKButton *weakTile = tile;
         
         [tile setName:@"tile"];
-        [tile setPosition:CGPointMake([self correctedRandomIndex] * tileWidth + tileWidth / 2.0, self.size.height + tileHeight / 2.0)];
+        [tile setPosition:CGPointMake([self correctedRandomIndex] * xxTileWidth + xxTileWidth / 2.0, self.size.height + xxTileHeight / 2.0)];
         [tile addActionOfType:SKButtonActionTypeTouchDown withBlock:^{
             if (self.gameCanContinue) {
                 [weakTile runAction:[self removeTappedTileActio:weakTile]];
@@ -97,7 +92,7 @@ static CGFloat tileHeight = 170.0;
         [self addChild:tile];
         
     
-        SKAction *moveAction = [SKAction moveTo:CGPointMake(tile.position.x, -tileHeight / 2.0)
+        SKAction *moveAction = [SKAction moveTo:CGPointMake(tile.position.x, -xxTileHeight / 2.0)
                                        duration:self.fallTime];
         
         SKAction *movementCompletionAction = [SKAction runBlock:^{
@@ -112,7 +107,7 @@ static CGFloat tileHeight = 170.0;
             [self addNewTile];
         }];
         
-        SKAction *waitAction = [SKAction waitForDuration:(self.fallTime * tileHeight) / (self.size.height + tileHeight + 70.0) withRange:0];
+        SKAction *waitAction = [SKAction waitForDuration:(self.fallTime * xxTileHeight) / (self.size.height + xxTileHeight + 70.0) withRange:0];
         
         SKAction *recursiveAction = [SKAction sequence:@[waitAction, completionAction]];
         

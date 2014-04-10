@@ -17,8 +17,6 @@
 @import GameKit;
 
 static NSString *tileName = @"Tile";
-static CGFloat tileWidth = 80.0;
-static CGFloat tileHeight = 170.0;
 static CGFloat leadingSpace = 50.0;
 
 @interface GameScene ()
@@ -29,8 +27,6 @@ static CGFloat leadingSpace = 50.0;
 @property (nonatomic, assign) double startTime;
 @property (nonatomic, assign) GameType gameType;
 @property (nonatomic, assign) BOOL canContinuePlaying;
-@property (nonatomic, strong) NSMutableArray *last15Taps;
-@property (strong, nonatomic) NSTimer *tapTimer;
 @property (getter = isFirstRun, assign) BOOL firstRun;
 @property (nonatomic, assign) BOOL isInFreePlay;
 
@@ -52,12 +48,6 @@ static CGFloat leadingSpace = 50.0;
         }else{
             [self setCanContinuePlaying:NO];
         }
-        
-        if (self.tapTimer.isValid) {
-            [self.tapTimer invalidate];
-        }
-
-        self.last15Taps = [NSMutableArray new];
         
         [self setBackgroundColor:[SKColor _nonStepTileColor]];
         [self setGameType:gameType];
@@ -110,7 +100,7 @@ static CGFloat leadingSpace = 50.0;
             
             [self addChild:countDownNode];            
         }else{
-            CGFloat tutHeight = self.size.height - tileHeight - leadingSpace;
+            CGFloat tutHeight = self.size.height - xxTileHeight - leadingSpace;
             TutorialOverlayNode *tutorialNode = [[TutorialOverlayNode alloc] initWithColor:[SKColor _nonStepTileColor]
                                                                                       size:CGSizeMake(self.size.width, tutHeight)
                                                                                andGameType:gameType];
@@ -185,7 +175,7 @@ static CGFloat leadingSpace = 50.0;
     self.tilesArray = [NSMutableArray new];
     
     for (int i = 0; i < 5; i ++) {
-        [self addRowAtYIndex:i * tileHeight + leadingSpace];
+        [self addRowAtYIndex:i * xxTileHeight + leadingSpace];
     }
 }
 
@@ -214,11 +204,11 @@ static CGFloat leadingSpace = 50.0;
             
             
             SKSpriteNode *node = [[SKSpriteNode alloc] initWithColor:color
-                                                                size:CGSizeMake(tileWidth, tileHeight)];
+                                                                size:CGSizeMake(xxTileWidth, xxTileHeight)];
             
             [node setYScale:0.99];
             [node setAnchorPoint:CGPointMake(0.0, 0.0)];
-            [node setPosition:CGPointMake(i * tileWidth, yIndex)];
+            [node setPosition:CGPointMake(i * xxTileWidth, yIndex)];
             [node setName:tileName];
             [node setUserData:info];
             
@@ -268,7 +258,7 @@ static CGFloat leadingSpace = 50.0;
     UITouch *touch = [touches anyObject];
     CGPoint touchLocation = [touch locationInNode:self];
     
-    if (touchLocation.y <= tileHeight + leadingSpace) {
+    if (touchLocation.y <= xxTileHeight + leadingSpace) {
         SKSpriteNode *tappableNode = [self tappableNodeInBottomRow];
         
         if (tappableNode == [self nodeAtPoint:touchLocation]) {
@@ -286,10 +276,6 @@ static CGFloat leadingSpace = 50.0;
         }
     }else{
         if (self.canContinuePlaying) {
-            if (self.tapTimer.isValid) {
-                [self.tapTimer invalidate];
-            }
-            
             [self lose];
         }
     }
@@ -322,20 +308,16 @@ static CGFloat leadingSpace = 50.0;
     [self.tilesArray removeLastObject];
     
     [self enumerateChildNodesWithName:tileName usingBlock:^(SKNode *node, BOOL *stop) {
-        SKAction *moveAction = [SKAction moveBy:CGVectorMake(0.0, -tileHeight) duration:0.02];
+        SKAction *moveAction = [SKAction moveBy:CGVectorMake(0.0, -xxTileHeight) duration:0.02];
         [node runAction:moveAction];
     }];
     
-    [self addRowAtYIndex:4 * tileHeight + leadingSpace];
+    [self addRowAtYIndex:4 * xxTileHeight + leadingSpace];
 }
 
 
 - (void)win
 {
-    if (self.tapTimer.isValid) {
-        [self.tapTimer invalidate];
-    }
-
     if (self.canContinuePlaying) {
         if ([self shouldPlaySounds]) {
             [self runAction:[self _winSoundAction]];
@@ -350,10 +332,6 @@ static CGFloat leadingSpace = 50.0;
 
 - (void)lose
 {
-    if (self.tapTimer.isValid) {
-        [self.tapTimer invalidate];
-    }
-
     if (self.canContinuePlaying) {
         if ([self shouldPlaySounds]) {
             [self runAction:[self _loseSoundAction]];
