@@ -11,6 +11,8 @@
 #import "NodeAdditions.h"
 
 @interface SKButton ()
+@property (nonatomic, strong) SKColor *originalBackgroundColor;
+@property (strong, nonatomic) SKColor *highlightedColor;
 @property (nonatomic, assign) NSUInteger actionBitmask;
 @property (nonatomic, assign) CGPoint startingTouchLocation;
 @property (strong, nonatomic) ActionBlock touchDownBlock;
@@ -35,6 +37,17 @@
     return self;
 }
 
+- (SKColor *)highlightedColor
+{
+    CGFloat h = 0.0, s = 0.0, b = 0.0, a = 0.0;
+    
+    if ([self.color getHue:&h saturation:&s brightness:&b alpha:&a]) {
+        return [SKColor colorWithHue:h saturation:s brightness:b / 2.0 alpha:a];
+    }
+    
+    return nil;
+}
+
 - (SKLabelNode *)label
 {
     if (!_label) {
@@ -52,6 +65,10 @@
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [super touchesBegan:touches withEvent:event];
+    
+    [self setOriginalBackgroundColor:self.color];
+    [self setColor:[self highlightedColor]];
+    
     if (self.actionBitmask > 0) {
         CGPoint location = [[touches anyObject] locationInNode:self];
 
@@ -63,13 +80,15 @@
         }else if (self.actionBitmask & SKButtonActionTypeTouchUpInside) {
             self.startingTouchLocation = location;
         }
-        
     }
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [super touchesEnded:touches withEvent:event];
+    
+    [self setColor:self.originalBackgroundColor];
+    [self setOriginalBackgroundColor:nil];
     
     if (self.actionBitmask > 0) {
         if (self.actionBitmask & SKButtonActionTypeTouchUpInside) {
