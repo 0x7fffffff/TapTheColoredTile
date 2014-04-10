@@ -11,12 +11,15 @@
 #import "NodeAdditions.h"
 
 @interface SKButton ()
-@property (nonatomic, strong) SKColor *originalBackgroundColor;
+
+@property (strong, nonatomic) SKColor *originalBackgroundColor;
 @property (strong, nonatomic) SKColor *highlightedColor;
-@property (nonatomic, assign) NSUInteger actionBitmask;
-@property (nonatomic, assign) CGPoint startingTouchLocation;
 @property (strong, nonatomic) ActionBlock touchDownBlock;
 @property (strong, nonatomic) ActionBlock touchUpInsideBlock;
+
+@property (nonatomic, assign) NSUInteger actionBitmask;
+@property (nonatomic, assign) CGPoint startingTouchLocation;
+
 @end
 
 @implementation SKButton
@@ -39,10 +42,10 @@
 
 - (SKColor *)highlightedColor
 {
-    CGFloat h = 0.0, s = 0.0, b = 0.0, a = 0.0;
+    CGFloat h, s, b, a;
     
     if ([self.color getHue:&h saturation:&s brightness:&b alpha:&a]) {
-        return [SKColor colorWithHue:h saturation:s brightness:b / 2.0 alpha:a];
+        return [SKColor colorWithHue:h saturation:s brightness:b * 0.8 alpha:a];
     }
     
     return nil;
