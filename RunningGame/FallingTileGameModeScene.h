@@ -7,7 +7,8 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
+#import "GameSceneBase.h"
 
-@interface FallingTileGameModeScene : SKScene
+@interface FallingTileGameModeScene : GameSceneBase
 
 @end

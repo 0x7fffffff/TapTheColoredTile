@@ -25,7 +25,7 @@
     if (self) {
         
         self.fontColor = [SKColor whiteColor];
-        self.fontName = @"Helvetica";
+        self.fontName = xxFileNameComicSansNeueFont;
         self.fontSize = 32.0;
         
         self.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeCenter;

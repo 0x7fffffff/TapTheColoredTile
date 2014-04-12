@@ -17,14 +17,10 @@
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
-        // Last set on V 1.1 update
-    if (![defaults boolForKey:xxxIsFirstRunKey]) {
-        [defaults setBool:YES forKey:xxxShouldShowAdsKey];
-        [defaults setBool:YES forKey:xxxShouldPlaySoundsKey];
-        [defaults setBool:YES forKey:xxxIsFirstRunKey];
+    // Last set on V 1.1 update
+    [defaults registerDefaults:@{xxxShouldShowAdsKey : @YES, xxxShouldPlaySoundsKey : @YES}];
+    [defaults synchronize];
 
-        [defaults synchronize];
-    }
     
     [MKiCloudSync start];
 
@@ -33,16 +29,17 @@
 
 - (void)authenticateLocalPlayer
 {
-    if(![GKLocalPlayer localPlayer].authenticated) {
-        
-//        [[NSNotificationCenter defaultCenter] addObserverForName:GKPlayerDidChangeNotificationName object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
-//            NSLog(@"%@",note.userInfo);
-//        }];
-        
-        [[GKLocalPlayer localPlayer] setAuthenticateHandler:^(UIViewController *viewController, NSError *error) {
-//            NSLog(@"Error%@",error);
-        }];
-    }
+    [[GKLocalPlayer localPlayer] setAuthenticateHandler:^(UIViewController *viewController, NSError *error) {
+
+        if (!error && ![[NSUserDefaults standardUserDefaults] boolForKey:xxxIsFirstRunKey]) {
+            GKScore *score = [[GKScore alloc] initWithLeaderboardIdentifier:xxLeaderboardKeySprintBestTimes];
+            [score setValue:0];
+
+            [GKScore reportScores:@[score] withCompletionHandler:^(NSError *error) {
+                NSLog(@"Reporting Error: %@",error);
+            }];
+        }
+    }];
 }
 
 

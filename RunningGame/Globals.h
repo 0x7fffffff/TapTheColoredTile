@@ -11,7 +11,6 @@ typedef enum : NSUInteger {
     GameTypeMarathon = 2,
     GameTypeFreePlay = 4,
     GameTypeFallingTiles = 8,
-    GameTypeNotInGame = 1024
 } GameType;
 
     // Max
@@ -35,3 +34,11 @@ extern NSString * const xxFileNameComicSansNeueFont;
     // Dimensions
 extern CGFloat const xxTileHeight;
 extern CGFloat const xxTileWidth;
+
+// Leaderboard keys
+
+extern NSString * const xxLeaderboardKeySprintBestTimes;
+//extern NSString * const xxLeaderboardKeySprintLastTime;
+extern NSString * const xxLeaderboardKeyMarathonBestTimes;
+//extern NSString * const xxLeaderboardKeyMarathonLastTime;
+extern NSString * const xxLeaderboardKeyFallingTilesBestTimes;

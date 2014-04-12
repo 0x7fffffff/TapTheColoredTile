@@ -32,3 +32,11 @@ NSString * const xxFileNameComicSansNeueFont = @"ComicNeue-Light";
     // Dimensions
 CGFloat const xxTileHeight = 170.0;
 CGFloat const xxTileWidth = 80.0;
+
+// Leaderboard keys
+
+NSString * const xxLeaderboardKeySprintBestTimes = @"SprintLeaderBoard"; // NEVER CHANGE!!!!!!!
+//NSString * const xxLeaderboardKeySprintLastTime = @"lastSprintTimeKey"; // NEVER CHANGE!!!!!!!
+NSString * const xxLeaderboardKeyMarathonBestTimes = @"MarathonLeaderBoard"; // NEVER CHANGE!!!!!!!
+//NSString * const xxLeaderboardKeyMarathonLastTime = @"lastMarathonTimeKey"; // NEVER CHANGE!!!!!!!
+NSString * const xxLeaderboardKeyFallingTilesBestTimes = @"FallingTilesLeaderBoard"; // NEVER CHANGE!!!!!!!

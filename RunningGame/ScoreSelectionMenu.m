@@ -10,7 +10,7 @@
 #import "SKButton.h"
 #import "SKColor+Colors.h"
 #import "MenuScene.h"
-#import "ScoreViewOnlyScene.h"
+#import "NewGameOverScene.h"
 @import GameKit;
 
 @interface ScoreSelectionMenu () < GKGameCenterControllerDelegate >
@@ -61,7 +61,7 @@
         [fallingTilesScoreButton setPosition:CGPointMake(xStart, yStart - 27.0)];
         [fallingTilesScoreButton setText:@"Falling Tiles"];
         [fallingTilesScoreButton addActionOfType:SKButtonActionTypeTouchUpInside withBlock:^{
-
+            [self showScoresPageForGameType:GameTypeFallingTiles];
         }];
         [self addChild:fallingTilesScoreButton];
         
@@ -74,7 +74,8 @@
             GKGameCenterViewController *controller = [[GKGameCenterViewController alloc] init];
             [controller setViewState:GKGameCenterViewControllerStateLeaderboards];
             [controller setGameCenterDelegate:self];
-            
+
+            [self setPaused:YES];
             [self.view.window.rootViewController presentViewController:controller animated:YES completion:nil];
         }];
         [self addChild:gameCenterButton];
@@ -97,16 +98,22 @@
 
 - (void)showScoresPageForGameType:(GameType)gameType
 {
-    ScoreViewOnlyScene *scene = [[ScoreViewOnlyScene alloc] initWithSize:self.size andGameType:gameType];
+    NewGameOverScene *scene = [[NewGameOverScene alloc] initWithSize:self.size
+                                                         andGameType:gameType
+                                                           andDidWin:NO
+                                                  withReportingScore:0.0
+                                                 canReturnToGameMode:NO];
+
     [scene setScaleMode:SKSceneScaleModeFill];
-    
     [self.view presentScene:scene transition:[SKTransition doorwayWithDuration:0.35]];
     
 }
 
 - (void)gameCenterViewControllerDidFinish:(GKGameCenterViewController *)gameCenterViewController
 {
-    [self.view.window.rootViewController dismissViewControllerAnimated:YES completion:nil];
+    [self.view.window.rootViewController dismissViewControllerAnimated:YES completion:^{
+        [self setPaused:NO];
+    }];
 }
 
 @end

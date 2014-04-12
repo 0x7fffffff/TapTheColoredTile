@@ -8,7 +8,7 @@
 
 #import "TutorialOverlayNode.h"
 #import "SKColor+Colors.h"
-#import "GameScene.h"
+#import "OriginalGameModeScene.h"
 #import "DSMultilineLabelNode.h"
 
 @interface TutorialOverlayNode ()
@@ -69,7 +69,7 @@
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"hasShownTutorial"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         
-        GameScene *scene = [[GameScene alloc] initWithSize:self.scene.size andGameType:self.gameType];
+        OriginalGameModeScene *scene = [[OriginalGameModeScene alloc] initWithSize:self.scene.size andGameType:self.gameType];
         [scene setScaleMode:SKSceneScaleModeFill];
         
         [self.scene.view presentScene:scene transition:[SKTransition doorwayWithDuration:0.35]];

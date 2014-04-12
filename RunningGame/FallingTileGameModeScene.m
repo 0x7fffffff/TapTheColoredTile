@@ -9,13 +9,11 @@
 #import "FallingTileGameModeScene.h"
 #import "SKButton.h"
 #import "SKColor+Colors.h"
-#import "ViewController.h"
 
 
 @interface FallingTileGameModeScene ()
 
 @property (nonatomic, assign) CGFloat fallTime;
-@property (nonatomic, assign) BOOL gameCanContinue;
 
 @end
 
@@ -27,18 +25,10 @@
     
     if (self) {
         [self setGameCanContinue:YES];
-        [self setBackgroundColor:[SKColor _nonStepTileColor]];
         [self setFallTime:2.5];
+        [self setReportingScore:0.0];
         [self addNewTile];
-        
-        SKButton *backButton = [[SKButton alloc] initWithColor:[SKColor _stepTileColor] size:CGSizeMake(44.0, 44.0)];
-        [backButton setText:@"x"];
-        [backButton setZPosition:1000.0];
-        [backButton setPosition:CGPointMake(size.width - 66.0, size.height - 66.0)];
-        [backButton addActionOfType:SKButtonActionTypeTouchUpInside withBlock:^{
-            
-        }];
-        [self addChild:backButton];
+        [self setGameType:GameTypeFallingTiles];
     }
     
     return self;
@@ -82,11 +72,11 @@
         SKButton *tile = [[SKButton alloc] initWithColor:[SKColor _stepTileColor] size:CGSizeMake(xxTileWidth, xxTileHeight)];
         __weak SKButton *weakTile = tile;
         
-        [tile setName:@"tile"];
         [tile setPosition:CGPointMake([self correctedRandomIndex] * xxTileWidth + xxTileWidth / 2.0, self.size.height + xxTileHeight / 2.0)];
         [tile addActionOfType:SKButtonActionTypeTouchDown withBlock:^{
             if (self.gameCanContinue) {
-                [weakTile runAction:[self removeTappedTileActio:weakTile]];
+                self.reportingScore ++ ;
+                [weakTile runAction:[self removeTappedTileAction:weakTile]];
             }
         }];
         [self addChild:tile];
@@ -107,7 +97,7 @@
             [self addNewTile];
         }];
         
-        SKAction *waitAction = [SKAction waitForDuration:(self.fallTime * xxTileHeight) / (self.size.height + xxTileHeight + 70.0) withRange:0];
+        SKAction *waitAction = [SKAction waitForDuration:(self.fallTime * xxTileHeight) / (self.size.height + xxTileHeight + 50.0) withRange:0];
         
         SKAction *recursiveAction = [SKAction sequence:@[waitAction, completionAction]];
         
@@ -119,7 +109,7 @@
     }
 }
 
-- (SKAction *)removeTappedTileActio:(SKButton *)tile
+- (SKAction *)removeTappedTileAction:(SKButton *)tile
 {
     SKAction *removeMovement = [SKAction runBlock:^{
         [tile removeActionForKey:@"moveAction"];
@@ -133,37 +123,6 @@
 }
 
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    [super touchesBegan:touches withEvent:event];
-    
-    CGPoint location = [[touches anyObject] locationInNode:self];
-    
-    ViewController *viewController = (ViewController *)self.view.window.rootViewController;
-    
-    if (viewController.isAdBannerCurrentlyVisible) {
-        if (location.y <= 50.0) {
-            [self setPaused:YES];
-            return;
-        }
-    }
-    
-    if (location.y >= self.size.height - 88.0 && location.x >= self.size.width - 88.0) {
-        NSLog(@"Back button");
-        return;
-    }
-    
-    [self lose];
-}
 
-- (void)lose
-{
-    
-}
-
-- (void)win
-{
-    
-}
 
 @end

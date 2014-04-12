@@ -7,7 +7,7 @@
 //
 
 #import "MenuScene.h"
-#import "GameScene.h"
+#import "OriginalGameModeScene.h"
 #import "SKColor+Colors.h"
 #import "NodeAdditions.h"
 #import "SKButton.h"
@@ -108,7 +108,7 @@
     if (gameType == GameTypeFallingTiles) {
         scene = [[FallingTileGameModeScene alloc] initWithSize:self.size];
     }else{
-        scene = [[GameScene alloc] initWithSize:self.size andGameType:gameType];
+        scene = [[OriginalGameModeScene alloc] initWithSize:self.size andGameType:gameType];
     }
     
     [scene setScaleMode:SKSceneScaleModeFill];
