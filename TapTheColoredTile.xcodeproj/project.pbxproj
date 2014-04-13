@@ -317,6 +317,8 @@
 			isa = PBXGroup;
 			children = (
 				00DA8B5418F104F900C4A54D /* 3rd Party */,
+				0078E61118FA393C0087786D /* MainSceneBaseClass.h */,
+				0078E61218FA393C0087786D /* MainSceneBaseClass.m */,
 				00B026DB18EB304B0058E591 /* SKButton.h */,
 				00B026DC18EB304B0058E591 /* SKButton.m */,
 				004620B518E62FA400DAD16A /* SKColor+Colors.h */,
@@ -325,8 +327,6 @@
 				006C26BF18E88263006EAAB6 /* NodeAdditions.m */,
 				009C8C2618F0E3530034A7BE /* Globals.h */,
 				009C8C2718F0E3530034A7BE /* Globals.m */,
-				0078E61118FA393C0087786D /* MainSceneBaseClass.h */,
-				0078E61218FA393C0087786D /* MainSceneBaseClass.m */,
 			);
 			name = "All Scenes";
 			sourceTree = "<group>";

@@ -14,7 +14,7 @@
 
 - (instancetype)initWithColor:(UIColor *)color size:(CGSize)size andData:(NSArray *)data
 {
-    self = [super initWithColor:[UIColor orangeColor] size:size];
+    self = [super initWithColor:color size:size];
 
     if (self) {
         [self setAnchorPoint:CGPointMake(0.5, 0.0)];
@@ -44,9 +44,10 @@
         }];
         NSLog(@"%@",data);
     }
-
+    
     return self;
 }
+
 
 - (NSArray *)reversedArrayFromArray:(NSArray *)inputArray {
     NSMutableArray *array = [NSMutableArray arrayWithCapacity:[inputArray count]];

@@ -38,6 +38,8 @@
 
     if (self) {
         [self.titleLabel setText:@"BLAH BLAH BALH"];
+        [self.subTitleLabel setText:@"Tap any score to share"];
+
         [self setGameType:gameType];
         [self setDidWin:won];
         [self setReportingScore:score];
