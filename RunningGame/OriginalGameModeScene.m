@@ -8,20 +8,14 @@
 
 #import "OriginalGameModeScene.h"
 #import "SKColor+Colors.h"
-#import "CountDownNode.h"
 #import "NodeAdditions.h"
-#import "TutorialOverlayNode.h"
 #import "SKButton.h"
 @import GameKit;
-
-static NSString *tileName = @"Tile";
-static CGFloat leadingSpace = 50.0;
 
 @interface OriginalGameModeScene ()
 @property (nonatomic, assign) NSInteger tilesCreated;
 @property (nonatomic, assign) NSInteger requiredSteps;
 @property (nonatomic, assign) NSInteger currentStep;
-@property (getter = isFirstRun, assign) BOOL firstRun;
 @property (strong, nonatomic) NSMutableArray *tiles;
 
 @end
@@ -30,9 +24,8 @@ static CGFloat leadingSpace = 50.0;
 
 - (instancetype)initWithSize:(CGSize)size andGameType:(GameType)gameType
 {
-    if (self = [super initWithSize:size]) {
+    if (self = [super initWithSize:size andGameType:gameType]) {
 
-        [self setGameType:gameType];
         [self setTilesCreated:0];
         
         switch (gameType) {
@@ -51,47 +44,25 @@ static CGFloat leadingSpace = 50.0;
             default:
                 break;
         }
-        
 
-        [self setFirstRun:![self hasShownTutorial]];
+        GameType returnGameType = gameType;
 
         if (self.isFirstRun) {
             [self setGameType:GameTypeFreePlay];
         }
-
+        
         if (self.gameType == GameTypeFreePlay) {
-
             [self setGameCanContinue:YES];
         }
 
-        
         if (self.gameType != GameTypeFreePlay) {
-
-            CountDownNode *countDownNode = [[CountDownNode alloc] initWithColor:[SKColor _nonStepTileColor]
-                                                                           size:size];
-            [countDownNode startCountDownWithCompletion:^{
-                SKAction *completionAction = [SKAction runBlock:^{
-                    [self setGameCanContinue:YES];
-                    [countDownNode removeFromParent];
-                    [self setStartTime:CFAbsoluteTimeGetCurrent()];
-                }];
-                
-                [countDownNode runAction:[SKAction sequence:@[[SKAction fadeAlphaTo:0.0
-                                                                           duration:0.2],completionAction]]];
+            [self runCountDownWithCompletion:^{
+                [self setGameCanContinue:YES];
+                [self setStartTime:CFAbsoluteTimeGetCurrent()];
             }];
-            
-            [self addChild:countDownNode];            
         }else{
             if (self.isFirstRun) {
-                CGFloat tutHeight = self.size.height - xxTileHeight - leadingSpace;
-                TutorialOverlayNode *tutorialNode = [[TutorialOverlayNode alloc] initWithColor:[SKColor _nonStepTileColor]
-                                                                                          size:CGSizeMake(self.size.width, tutHeight)
-                                                                                   andGameType:gameType];
-                [tutorialNode setAnchorPoint:CGPointMake(0.5, 0.5)];
-                [tutorialNode setPosition:CGPointMake(size.width / 2.0, size.height - tutHeight / 2.0)];
-                [tutorialNode setName:@"tutorialNode"];
-                [tutorialNode setZPosition:1321.0];
-                [self addChild:tutorialNode];
+                [self runTutorialModeWithReturnGameType:returnGameType];
             }
         }
 
@@ -100,18 +71,6 @@ static CGFloat leadingSpace = 50.0;
     
     return self;
 }
-
-
-- (BOOL)hasShownTutorial
-{
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-    BOOL beenRun = [defaults boolForKey:@"hasShownTutorial"];
-    
-    return beenRun;
-}
-
-
 
 - (CGPoint)centerOfOpenGapInNewRow
 {
@@ -189,17 +148,12 @@ static CGFloat leadingSpace = 50.0;
     }
 }
 
-
 - (void)takeStep
 {
     self.currentStep ++ ;
 
     if (self.gameType == GameTypeFreePlay) {
-        TutorialOverlayNode *tutNode = (TutorialOverlayNode *)[self childNodeWithName:@"tutorialNode"];
-
-        if (tutNode) {
-            [tutNode incrementTutorialIndex];
-        }
+        [self incrementTutorialNode];
     }
 
     if (self.currentStep == self.requiredSteps) {

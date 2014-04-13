@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "MKiCloudSync.h"
+#import "Appirater.h"
 @import SpriteKit;
 @import AVFoundation;
 @import GameKit;
@@ -15,6 +16,14 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [Appirater setAppId:@"851869611"];
+    [Appirater setDaysUntilPrompt:14];
+    [Appirater setUsesUntilPrompt:30];
+    [Appirater setSignificantEventsUntilPrompt:20];
+    [Appirater setTimeBeforeReminding:2];
+    [Appirater setOpenInAppStore:NO];
+    [Appirater setDebug:NO];
+
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     // Last set on V 1.1 update
@@ -23,6 +32,7 @@
 
     
     [MKiCloudSync start];
+    [Appirater appLaunched:YES];
 
     return YES;
 }
@@ -76,6 +86,8 @@
 {
     [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryAmbient withOptions:AVAudioSessionCategoryOptionMixWithOthers error:nil];
     [[AVAudioSession sharedInstance] setActive:YES error:nil];
+
+    [Appirater appEnteredForeground:YES];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application

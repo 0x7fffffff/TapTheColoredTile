@@ -11,6 +11,4 @@
 
 @interface OriginalGameModeScene : GameSceneBase
 
-- (instancetype)initWithSize:(CGSize)size andGameType:(GameType)gameType;
-
 @end

@@ -13,16 +13,20 @@
 #import "NodeAdditions.h"
 #import "NewGameOverScene.h"
 #import "ViewController.h"
+#import "CountDownNode.h"
+#import "TutorialOverlayNode.h"
+@import iAd;
 
 @implementation GameSceneBase
 
-- (instancetype)initWithSize:(CGSize)size
+- (instancetype)initWithSize:(CGSize)size andGameType:(GameType)gameType
 {
     self = [super initWithSize:size];
 
     if (self) {
+        [self setGameType:gameType];
         [self setBackgroundColor:[SKColor _nonStepTileColor]];
-
+        [self setFirstRun:![self hasShownTutorial]];
 
         SKButton *cancelButtonNode = [[SKButton alloc] initWithColor:[SKColor _stepDestructiveColor]
                                                                 size:CGSizeMake(44.0, 44.0)];
@@ -37,12 +41,51 @@
                          transition:[SKTransition doorsCloseHorizontalWithDuration:0.35]];
 
         }];
+
         [self addChild:cancelButtonNode];
     }
 
     return self;
 }
 
+- (void)runCountDownWithCompletion:(CountDownCompletionBlock)countDownCompletionBlock
+{
+    CountDownNode *countDownNode = [[CountDownNode alloc] initWithColor:[SKColor _nonStepTileColor]
+                                                                   size:self.size
+                                                            andGameType:self.gameType];
+    [countDownNode startCountDownWithCompletion:^{
+        SKAction *completionAction = [SKAction runBlock:^{
+            countDownCompletionBlock();
+        }];
+
+        [countDownNode runAction:[SKAction sequence:@[[SKAction fadeAlphaTo:0.0 duration:0.2], completionAction, [SKAction removeFromParent]]]];
+    }];
+
+    [self addChild:countDownNode];
+
+}
+
+- (void)runTutorialModeWithReturnGameType:(GameType)returnGameType
+{
+    CGFloat tutHeight = self.size.height - xxTileHeight - leadingSpace;
+    TutorialOverlayNode *tutorialNode = [[TutorialOverlayNode alloc] initWithColor:[SKColor _nonStepTileColor]
+                                                                              size:CGSizeMake(self.size.width, tutHeight)
+                                                                       andGameType:returnGameType];
+    [tutorialNode setAnchorPoint:CGPointMake(0.5, 0.5)];
+    [tutorialNode setPosition:CGPointMake(self.size.width / 2.0, self.size.height - tutHeight / 2.0)];
+    [tutorialNode setZPosition:1321.0];
+    [tutorialNode setName:@"tutorialNode"];
+    [self addChild:tutorialNode];
+}
+
+- (void)incrementTutorialNode
+{
+    TutorialOverlayNode *tutNode = (TutorialOverlayNode *)[self childNodeWithName:@"tutorialNode"];
+
+    if (tutNode) {
+        [tutNode incrementTutorialIndex];
+    }
+}
 
 - (void)win
 {
@@ -56,7 +99,6 @@
         }
     }
 }
-
 
 - (void)lose
 {
@@ -104,13 +146,23 @@
     ViewController *viewController = (ViewController *)self.view.window.rootViewController;
 
     if (viewController.isAdBannerCurrentlyVisible) {
-        if (location.y <= 50.0) {
+        if (location.y <= viewController.adBanner.frame.size.height) {
             [self setPaused:YES];
             return;
         }
     }
-    
+
     [self lose];
+}
+
+
+- (BOOL)hasShownTutorial
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+
+    BOOL beenRun = [defaults boolForKey:@"hasShownTutorial"];
+
+    return beenRun;
 }
 
 @end

@@ -13,7 +13,8 @@
 #import "ScoreSelectionMenu.h"
 #import "FallingTileGameModeScene.h"
 #import "MenuScene.h"
-
+#import "Appirater.h"
+#import "ScoresListNode.h"
 
 @interface NewGameOverScene ()
 
@@ -21,6 +22,7 @@
 @property (nonatomic, assign) CGFloat reportingScore;
 @property (nonatomic, assign) BOOL didWin;
 @property (nonatomic, assign) BOOL canReturn;
+@property (nonatomic, strong) NSArray *currentScoresArray;
 
 @end
 
@@ -35,15 +37,16 @@
     self = [super initWithSize:size];
 
     if (self) {
-        [self setBackgroundColor:[SKColor _nonStepTileColor]];
+        [self.titleLabel setText:@"BLAH BLAH BALH"];
         [self setGameType:gameType];
         [self setDidWin:won];
         [self setReportingScore:score];
         [self setCanReturn:canReturn];
 
+        [self evaluteBestScores];
         [self addButtonsAndLabels];
 
-        [self evaluteBestScores];
+        [Appirater userDidSignificantEvent:YES];
     }
 
     return self;
@@ -99,7 +102,8 @@
     }else{
         finalArray = [workingMutableArray copy];
     }
-    NSLog(@"%@",finalArray);
+
+    self.currentScoresArray = [NSArray arrayWithArray:finalArray];
 
     if (finalArray) {
         [defaults setObject:finalArray forKey:previousScoresKey];
@@ -149,6 +153,16 @@
 
 - (void)addButtonsAndLabels
 {
+    CGFloat listHeight = self.size.height - 248.0;
+
+    ScoresListNode *scoresList = [[ScoresListNode alloc] initWithColor:[SKColor clearColor]
+                                                                  size:CGSizeMake(260.0, listHeight)
+                                                               andData:self.currentScoresArray];
+
+    [scoresList setPosition:CGPointMake(self.size.width / 2.0, 134.0)];
+    [self addChild:scoresList];
+
+
     CGSize size = self.size;
     CGSize buttonSize = CGSizeMake(120.0, 44.0);
 

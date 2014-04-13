@@ -16,7 +16,7 @@
 
 @implementation CountDownNode
 
-- (instancetype)initWithColor:(SKColor *)color size:(CGSize)size
+- (instancetype)initWithColor:(SKColor *)color size:(CGSize)size andGameType:(GameType)gameType
 {
     self = [super initWithColor:color size:size];
     

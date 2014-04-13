@@ -11,7 +11,6 @@
 @import iAd;
 
 @interface ViewController () < ADBannerViewDelegate >
-@property (weak, nonatomic) IBOutlet ADBannerView *adBanner;
 @end
 
 @implementation ViewController

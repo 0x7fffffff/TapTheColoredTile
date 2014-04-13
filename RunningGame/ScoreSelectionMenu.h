@@ -7,7 +7,8 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
+#import "MainSceneBaseClass.h"
 
-@interface ScoreSelectionMenu : SKScene
+@interface ScoreSelectionMenu : MainSceneBaseClass
 
 @end

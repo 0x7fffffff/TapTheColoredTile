@@ -13,5 +13,6 @@ typedef void(^CountDownCompleteionBlock)(void);
 @interface CountDownNode : SKSpriteNode
 
 - (void)startCountDownWithCompletion:(CountDownCompleteionBlock)completionBlock;
+- (instancetype)initWithColor:(SKColor *)color size:(CGSize)size andGameType:(GameType)gameType;
 
 @end

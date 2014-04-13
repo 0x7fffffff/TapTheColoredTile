@@ -21,16 +21,24 @@
 
 - (instancetype)initWithSize:(CGSize)size
 {
-    self = [super initWithSize:size];
+    self = [super initWithSize:size andGameType:GameTypeFallingTiles];
     
     if (self) {
-        [self setGameCanContinue:YES];
+        [self setGameCanContinue:NO];
         [self setFallTime:2.5];
         [self setReportingScore:0.0];
-        [self addNewTile];
         [self setGameType:GameTypeFallingTiles];
+
+        if (self.isFirstRun) {
+            [self runTutorialModeWithReturnGameType:GameTypeFallingTiles];
+        }else{
+            [self runCountDownWithCompletion:^{
+                [self setGameCanContinue:YES];
+                [self addNewTile];
+            }];
+        }
     }
-    
+
     return self;
 }
 
@@ -64,11 +72,7 @@
 - (void)addNewTile
 {
     if (self.gameCanContinue) {
-        static int tileNumber = 0;
-        
-        tileNumber ++ ;
-        
-        [self correctedRandomIndex];
+
         SKButton *tile = [[SKButton alloc] initWithColor:[SKColor _stepTileColor] size:CGSizeMake(xxTileWidth, xxTileHeight)];
         __weak SKButton *weakTile = tile;
         
@@ -95,14 +99,14 @@
         
         SKAction *completionAction = [SKAction runBlock:^{
             [self addNewTile];
-        }];
+        } queue:dispatch_get_main_queue()];
         
-        SKAction *waitAction = [SKAction waitForDuration:(self.fallTime * xxTileHeight) / (self.size.height + xxTileHeight + 50.0) withRange:0];
+        SKAction *waitAction = [SKAction waitForDuration:(self.fallTime * xxTileHeight) / (self.size.height + xxTileHeight + 50.0)];
         
         SKAction *recursiveAction = [SKAction sequence:@[waitAction, completionAction]];
         
         [self runAction:recursiveAction withKey:@"recursionAction"];
-        
+
         [tile runAction:[SKAction sequence:@[moveAction,movementCompletionAction]] withKey:@"moveAction"];
 
         self.fallTime -= self.fallTime >= 0.85 ? 0.01 : 0.0;

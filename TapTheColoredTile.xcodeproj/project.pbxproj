@@ -26,7 +26,6 @@
 		004620B718E62FA400DAD16A /* SKColor+Colors.m in Sources */ = {isa = PBXBuildFile; fileRef = 004620B618E62FA400DAD16A /* SKColor+Colors.m */; };
 		004620BA18E65AF600DAD16A /* MenuScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 004620B918E65AF600DAD16A /* MenuScene.m */; };
 		004620C018E7089300DAD16A /* CountDownNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 004620BF18E7089300DAD16A /* CountDownNode.m */; };
-		004620C918E7288200DAD16A /* ComicNeueSansID.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 004620C818E7288200DAD16A /* ComicNeueSansID.ttf */; };
 		004C159418EB947E00B58DBA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 004C159318EB947E00B58DBA /* Main.storyboard */; };
 		004C159D18EB996900B58DBA /* beep.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 004C159518EB96CB00B58DBA /* beep.m4a */; };
 		004C159E18EB996C00B58DBA /* lose.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 004C159618EB96CC00B58DBA /* lose.m4a */; };
@@ -38,6 +37,10 @@
 		0070C93018F413370044E583 /* FallingTileGameModeScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 0070C92F18F413370044E583 /* FallingTileGameModeScene.m */; };
 		0078E60218F980440087786D /* GameSceneBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 0078E60118F980440087786D /* GameSceneBase.m */; };
 		0078E60518F9BA260087786D /* NewGameOverScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 0078E60418F9BA260087786D /* NewGameOverScene.m */; };
+		0078E60A18FA11070087786D /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = 0078E60818FA11070087786D /* Appirater.m */; };
+		0078E60E18FA32150087786D /* ScoresListNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 0078E60D18FA32150087786D /* ScoresListNode.m */; };
+		0078E61018FA37720087786D /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0078E60F18FA37720087786D /* StoreKit.framework */; };
+		0078E61318FA393C0087786D /* MainSceneBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 0078E61218FA393C0087786D /* MainSceneBaseClass.m */; };
 		009C8C2818F0E3530034A7BE /* Globals.m in Sources */ = {isa = PBXBuildFile; fileRef = 009C8C2718F0E3530034A7BE /* Globals.m */; };
 		00B026DD18EB304B0058E591 /* SKButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B026DC18EB304B0058E591 /* SKButton.m */; };
 		00B026E218EB4A8C0058E591 /* DSMultilineLabelNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B026E118EB4A8C0058E591 /* DSMultilineLabelNode.m */; };
@@ -86,7 +89,6 @@
 		004620B918E65AF600DAD16A /* MenuScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuScene.m; sourceTree = "<group>"; };
 		004620BE18E7089300DAD16A /* CountDownNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountDownNode.h; sourceTree = "<group>"; };
 		004620BF18E7089300DAD16A /* CountDownNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountDownNode.m; sourceTree = "<group>"; };
-		004620C818E7288200DAD16A /* ComicNeueSansID.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ComicNeueSansID.ttf; sourceTree = "<group>"; };
 		004C159318EB947E00B58DBA /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		004C159518EB96CB00B58DBA /* beep.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = beep.m4a; sourceTree = "<group>"; };
 		004C159618EB96CC00B58DBA /* lose.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = lose.m4a; sourceTree = "<group>"; };
@@ -104,6 +106,14 @@
 		0078E60118F980440087786D /* GameSceneBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameSceneBase.m; sourceTree = "<group>"; };
 		0078E60318F9BA260087786D /* NewGameOverScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewGameOverScene.h; sourceTree = "<group>"; };
 		0078E60418F9BA260087786D /* NewGameOverScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewGameOverScene.m; sourceTree = "<group>"; };
+		0078E60718FA11070087786D /* Appirater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Appirater.h; sourceTree = "<group>"; };
+		0078E60818FA11070087786D /* Appirater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Appirater.m; sourceTree = "<group>"; };
+		0078E60918FA11070087786D /* AppiraterDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppiraterDelegate.h; sourceTree = "<group>"; };
+		0078E60C18FA32150087786D /* ScoresListNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoresListNode.h; sourceTree = "<group>"; };
+		0078E60D18FA32150087786D /* ScoresListNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScoresListNode.m; sourceTree = "<group>"; };
+		0078E60F18FA37720087786D /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		0078E61118FA393C0087786D /* MainSceneBaseClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainSceneBaseClass.h; sourceTree = "<group>"; };
+		0078E61218FA393C0087786D /* MainSceneBaseClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainSceneBaseClass.m; sourceTree = "<group>"; };
 		009C8C2618F0E3530034A7BE /* Globals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Globals.h; sourceTree = "<group>"; };
 		009C8C2718F0E3530034A7BE /* Globals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Globals.m; sourceTree = "<group>"; };
 		00B026DB18EB304B0058E591 /* SKButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKButton.h; sourceTree = "<group>"; };
@@ -124,6 +134,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0078E61018FA37720087786D /* StoreKit.framework in Frameworks */,
 				004620B418E62BA600DAD16A /* iAd.framework in Frameworks */,
 				0046207A18E62B7000DAD16A /* CoreGraphics.framework in Frameworks */,
 				0046207C18E62B7000DAD16A /* UIKit.framework in Frameworks */,
@@ -168,6 +179,7 @@
 		0046207618E62B7000DAD16A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0078E60F18FA37720087786D /* StoreKit.framework */,
 				00DA8B5518F10C0800C4A54D /* GameKit.framework */,
 				004620B318E62BA600DAD16A /* iAd.framework */,
 				0046207718E62B7000DAD16A /* Foundation.framework */,
@@ -204,7 +216,6 @@
 			isa = PBXGroup;
 			children = (
 				00BCE5DA18F2E670009F7816 /* ComicNeue-Light.ttf */,
-				004620C818E7288200DAD16A /* ComicNeueSansID.ttf */,
 				004C159518EB96CB00B58DBA /* beep.m4a */,
 				004C159618EB96CC00B58DBA /* lose.m4a */,
 				004C159718EB96CC00B58DBA /* tap.m4a */,
@@ -261,10 +272,12 @@
 		004620CC18E73CE600DAD16A /* Game Over Scene */ = {
 			isa = PBXGroup;
 			children = (
-				0078E60318F9BA260087786D /* NewGameOverScene.h */,
-				0078E60418F9BA260087786D /* NewGameOverScene.m */,
 				0070C92718F367710044E583 /* ScoreSelectionMenu.h */,
 				0070C92818F367710044E583 /* ScoreSelectionMenu.m */,
+				0078E60318F9BA260087786D /* NewGameOverScene.h */,
+				0078E60418F9BA260087786D /* NewGameOverScene.m */,
+				0078E60C18FA32150087786D /* ScoresListNode.h */,
+				0078E60D18FA32150087786D /* ScoresListNode.m */,
 			);
 			name = "Game Over Scene";
 			sourceTree = "<group>";
@@ -278,6 +291,17 @@
 				004620BF18E7089300DAD16A /* CountDownNode.m */,
 			);
 			name = "Add Ons";
+			sourceTree = "<group>";
+		};
+		0078E60B18FA110B0087786D /* Appirater */ = {
+			isa = PBXGroup;
+			children = (
+				0078E60718FA11070087786D /* Appirater.h */,
+				0078E60818FA11070087786D /* Appirater.m */,
+				0078E60918FA11070087786D /* AppiraterDelegate.h */,
+			);
+			name = Appirater;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		00B026DE18EB3F560058E591 /* Settings Screen */ = {
@@ -301,6 +325,8 @@
 				006C26BF18E88263006EAAB6 /* NodeAdditions.m */,
 				009C8C2618F0E3530034A7BE /* Globals.h */,
 				009C8C2718F0E3530034A7BE /* Globals.m */,
+				0078E61118FA393C0087786D /* MainSceneBaseClass.h */,
+				0078E61218FA393C0087786D /* MainSceneBaseClass.m */,
 			);
 			name = "All Scenes";
 			sourceTree = "<group>";
@@ -308,6 +334,7 @@
 		00DA8B5418F104F900C4A54D /* 3rd Party */ = {
 			isa = PBXGroup;
 			children = (
+				0078E60B18FA110B0087786D /* Appirater */,
 				00DA8B5118F104F500C4A54D /* MKiCloudSync.h */,
 				00DA8B5218F104F500C4A54D /* MKiCloudSync.m */,
 				00B026E018EB4A8C0058E591 /* DSMultilineLabelNode.h */,
@@ -405,7 +432,6 @@
 			files = (
 				0046208418E62B7000DAD16A /* InfoPlist.strings in Resources */,
 				004C159E18EB996C00B58DBA /* lose.m4a in Resources */,
-				004620C918E7288200DAD16A /* ComicNeueSansID.ttf in Resources */,
 				004C159418EB947E00B58DBA /* Main.storyboard in Resources */,
 				00BCE5DB18F2E670009F7816 /* ComicNeue-Light.ttf in Resources */,
 				004C159F18EB996F00B58DBA /* tap.m4a in Resources */,
@@ -432,12 +458,15 @@
 			files = (
 				00CEC67618EA47E7009B7CF1 /* TutorialOverlayNode.m in Sources */,
 				0046209318E62B7000DAD16A /* OriginalGameModeScene.m in Sources */,
+				0078E61318FA393C0087786D /* MainSceneBaseClass.m in Sources */,
 				004620C018E7089300DAD16A /* CountDownNode.m in Sources */,
 				0078E60218F980440087786D /* GameSceneBase.m in Sources */,
 				0070C93018F413370044E583 /* FallingTileGameModeScene.m in Sources */,
 				0078E60518F9BA260087786D /* NewGameOverScene.m in Sources */,
 				0046209018E62B7000DAD16A /* ViewController.m in Sources */,
 				004620B718E62FA400DAD16A /* SKColor+Colors.m in Sources */,
+				0078E60E18FA32150087786D /* ScoresListNode.m in Sources */,
+				0078E60A18FA11070087786D /* Appirater.m in Sources */,
 				00B026DD18EB304B0058E591 /* SKButton.m in Sources */,
 				004620BA18E65AF600DAD16A /* MenuScene.m in Sources */,
 				006C26C018E88263006EAAB6 /* NodeAdditions.m in Sources */,

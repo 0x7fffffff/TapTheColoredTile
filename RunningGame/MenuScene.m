@@ -20,20 +20,12 @@
 - (instancetype)initWithSize:(CGSize)size
 {
     if (self = [super initWithSize:size]) {
-        [self setBackgroundColor:[SKColor _nonStepTileColor]];
-        
-        SKLabelNode *titleLabelNode = [[SKLabelNode alloc] initWithFontNamed:xxFileNameComicSansNeueFont];
-        [titleLabelNode setText:@"Tap the Colored Tile"];
-        [titleLabelNode setPosition:CGPointMake(size.width / 2.0, size.height - 60.0)];
-        [titleLabelNode setHorizontalAlignmentMode:SKLabelHorizontalAlignmentModeCenter];
-        [titleLabelNode setVerticalAlignmentMode:SKLabelVerticalAlignmentModeCenter];
-        [titleLabelNode setFontColor:[SKColor _stepTileColor]];
-        [titleLabelNode setFontSize:34.0];
-        [self addChild:titleLabelNode];
-        
+
+        [self.titleLabel setText:@"Tap the Colored Tile"];
+
         CGSize buttonSize = CGSizeMake(size.width, 44.0);
         CGFloat xStart = size.width / 2.0;
-        CGFloat yStart = titleLabelNode.position.y / 2.0;
+        CGFloat yStart = self.titleLabel.position.y / 2.0;
         
         
         

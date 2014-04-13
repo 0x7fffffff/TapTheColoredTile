@@ -7,8 +7,9 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
+#import "MainSceneBaseClass.h"
 
-@interface NewGameOverScene : SKScene
+@interface NewGameOverScene : MainSceneBaseClass
 
 - (instancetype)initWithSize:(CGSize)size andGameType:(GameType)gameType andDidWin:(BOOL)won withReportingScore:(CGFloat)score canReturnToGameMode:(BOOL)canReturn;
 

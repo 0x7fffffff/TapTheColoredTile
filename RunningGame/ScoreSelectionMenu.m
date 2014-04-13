@@ -24,20 +24,13 @@
     self = [super initWithSize:size];
     
     if (self) {
-        [self setBackgroundColor:[SKColor _nonStepTileColor]];
-        
-        SKLabelNode *titleLabelNode = [[SKLabelNode alloc] initWithFontNamed:xxFileNameComicSansNeueFont];
-        [titleLabelNode setText:@"Scores"];
-        [titleLabelNode setPosition:CGPointMake(size.width / 2.0, size.height - 60.0)];
-        [titleLabelNode setHorizontalAlignmentMode:SKLabelHorizontalAlignmentModeCenter];
-        [titleLabelNode setVerticalAlignmentMode:SKLabelVerticalAlignmentModeCenter];
-        [titleLabelNode setFontColor:[SKColor _stepTileColor]];
-        [titleLabelNode setFontSize:34.0];
-        [self addChild:titleLabelNode];
+
+        [self.titleLabel setText:@"Scores"];
+
         
         CGSize buttonSize = CGSizeMake(size.width, 44.0);
         CGFloat xStart = size.width / 2.0;
-        CGFloat yStart = titleLabelNode.position.y / 2.0 + 60.0;
+        CGFloat yStart = self.titleLabel.position.y / 2.0 + 60.0;
         
         SKButton *sprintScoreButton = [[SKButton alloc] initWithColor:[SKColor _stepTileColor] size:buttonSize];
         [sprintScoreButton setPosition:CGPointMake(xStart, yStart + 81.0)];
@@ -75,8 +68,9 @@
             [controller setViewState:GKGameCenterViewControllerStateLeaderboards];
             [controller setGameCenterDelegate:self];
 
-            [self setPaused:YES];
-            [self.view.window.rootViewController presentViewController:controller animated:YES completion:nil];
+            [self.view.window.rootViewController presentViewController:controller animated:YES completion:^{
+                [self setPaused:YES];
+            }];
         }];
         [self addChild:gameCenterButton];
         
