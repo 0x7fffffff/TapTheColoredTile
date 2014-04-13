@@ -20,6 +20,7 @@ typedef void(^ActionBlock)(void);
 @property (strong, nonatomic) NSString *text;
 @property (strong, nonatomic) NSString *fontName;
 @property (strong, nonatomic) SKColor *textColor;
+@property (strong, nonatomic) SKColor *highlightedColor;
 @property (nonatomic, assign) CGFloat textSize;
 @property (nonatomic, assign) NSInteger tag;
 @property (nonatomic, assign) BOOL overrideSoundSettings;

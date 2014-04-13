@@ -37,8 +37,6 @@
     self = [super initWithSize:size];
 
     if (self) {
-        [self.titleLabel setText:@"BLAH BLAH BALH"];
-        [self.subTitleLabel setText:@"Tap any score to share"];
 
         [self setGameType:gameType];
         [self setDidWin:won];
@@ -53,7 +51,6 @@
 
     return self;
 }
-
 
 - (void)evaluteBestScores
 {
@@ -81,28 +78,26 @@
         newScoresArray = [defaults objectForKey:previousScoresKey];
     }
 
-    NSMutableArray *workingMutableArray = [NSMutableArray new];
+    NSMutableSet *workingMutableArray = [NSMutableSet new];
 
     if (newScoresArray) {
         [workingMutableArray addObjectsFromArray:newScoresArray];
     }
 
+    NSNumber *newNumber = @([[NSString stringWithFormat:@"%.3f",newScore] doubleValue]);
     if (newScore > 0) {
-        [workingMutableArray addObject:@([[NSString stringWithFormat:@"%.3f",newScore] doubleValue])];
+        [workingMutableArray addObject:newNumber];
     }
 
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"self"
                                                                      ascending:self.gameType != GameTypeFallingTiles];
-    [workingMutableArray sortUsingDescriptors:@[sortDescriptor]];
 
-    NSArray *finalArray = nil;
+    NSArray *finalArray = [workingMutableArray sortedArrayUsingDescriptors:@[sortDescriptor]];
 
     static NSInteger maxEntries = 10;
 
     if (workingMutableArray.count > maxEntries) {
-        finalArray = [[workingMutableArray subarrayWithRange:NSMakeRange(0, maxEntries)] copy];
-    }else{
-        finalArray = [workingMutableArray copy];
+        finalArray = [[finalArray subarrayWithRange:NSMakeRange(0, maxEntries)] copy];
     }
 
     self.currentScoresArray = [NSArray arrayWithArray:finalArray];
@@ -111,12 +106,50 @@
         [defaults setObject:finalArray forKey:previousScoresKey];
         [defaults synchronize];
     }
+
+    NSInteger index = NSIntegerMax;
+
+    if ([finalArray containsObject:newNumber]) {
+        index = [finalArray indexOfObject:newNumber];
+    }
+
+    CGFloat listHeight = self.size.height - 248.0;
+
+    ScoresListNode *scoresList = [[ScoresListNode alloc] initWithColor:[SKColor clearColor]
+                                                                  size:CGSizeMake(260.0, listHeight)
+                                                               andData:self.currentScoresArray
+                                                           andGameType:self.gameType
+                                                   andHighlightedIndex:index];
+
+    [scoresList setPosition:CGPointMake(self.size.width / 2.0, 134.0)];
+    [self addChild:scoresList];
+
+    NSString *titleText = nil;
+
+    if (newScore > 0) {
+        if (index == 0) {
+            titleText = @"New Record!";
+        }else if (index <= 4) {
+            if (self.gameType == GameTypeFallingTiles) {
+                titleText = @"Nice Score!";
+            }else{
+                titleText = @"Nice Time!";
+            }
+        }else{
+            titleText = [scoresList listStringFromScore:newNumber forGameType:self.gameType];
+        }
+    }else{
+        if (self.gameType == GameTypeFallingTiles) {
+            titleText = @"Best Scores";
+        }else{
+            titleText = @"Best Times";
+        }
+    }
+
+    [self.titleLabel setText:titleText];
+    [self.subTitleLabel setText:@"Tap any score to share"];
 }
 
-- (void)generateScoreBoardWithContents:(NSArray *)scores
-{
-
-}
 
 - (NSArray *)attemptToLoadLegacyScores
 {
@@ -155,16 +188,6 @@
 
 - (void)addButtonsAndLabels
 {
-    CGFloat listHeight = self.size.height - 248.0;
-
-    ScoresListNode *scoresList = [[ScoresListNode alloc] initWithColor:[SKColor clearColor]
-                                                                  size:CGSizeMake(260.0, listHeight)
-                                                               andData:self.currentScoresArray];
-
-    [scoresList setPosition:CGPointMake(self.size.width / 2.0, 134.0)];
-    [self addChild:scoresList];
-
-
     CGSize size = self.size;
     CGSize buttonSize = CGSizeMake(120.0, 44.0);
 
@@ -188,7 +211,11 @@
             }
             [scene setScaleMode:SKSceneScaleModeFill];
 
-            [self.view presentScene:scene transition:[SKTransition flipVerticalWithDuration:0.35]];
+            SKTransition *transition = [SKTransition moveInWithDirection:SKTransitionDirectionUp duration:0.35];
+            [transition setPausesOutgoingScene:YES];
+            [transition setPausesIncomingScene:NO];
+
+            [self.view presentScene:scene transition:transition];
         }];
         [self addChild:retryButton];
     }else{
@@ -210,8 +237,12 @@
             scene = [[ScoreSelectionMenu alloc] initWithSize:size];
         }
 
+        SKTransition *transition = [SKTransition revealWithDirection:SKTransitionDirectionUp duration:0.35];
+        [transition setPausesOutgoingScene:YES];
+        [transition setPausesIncomingScene:NO];
+
         [scene setScaleMode:SKSceneScaleModeFill];
-        [self.view presentScene:scene transition:[SKTransition doorsCloseHorizontalWithDuration:0.35]];
+        [self.view presentScene:scene transition:transition];
     }];
     [self addChild:quitButton];
 }

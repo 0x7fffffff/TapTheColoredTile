@@ -7,6 +7,7 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
+@class SKButton;
 
 typedef void(^CountDownCompletionBlock)(void);
 static NSString *tileName = @"Tile";

@@ -10,6 +10,13 @@
 
 @interface ScoresListNode : SKSpriteNode
 
-- (instancetype)initWithColor:(UIColor *)color size:(CGSize)size andData:(NSArray *)data;
+- (instancetype)initWithColor:(UIColor *)color
+                         size:(CGSize)size
+                      andData:(NSArray *)data
+                  andGameType:(GameType)gameType
+          andHighlightedIndex:(NSInteger)index;
+
+- (NSString *)listStringFromScore:(NSNumber *)score
+                      forGameType:(GameType)gameType;
 
 @end

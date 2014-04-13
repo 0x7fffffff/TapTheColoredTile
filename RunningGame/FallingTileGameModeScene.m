@@ -10,10 +10,10 @@
 #import "SKButton.h"
 #import "SKColor+Colors.h"
 
-
 @interface FallingTileGameModeScene ()
 
 @property (nonatomic, assign) CGFloat fallTime;
+@property (nonatomic, assign) NSInteger tilesProduced;
 
 @end
 
@@ -25,6 +25,7 @@
     
     if (self) {
         [self setGameCanContinue:NO];
+        [self setTilesProduced:0];
         [self setFallTime:2.5];
         [self setReportingScore:0.0];
         [self setGameType:GameTypeFallingTiles];
@@ -41,7 +42,6 @@
 
     return self;
 }
-
 
 - (uint32_t)correctedRandomIndex
 {
@@ -68,14 +68,19 @@
     return randIndex;
 }
 
-
 - (void)addNewTile
 {
     if (self.gameCanContinue) {
+        self.tilesProduced ++ ;
 
         SKButton *tile = [[SKButton alloc] initWithColor:[SKColor _stepTileColor] size:CGSizeMake(xxTileWidth, xxTileHeight)];
         __weak SKButton *weakTile = tile;
-        
+
+        if (((NSInteger)self.tilesProduced) % 5 == 0) {
+            [tile setText:[NSString stringWithFormat:@"%ld",(long)self.tilesProduced]];
+            [tile setTextColor:[tile highlightedColor]];
+        }
+
         [tile setPosition:CGPointMake([self correctedRandomIndex] * xxTileWidth + xxTileWidth / 2.0, self.size.height + xxTileHeight / 2.0)];
         [tile addActionOfType:SKButtonActionTypeTouchDown withBlock:^{
             if (self.gameCanContinue) {
@@ -85,14 +90,13 @@
         }];
         [self addChild:tile];
         
-    
+
         SKAction *moveAction = [SKAction moveTo:CGPointMake(tile.position.x, -xxTileHeight / 2.0)
                                        duration:self.fallTime];
         
         SKAction *movementCompletionAction = [SKAction runBlock:^{
             [self removeAllActions];
             if (self.gameCanContinue) {
-                [self setGameCanContinue:NO];
                 [self lose];
             }
         }];
@@ -125,8 +129,5 @@
     
     return [SKAction sequence:@[removeMovement,fade,remove]];
 }
-
-
-
 
 @end

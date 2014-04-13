@@ -28,17 +28,25 @@
         [self setBackgroundColor:[SKColor _nonStepTileColor]];
         [self setFirstRun:![self hasShownTutorial]];
 
-        SKButton *cancelButtonNode = [[SKButton alloc] initWithColor:[SKColor _stepDestructiveColor]
-                                                                size:CGSizeMake(44.0, 44.0)];
+        SKButton *cancelButtonNode = [[SKButton alloc] initWithColor:[SKColor clearColor]
+                                                                size:CGSizeMake(64.0, 64.0)];
+        
+        [cancelButtonNode setPosition:CGPointMake(size.width - 32.0, size.height - 32.0)];
         [cancelButtonNode setZPosition:50];
         [cancelButtonNode setText:@"x"];
-        [cancelButtonNode setPosition:CGPointMake(size.width - 44.0, size.height - 44.0)];
+        [cancelButtonNode setTextSize:40.0];
+        [cancelButtonNode setTextColor:[SKColor darkGrayColor]];
+
         [cancelButtonNode addActionOfType:SKButtonActionTypeTouchUpInside withBlock:^{
             MenuScene *scene = [[MenuScene alloc] initWithSize:self.size];
             [scene setScaleMode:SKSceneScaleModeAspectFill];
 
+            SKTransition *transition = [SKTransition revealWithDirection:SKTransitionDirectionUp duration:0.35];
+            [transition setPausesOutgoingScene:YES];
+            [transition setPausesIncomingScene:NO];
+
             [self.view presentScene:scene
-                         transition:[SKTransition doorsCloseHorizontalWithDuration:0.35]];
+                         transition:transition];
 
         }];
 
@@ -132,8 +140,13 @@
                                                  canReturnToGameMode:YES];
 
     [scene setScaleMode:SKSceneScaleModeFill];
+
+    SKTransition *transition = [SKTransition revealWithDirection:SKTransitionDirectionUp duration:0.35];
+    [transition setPausesIncomingScene:NO];
+    [transition setPausesOutgoingScene:NO];
+    
     [self.view presentScene:scene
-                 transition:[SKTransition flipVerticalWithDuration:0.35]];
+                 transition:transition];
 
 }
 
@@ -154,7 +167,6 @@
 
     [self lose];
 }
-
 
 - (BOOL)hasShownTutorial
 {

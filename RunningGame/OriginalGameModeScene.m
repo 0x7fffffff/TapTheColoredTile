@@ -72,46 +72,12 @@
     return self;
 }
 
-- (CGPoint)centerOfOpenGapInNewRow
-{
-    CGFloat y = 0.0;
-
-    SKButton *tile = [self.tiles lastObject];
-
-    y = tile.frame.origin.y + tile.frame.size.height / 2.0;
-
-    CGPoint point = CGPointZero;
-    
-    switch ((int)floor(tile.frame.origin.x / xxTileWidth)) {
-        case 0:{
-            point = CGPointMake(200.0, y);
-        }break;
-            
-        case 1:{
-            point = CGPointMake(240.0, y);
-        }break;
-            
-        case 2:{
-            point = CGPointMake(80.0, y);
-        }break;
-            
-        case 3:{
-            point = CGPointMake(120.0, y);
-        }break;
-            
-        default:
-            break;
-    }
-    
-    return point;
-}
-
 - (void)generateTiles
 {
     self.tiles = [NSMutableArray new];
     
     for (int i = 0; i < 5; i ++) {
-        [self addRowAtYIndex:i * xxTileHeight + leadingSpace];
+        [self addRowAtYIndex:i * xxTileHeight + leadingSpace + xxTileHeight / 2.0];
     }
 }
 
@@ -121,35 +87,37 @@
         self.tilesCreated ++ ;
 
         SKButton *tile = [[SKButton alloc] initWithColor:[SKColor _stepTileColor] size:CGSizeMake(xxTileWidth, xxTileHeight)];
-        [tile setAnchorPoint:CGPointZero];
-        [tile setPosition:CGPointMake(arc4random_uniform(4) * xxTileWidth, yIndex)];
+        __weak SKButton *weakTile = tile;
+
+        [tile setPosition:CGPointMake(arc4random_uniform(4) * xxTileWidth + xxTileWidth / 2.0, yIndex)];
         [tile setName:tileName];
         [tile addActionOfType:SKButtonActionTypeTouchDown withBlock:^{
-            [self takeStep];
+            [self takeStepFromTile:weakTile];
         }];
-        [self addChild:tile];
-        [self.tiles addObject:tile];
-
 
         if (self.gameType != GameTypeFreePlay) {
             if (self.tilesCreated % 5 == 0) {
-                SKLabelNode *backgroundCountLabel = [[SKLabelNode alloc] initWithFontNamed:xxFileNameComicSansNeueFont];
-                [backgroundCountLabel setName:tileName];
-                [backgroundCountLabel setPosition:[self centerOfOpenGapInNewRow]];
-                [backgroundCountLabel setText:[NSString stringWithFormat:@"%li",(long)self.tilesCreated]];
-                [backgroundCountLabel setFontSize:50.0];
-                [backgroundCountLabel setAlpha:1.0];
-                [backgroundCountLabel setFontColor:[SKColor darkGrayColor]];
-                [backgroundCountLabel setHorizontalAlignmentMode:SKLabelHorizontalAlignmentModeCenter];
-                [backgroundCountLabel setVerticalAlignmentMode:SKLabelVerticalAlignmentModeCenter];
-                [self insertChild:backgroundCountLabel atIndex:0];
-            }            
+                long remaining = (long)self.requiredSteps - (long)self.tilesCreated;
+
+                if (remaining > 0) {
+                    [tile setText:[NSString stringWithFormat:@"%li",remaining]];
+                    [tile setTextColor:[tile highlightedColor]];
+                }
+            }
         }
+
+        [self addChild:tile];
+        [self.tiles addObject:tile];
     }
 }
 
-- (void)takeStep
+- (void)takeStepFromTile:(SKButton *)tile
 {
+    if ([self.tiles indexOfObject:tile] != 0) {
+        [self lose];
+
+        return;
+    }
     self.currentStep ++ ;
 
     if (self.gameType == GameTypeFreePlay) {
@@ -173,7 +141,7 @@
 
     }];
     
-    [self addRowAtYIndex:4 * xxTileHeight + leadingSpace];
+    [self addRowAtYIndex:4 * xxTileHeight + leadingSpace + xxTileHeight / 2.0];
 }
 
 @end

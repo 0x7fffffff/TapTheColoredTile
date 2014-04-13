@@ -13,7 +13,6 @@
 @interface SKButton ()
 
 @property (strong, nonatomic) SKColor *originalBackgroundColor;
-@property (strong, nonatomic) SKColor *highlightedColor;
 @property (strong, nonatomic) ActionBlock touchDownBlock;
 @property (strong, nonatomic) ActionBlock touchUpInsideBlock;
 
