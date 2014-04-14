@@ -23,7 +23,7 @@ extern NSString * const xxSoundFileNameTap;
 extern NSString * const xxSoundFileNameBeep;
 
     // NSUserDefaults Keys
-extern NSString * const xxxIsFirstRunKey;
+extern NSString * const xxxHasPreviouslyRun;
 extern NSString * const xxxShouldPlaySoundsKey;
 extern NSString * const xxxShouldShowAdsKey;
 extern NSString * const xxxHasShownTutorialKey;
@@ -38,7 +38,5 @@ extern CGFloat const xxTileWidth;
 // Leaderboard keys
 
 extern NSString * const xxLeaderboardKeySprintBestTimes;
-//extern NSString * const xxLeaderboardKeySprintLastTime;
 extern NSString * const xxLeaderboardKeyMarathonBestTimes;
-//extern NSString * const xxLeaderboardKeyMarathonLastTime;
-extern NSString * const xxLeaderboardKeyFallingTilesBestTimes;
+extern NSString * const xxLeaderboardKeyFallingTilesBestScores;

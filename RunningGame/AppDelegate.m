@@ -26,9 +26,18 @@
 
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
-    // Last set on V 1.1 update
-    [defaults registerDefaults:@{xxxShouldShowAdsKey : @YES, xxxShouldPlaySoundsKey : @YES}];
-    [defaults synchronize];
+    // Last set on v2.0 update
+    if (![defaults boolForKey:xxxHasPreviouslyRun]) {
+
+        [defaults removePersistentDomainForName:[[NSBundle mainBundle] bundleIdentifier]];
+        [defaults synchronize];
+
+        [defaults setBool:YES forKey:xxxShouldPlaySoundsKey];
+        [defaults setBool:YES forKey:xxxShouldShowAdsKey];
+        [defaults setBool:NO forKey:xxxHasShownTutorialKey];
+        [defaults setBool:YES forKey:xxxHasPreviouslyRun];
+        [defaults synchronize];
+    }
 
     
     [MKiCloudSync start];
@@ -41,7 +50,7 @@
 {
     [[GKLocalPlayer localPlayer] setAuthenticateHandler:^(UIViewController *viewController, NSError *error) {
 
-        if (!error && ![[NSUserDefaults standardUserDefaults] boolForKey:xxxIsFirstRunKey]) {
+        if (!error && ![[NSUserDefaults standardUserDefaults] boolForKey:xxxHasPreviouslyRun]) {
             GKScore *score = [[GKScore alloc] initWithLeaderboardIdentifier:xxLeaderboardKeySprintBestTimes];
             [score setValue:0];
 

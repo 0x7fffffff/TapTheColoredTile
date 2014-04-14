@@ -54,17 +54,19 @@
         __weak SKButton *weakSupport = supporButton;
 
         [supporButton addActionOfType:SKButtonActionTypeTouchUpInside withBlock:^{
-            if ([MFMailComposeViewController canSendMail]) {
-                MFMailComposeViewController *composer = [[MFMailComposeViewController alloc] init];
-                [composer setMailComposeDelegate:self];
-                [composer setMessageBody:[NSString stringWithFormat:@"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPlease leave the lines below intact for diagnostic purposes.\n%@\n%@",[self machineName],[[UIDevice currentDevice] systemVersion]] isHTML:NO];
-                [composer setSubject:@"Customer Support - Tap the Colored Tile"];
-                [composer setTitle:@"Customer Support"];
-                [composer setToRecipients:@[@"help.happtech@gmail.com"]];
-                [self.view.window.rootViewController presentViewController:composer animated:YES completion:nil];
-            }else{
-                [weakSupport setText:@"Can't Send Mail"];
-            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if ([MFMailComposeViewController canSendMail]) {
+                    MFMailComposeViewController *composer = [[MFMailComposeViewController alloc] init];
+                    [composer setMailComposeDelegate:self];
+                    [composer setMessageBody:[NSString stringWithFormat:@"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPlease leave the lines below intact for diagnostic purposes.\n%@\n%@",[self machineName],[[UIDevice currentDevice] systemVersion]] isHTML:NO];
+                    [composer setSubject:@"Customer Support - Tap the Colored Tile"];
+                    [composer setTitle:@"Customer Support"];
+                    [composer setToRecipients:@[@"help.happtech@gmail.com"]];
+                    [self.view.window.rootViewController presentViewController:composer animated:YES completion:nil];
+                }else{
+                    [weakSupport setText:@"Can't Send Mail"];
+                }
+            });
         }];
         [self addChild:supporButton];
 

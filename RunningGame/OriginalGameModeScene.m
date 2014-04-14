@@ -95,13 +95,20 @@
             [self takeStepFromTile:weakTile];
         }];
 
-        if (self.gameType != GameTypeFreePlay) {
+        if (!self.isFirstRun) {
             if (self.tilesCreated % 5 == 0) {
-                long remaining = (long)self.requiredSteps - (long)self.tilesCreated;
+
+                long remaining = 0;
+
+                if (self.gameType == GameTypeFreePlay) {
+                    remaining = (long)self.tilesCreated;
+                }else{
+                    remaining = (long)self.requiredSteps - (long)self.tilesCreated;
+                }
 
                 if (remaining > 0) {
                     [tile setText:[NSString stringWithFormat:@"%li",remaining]];
-                    [tile setTextColor:[tile highlightedColor]];
+                    [tile setTextColor:[SKColor _nonStepTileColor]];
                 }
             }
         }
@@ -114,6 +121,7 @@
 - (void)takeStepFromTile:(SKButton *)tile
 {
     if ([self.tiles indexOfObject:tile] != 0) {
+        [tile removeAllActions];
         [self lose];
 
         return;

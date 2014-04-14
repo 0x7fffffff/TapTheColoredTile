@@ -59,6 +59,7 @@
 
 - (void)bannerViewDidLoadAd:(ADBannerView *)banner
 {
+    [self.adBanner.layer setZPosition:10000.0];
     [UIView animateWithDuration:0.15 animations:^{
         [self.adBanner setAlpha:1.0];
     } completion:^(BOOL finished) {
@@ -75,7 +76,8 @@
     }];
 }
 
-- (BOOL)bannerViewActionShouldBegin:(ADBannerView *)banner willLeaveApplication:(BOOL)willLeave
+- (BOOL)bannerViewActionShouldBegin:(ADBannerView *)banner
+               willLeaveApplication:(BOOL)willLeave
 {
     SKView *skView = (SKView *)self.view;
     

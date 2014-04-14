@@ -15,6 +15,7 @@
 #import "MenuScene.h"
 #import "Appirater.h"
 #import "ScoresListNode.h"
+@import GameKit;
 
 @interface NewGameOverScene ()
 
@@ -23,6 +24,7 @@
 @property (nonatomic, assign) BOOL didWin;
 @property (nonatomic, assign) BOOL canReturn;
 @property (nonatomic, strong) NSArray *currentScoresArray;
+@property (nonatomic, copy) NSString *leaderBoard;
 
 @end
 
@@ -62,10 +64,12 @@
     }else if (self.gameType == GameTypeMarathon) {
         previousScoresKey = xxLeaderboardKeyMarathonBestTimes; // NEVER CHANGE
     }else if (self.gameType == GameTypeFallingTiles) {
-        previousScoresKey = xxLeaderboardKeyFallingTilesBestTimes; // NEVER CHANGE
+        previousScoresKey = xxLeaderboardKeyFallingTilesBestScores; // NEVER CHANGE
     }else{
         return;
     }
+
+    [self setLeaderBoard:previousScoresKey];
 
     NSArray *legacyRecoveryAttempt = [self attemptToLoadLegacyScores];
     NSArray *newScoresArray = nil;
@@ -129,6 +133,7 @@
     if (newScore > 0) {
         if (index == 0) {
             titleText = @"New Record!";
+            [self attemptGameCenterScoreReporting];
         }else if (index <= 4) {
             if (self.gameType == GameTypeFallingTiles) {
                 titleText = @"Nice Score!";
@@ -149,7 +154,6 @@
     [self.titleLabel setText:titleText];
     [self.subTitleLabel setText:@"Tap any score to share"];
 }
-
 
 - (NSArray *)attemptToLoadLegacyScores
 {
@@ -247,46 +251,50 @@
     [self addChild:quitButton];
 }
 
-/*
- - (void)reportHighestScore
- {
+- (void)attemptGameCenterScoreReporting
+{
+    GKLocalPlayer *player = [GKLocalPlayer localPlayer];
 
- if ([GKLocalPlayer localPlayer].isAuthenticated) {
- [self submitScore];
- }else{
- [[GKLocalPlayer localPlayer] setAuthenticateHandler:^(UIViewController *viewController, NSError *error) {
- [self submitScore];
- }];
- }
- }
+    if (player.isAuthenticated) {
+        [self submitScore];
+    }else{
+        [player setAuthenticateHandler:^(UIViewController *viewController, NSError *error) {
+            if (!error) {
+                [self submitScore];
+            }
+        }];
+    }
+}
 
- - (void)submitScore
- {
- uint64_t scoreValue = [self scorePreparedForGameCenter];
+- (void)submitScore
+{
+    NSNumber *score = (NSNumber *)[self.currentScoresArray firstObject];
 
- if (scoreValue > 0) {
+    if (score) {
+        int64_t adjustedScore = [self scorePreparedForGameCenter:score];
 
- GKScore *score = [[GKScore alloc] initWithLeaderboardIdentifier:self.leaderboardID];
- [score setValue:scoreValue];
+        GKScore *submissionScore = [[GKScore alloc] initWithLeaderboardIdentifier:self.leaderBoard];
+        [submissionScore setValue:adjustedScore];
 
- [GKScore reportScores:@[score] withCompletionHandler:nil];
- }
- }
+        [GKScore reportScores:@[submissionScore] withCompletionHandler:^(NSError *error) {
+            if (error) {
+                NSLog(@"Error submitting score to Game Center");
+            }else{
+                NSLog(@"Submited Score: %lld",adjustedScore);
+            }
+        }];
+    }
+}
 
- - (int64_t)scorePreparedForGameCenter
- {
- double input = DBL_MAX;
+- (int64_t)scorePreparedForGameCenter:(NSNumber *)score
+{
+    int64_t output = score.longLongValue;
 
- if (self.scores.count > 0) {
- if (self.returningGameType == GameTypeSprint || self.returningGameType == GameTypeMarathon) {
- input = [self.scores[0] doubleValue] * 1000;
+    if (self.gameType == GameTypeSprint || self.gameType == GameTypeMarathon) {
+        output = [score doubleValue] * 1000;
+    }
 
- }
- }
-
- return (int64_t)input;
- }
- */
-
+    return (int64_t)output;
+}
 
 @end

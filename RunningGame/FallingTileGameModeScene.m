@@ -30,8 +30,12 @@
         [self setReportingScore:0.0];
         [self setGameType:GameTypeFallingTiles];
 
+
         if (self.isFirstRun) {
             [self runTutorialModeWithReturnGameType:GameTypeFallingTiles];
+            [self setGameCanContinue:YES];
+            [self setGameType:GameTypeFreePlay];
+            [self addNewTile];
         }else{
             [self runCountDownWithCompletion:^{
                 [self setGameCanContinue:YES];
@@ -77,8 +81,10 @@
         __weak SKButton *weakTile = tile;
 
         if (((NSInteger)self.tilesProduced) % 5 == 0) {
-            [tile setText:[NSString stringWithFormat:@"%ld",(long)self.tilesProduced]];
-            [tile setTextColor:[tile highlightedColor]];
+            if (self.gameType == GameTypeFallingTiles) {
+                [tile setText:[NSString stringWithFormat:@"%ld",(long)self.tilesProduced]];
+                [tile setTextColor:[SKColor _nonStepTileColor]];
+            }
         }
 
         [tile setPosition:CGPointMake([self correctedRandomIndex] * xxTileWidth + xxTileWidth / 2.0, self.size.height + xxTileHeight / 2.0)];
@@ -86,6 +92,10 @@
             if (self.gameCanContinue) {
                 self.reportingScore ++ ;
                 [weakTile runAction:[self removeTappedTileAction:weakTile]];
+
+                if (self.gameType == GameTypeFreePlay) {
+                    [self incrementTutorialNode];
+                }
             }
         }];
         [self addChild:tile];
@@ -97,7 +107,9 @@
         SKAction *movementCompletionAction = [SKAction runBlock:^{
             [self removeAllActions];
             if (self.gameCanContinue) {
-                [self lose];
+                if (self.gameType == GameTypeFallingTiles) {
+                    [self lose];
+                }
             }
         }];
         
@@ -113,7 +125,9 @@
 
         [tile runAction:[SKAction sequence:@[moveAction,movementCompletionAction]] withKey:@"moveAction"];
 
-        self.fallTime -= self.fallTime >= 0.85 ? 0.01 : 0.0;
+        if (self.gameType == GameTypeFallingTiles) {
+            self.fallTime -= self.fallTime >= 0.85 ? 0.01 : 0.0;
+        }
     }
 }
 

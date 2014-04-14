@@ -67,10 +67,12 @@
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [super touchesBegan:touches withEvent:event];
-    
-    [self setOriginalBackgroundColor:self.color];
-    [self setColor:[self highlightedColor]];
-    
+
+    if (self.actionBitmask ^ SKButtonActionTypeTouchDown) {
+        [self setOriginalBackgroundColor:self.color];
+        [self setColor:[self highlightedColor]];
+    }
+
     if (self.actionBitmask > 0) {
         CGPoint location = [[touches anyObject] locationInNode:self];
 
@@ -89,8 +91,11 @@
 {
     [super touchesEnded:touches withEvent:event];
     
-    [self setColor:self.originalBackgroundColor];
-    [self setOriginalBackgroundColor:nil];
+    if (self.actionBitmask ^ SKButtonActionTypeTouchDown) {
+        [self setColor:self.originalBackgroundColor];
+        [self setOriginalBackgroundColor:nil];
+    }
+
     
     if (self.actionBitmask > 0) {
         if (self.actionBitmask & SKButtonActionTypeTouchUpInside) {

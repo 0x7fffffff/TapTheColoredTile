@@ -37,11 +37,11 @@
 		0070C93018F413370044E583 /* FallingTileGameModeScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 0070C92F18F413370044E583 /* FallingTileGameModeScene.m */; };
 		0078E60218F980440087786D /* GameSceneBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 0078E60118F980440087786D /* GameSceneBase.m */; };
 		0078E60518F9BA260087786D /* NewGameOverScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 0078E60418F9BA260087786D /* NewGameOverScene.m */; };
-		0078E60A18FA11070087786D /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = 0078E60818FA11070087786D /* Appirater.m */; };
 		0078E60E18FA32150087786D /* ScoresListNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 0078E60D18FA32150087786D /* ScoresListNode.m */; };
 		0078E61018FA37720087786D /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0078E60F18FA37720087786D /* StoreKit.framework */; };
 		0078E61318FA393C0087786D /* MainSceneBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 0078E61218FA393C0087786D /* MainSceneBaseClass.m */; };
 		009C8C2818F0E3530034A7BE /* Globals.m in Sources */ = {isa = PBXBuildFile; fileRef = 009C8C2718F0E3530034A7BE /* Globals.m */; };
+		009C923118FB7464003D28FE /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = 009C922F18FB7464003D28FE /* Appirater.m */; };
 		00B026DD18EB304B0058E591 /* SKButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B026DC18EB304B0058E591 /* SKButton.m */; };
 		00B026E218EB4A8C0058E591 /* DSMultilineLabelNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B026E118EB4A8C0058E591 /* DSMultilineLabelNode.m */; };
 		00BCE5DB18F2E670009F7816 /* ComicNeue-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 00BCE5DA18F2E670009F7816 /* ComicNeue-Light.ttf */; };
@@ -106,9 +106,6 @@
 		0078E60118F980440087786D /* GameSceneBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameSceneBase.m; sourceTree = "<group>"; };
 		0078E60318F9BA260087786D /* NewGameOverScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewGameOverScene.h; sourceTree = "<group>"; };
 		0078E60418F9BA260087786D /* NewGameOverScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewGameOverScene.m; sourceTree = "<group>"; };
-		0078E60718FA11070087786D /* Appirater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Appirater.h; sourceTree = "<group>"; };
-		0078E60818FA11070087786D /* Appirater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Appirater.m; sourceTree = "<group>"; };
-		0078E60918FA11070087786D /* AppiraterDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppiraterDelegate.h; sourceTree = "<group>"; };
 		0078E60C18FA32150087786D /* ScoresListNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoresListNode.h; sourceTree = "<group>"; };
 		0078E60D18FA32150087786D /* ScoresListNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScoresListNode.m; sourceTree = "<group>"; };
 		0078E60F18FA37720087786D /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
@@ -116,6 +113,9 @@
 		0078E61218FA393C0087786D /* MainSceneBaseClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainSceneBaseClass.m; sourceTree = "<group>"; };
 		009C8C2618F0E3530034A7BE /* Globals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Globals.h; sourceTree = "<group>"; };
 		009C8C2718F0E3530034A7BE /* Globals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Globals.m; sourceTree = "<group>"; };
+		009C922E18FB7464003D28FE /* Appirater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Appirater.h; sourceTree = "<group>"; };
+		009C922F18FB7464003D28FE /* Appirater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Appirater.m; sourceTree = "<group>"; };
+		009C923018FB7464003D28FE /* AppiraterDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppiraterDelegate.h; sourceTree = "<group>"; };
 		00B026DB18EB304B0058E591 /* SKButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKButton.h; sourceTree = "<group>"; };
 		00B026DC18EB304B0058E591 /* SKButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKButton.m; sourceTree = "<group>"; };
 		00B026E018EB4A8C0058E591 /* DSMultilineLabelNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSMultilineLabelNode.h; sourceTree = "<group>"; };
@@ -296,9 +296,9 @@
 		0078E60B18FA110B0087786D /* Appirater */ = {
 			isa = PBXGroup;
 			children = (
-				0078E60718FA11070087786D /* Appirater.h */,
-				0078E60818FA11070087786D /* Appirater.m */,
-				0078E60918FA11070087786D /* AppiraterDelegate.h */,
+				009C922E18FB7464003D28FE /* Appirater.h */,
+				009C922F18FB7464003D28FE /* Appirater.m */,
+				009C923018FB7464003D28FE /* AppiraterDelegate.h */,
 			);
 			name = Appirater;
 			path = ..;
@@ -466,7 +466,6 @@
 				0046209018E62B7000DAD16A /* ViewController.m in Sources */,
 				004620B718E62FA400DAD16A /* SKColor+Colors.m in Sources */,
 				0078E60E18FA32150087786D /* ScoresListNode.m in Sources */,
-				0078E60A18FA11070087786D /* Appirater.m in Sources */,
 				00B026DD18EB304B0058E591 /* SKButton.m in Sources */,
 				004620BA18E65AF600DAD16A /* MenuScene.m in Sources */,
 				006C26C018E88263006EAAB6 /* NodeAdditions.m in Sources */,
@@ -475,6 +474,7 @@
 				004C15A318EBAF2F00B58DBA /* SettingsScene.m in Sources */,
 				0046208618E62B7000DAD16A /* main.m in Sources */,
 				009C8C2818F0E3530034A7BE /* Globals.m in Sources */,
+				009C923118FB7464003D28FE /* Appirater.m in Sources */,
 				00DA8B5318F104F500C4A54D /* MKiCloudSync.m in Sources */,
 				0070C92918F367710044E583 /* ScoreSelectionMenu.m in Sources */,
 			);

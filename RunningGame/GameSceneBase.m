@@ -75,7 +75,7 @@
 
 - (void)runTutorialModeWithReturnGameType:(GameType)returnGameType
 {
-    CGFloat tutHeight = self.size.height - xxTileHeight - leadingSpace;
+    CGFloat tutHeight = self.size.height / 2.0;
     TutorialOverlayNode *tutorialNode = [[TutorialOverlayNode alloc] initWithColor:[SKColor _nonStepTileColor]
                                                                               size:CGSizeMake(self.size.width, tutHeight)
                                                                        andGameType:returnGameType];

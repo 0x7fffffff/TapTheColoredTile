@@ -20,7 +20,7 @@ NSString * const xxSoundFileNameTap = @"tap.m4a";
 NSString * const xxSoundFileNameBeep = @"beep.m4a";
 
     // NSUserDefaults Keys
-NSString * const xxxIsFirstRunKey = @"firstRunDefaults";
+NSString * const xxxHasPreviouslyRun = @"xxxHasPreviouslyRun";
 NSString * const xxxShouldPlaySoundsKey = @"shouldPlaySounds";
 NSString * const xxxShouldShowAdsKey = @"shouldShowAds";
 NSString * const xxxHasShownTutorialKey = @"hasShownTutorial";
@@ -36,7 +36,5 @@ CGFloat const xxTileWidth = 80.0;
 // Leaderboard keys
 
 NSString * const xxLeaderboardKeySprintBestTimes = @"SprintLeaderBoard"; // NEVER CHANGE!!!!!!!
-//NSString * const xxLeaderboardKeySprintLastTime = @"lastSprintTimeKey"; // NEVER CHANGE!!!!!!!
 NSString * const xxLeaderboardKeyMarathonBestTimes = @"MarathonLeaderBoard"; // NEVER CHANGE!!!!!!!
-//NSString * const xxLeaderboardKeyMarathonLastTime = @"lastMarathonTimeKey"; // NEVER CHANGE!!!!!!!
-NSString * const xxLeaderboardKeyFallingTilesBestTimes = @"FallingTilesLeaderBoard"; // NEVER CHANGE!!!!!!!
+NSString * const xxLeaderboardKeyFallingTilesBestScores = @"FallingTileLeaderboard"; // NEVER CHANGE!!!!!!!

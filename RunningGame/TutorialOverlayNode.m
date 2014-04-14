@@ -10,10 +10,13 @@
 #import "SKColor+Colors.h"
 #import "OriginalGameModeScene.h"
 #import "DSMultilineLabelNode.h"
+#import "FallingTileGameModeScene.h"
 
 @interface TutorialOverlayNode ()
+
 @property (nonatomic, assign) NSInteger index;
 @property (nonatomic, assign) GameType gameType;
+
 @end
 
 @implementation TutorialOverlayNode
@@ -43,7 +46,7 @@
         [mainLabel setParagraphWidth:size.width - 20.0];
         [mainLabel setFontSize:24.0];
         [mainLabel setName:@"mainLabel"];
-        [mainLabel setText:[self sprintModeTextArray][self.index]];
+        [mainLabel setText:[self textArrayForGameType:self.gameType][self.index]];
         [mainLabel setVerticalAlignmentMode:SKLabelVerticalAlignmentModeCenter];
         [mainLabel setHorizontalAlignmentMode:SKLabelHorizontalAlignmentModeCenter];
         [mainLabel setPosition:CGPointMake(0.0, 0.0)];
@@ -60,31 +63,62 @@
 {
     self.index ++ ;
     
-    if (self.index < [self sprintModeTextArray].count) {
+    if (self.index < [self textArrayForGameType:self.gameType].count) {
         SKLabelNode *mainLabel = (SKLabelNode *)[self childNodeWithName:@"mainLabel"];
-        [mainLabel setText:[self sprintModeTextArray][self.index]];
+        [mainLabel setText:[self textArrayForGameType:self.gameType][self.index]];
         [mainLabel setFontColor:[SKColor _stepTileColor]];
     }else{
         
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"hasShownTutorial"];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:xxxHasShownTutorialKey];
         [[NSUserDefaults standardUserDefaults] synchronize];
-        
-        OriginalGameModeScene *scene = [[OriginalGameModeScene alloc] initWithSize:self.scene.size andGameType:self.gameType];
+
+        SKScene *scene = nil;
+
+        if (self.gameType == GameTypeFallingTiles) {
+            scene = [[FallingTileGameModeScene alloc] initWithSize:self.scene.size];
+        }else{
+            scene = [[OriginalGameModeScene alloc] initWithSize:self.scene.size andGameType:self.gameType];
+        }
         [scene setScaleMode:SKSceneScaleModeFill];
-        
-        [self.scene.view presentScene:scene transition:[SKTransition doorwayWithDuration:0.35]];
+
+        SKTransition *transition = [SKTransition moveInWithDirection:SKTransitionDirectionUp duration:0.35];
+        [transition setPausesIncomingScene:NO];
+        [transition setPausesOutgoingScene:NO];
+
+        [self.scene.view presentScene:scene transition:transition];
     }
 }
 
-- (NSArray *)sprintModeTextArray
+- (NSArray *)textArrayForGameType:(GameType)gameType
+{
+    if (gameType == GameTypeFallingTiles) {
+        return [self fallingTilesModeTextArray];
+    }else{
+        return [self sprintAndMarathonModesTextArray];
+    }
+}
+
+- (NSArray *)sprintAndMarathonModesTextArray
 {
     static NSArray *array = nil;
     
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        array = @[@"Tap the tile at the bottom of the screen.",@"You can only tap the bottom most full tile.",@"Tapping anywhere else will cause you to lose!",@"Tap as quickly as you can. The faster you are the better!",@"It looks like you're getting it!"];
+        array = @[@"Tap the tile at the bottom of the screen.", @"You can only tap the bottom most full tile.", @"Tapping anywhere else will cause you to lose!", @"Tap as quickly as you can. The faster you are the better!", @"Sprint mode goes to 50 and Marathon mode goes to 250!", @"It looks like you're getting it. Good luck!"];
     });
     
+    return array;
+}
+
+- (NSArray *)fallingTilesModeTextArray
+{
+    static NSArray *array = nil;
+
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        array = @[@"Tap the tiles before they fall off the screen!", @"The order that you tap the tiles doesn't matter!", @"Tapping anywhere else will cause you to lose!", @"The tiles will progressively move faster and faster!", @"Try to go for as long as you can!", @"It looks like you're getting it. Good luck!"];
+    });
+
     return array;
 }
 
