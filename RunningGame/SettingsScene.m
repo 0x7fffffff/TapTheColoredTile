@@ -127,7 +127,7 @@
         [soundsToggleButton addActionOfType:SKButtonActionTypeTouchUpInside withBlock:^{
             if (weakSound.tag) {
                 [weakSound setTag:0];
-                [weakSound setColor:[UIColor lightGrayColor]];
+                [weakSound setColor:[SKColor lightGrayColor]];
                 [weakSound setText:@"Turn Sounds On"];
             }else{
                 [weakSound setTag:1];

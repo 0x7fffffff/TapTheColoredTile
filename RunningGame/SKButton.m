@@ -23,7 +23,7 @@
 
 @implementation SKButton
 
-- (instancetype)initWithColor:(UIColor *)color size:(CGSize)size
+- (instancetype)initWithColor:(SKColor *)color size:(CGSize)size
 {
     self = [super initWithColor:color size:size];
     
@@ -34,9 +34,39 @@
         [self setActionBitmask:0];
         [self setOverrideSoundSettings:NO];
         [self addChild:self.label];
+        [self generateSubTiles];
     }
     
     return self;
+}
+
+- (void)generateSubTiles
+{
+    CGSize superSize = self.size;
+    CGSize subSize = CGSizeMake(superSize.width / 4.0, superSize.height / 4.0);
+    
+    for (int y = -2; y <= 2; y ++) {
+        for (int x = -2; x <= 2; x ++) {
+            if (x && y) {
+                SKSpriteNode *subNode = [[SKSpriteNode alloc] initWithColor:self.color size:subSize];
+                [subNode setAnchorPoint:CGPointMake(0.5, 0.5)];
+                [subNode setName:@"particle"];
+                [subNode setPosition:CGPointMake(subSize.width * x - subSize.width / 2.0 * (x / fabs(x)), subSize.height * y - subSize.height / 2.0 * (y / fabs(y)))];
+
+                [self addChild:subNode];
+            }
+        }
+    }
+    
+    [self setColor:[SKColor clearColor]];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self enumerateChildNodesWithName:@"particle" usingBlock:^(SKNode *node, BOOL *stop) {
+            SKAction *move = [SKAction moveBy:CGVectorMake(node.position.x, - fabs(node.position.y)) duration:2.0];
+            SKAction *scale = [SKAction scaleTo:0.0 duration:2.0];
+            [node runAction:[SKAction group:@[move, scale]]];
+        }];
+    });
 }
 
 - (SKColor *)highlightedColor
@@ -144,7 +174,7 @@
     [self.label setFontName:fontName];
 }
 
-- (void)setTextColor:(UIColor *)textColor
+- (void)setTextColor:(SKColor *)textColor
 {
     _textColor = textColor;
     
