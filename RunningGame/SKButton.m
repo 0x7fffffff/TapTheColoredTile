@@ -120,7 +120,12 @@
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [super touchesEnded:touches withEvent:event];
-    
+
+    if (self.actionBitmask ^ SKButtonActionTypeTouchDown) {
+        [self setColor:self.originalBackgroundColor];
+        [self setOriginalBackgroundColor:nil];
+    }
+
     if (self.actionBitmask > 0) {
         if (self.actionBitmask & SKButtonActionTypeTouchUpInside) {
             CGPoint location = [[touches anyObject] locationInNode:self];
@@ -128,25 +133,14 @@
             BOOL containsPoint = [self isPoint:location inNode:self];
 
             if (containsPoint) {
-                if (self.overrideSoundSettings) {
-                    if (![self shouldPlaySounds]) {
-                        [self runAction:[self _tapSoundAction]];
-                    }
-                }else{
-                    if ([self shouldPlaySounds]) {
-                        [self runAction:[self _tapSoundAction]];
-                    }
+                if (self.overrideSoundSettings != [self shouldPlaySounds]) {
+                    [self runAction:[self _tapSoundAction]];
                 }
 
                 self.touchUpInsideBlock();
                 [self setStartingTouchLocation:CGPointZero];
             }
             
-        }
-
-        if (self.actionBitmask ^ SKButtonActionTypeTouchDown) {
-            [self setColor:self.originalBackgroundColor];
-            [self setOriginalBackgroundColor:nil];
         }
     }
 }
