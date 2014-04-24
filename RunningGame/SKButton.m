@@ -34,7 +34,7 @@
         [self setActionBitmask:0];
         [self setOverrideSoundSettings:NO];
         [self addChild:self.label];
-        [self generateSubTiles];
+//        [self generateSubTiles];
     }
     
     return self;
@@ -121,17 +121,13 @@
 {
     [super touchesEnded:touches withEvent:event];
     
-    if (self.actionBitmask ^ SKButtonActionTypeTouchDown) {
-        [self setColor:self.originalBackgroundColor];
-        [self setOriginalBackgroundColor:nil];
-    }
-
-    
     if (self.actionBitmask > 0) {
         if (self.actionBitmask & SKButtonActionTypeTouchUpInside) {
             CGPoint location = [[touches anyObject] locationInNode:self];
-            
-            if (fabs(location.x - self.startingTouchLocation.x) <= self.frame.size.width / 2.0 && fabs(location.y - self.startingTouchLocation.y) <= self.frame.size.height / 2.0) {
+
+            BOOL containsPoint = [self isPoint:location inNode:self];
+
+            if (containsPoint) {
                 if (self.overrideSoundSettings) {
                     if (![self shouldPlaySounds]) {
                         [self runAction:[self _tapSoundAction]];
@@ -147,7 +143,49 @@
             }
             
         }
+
+        if (self.actionBitmask ^ SKButtonActionTypeTouchDown) {
+            [self setColor:self.originalBackgroundColor];
+            [self setOriginalBackgroundColor:nil];
+        }
     }
+}
+
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [super touchesMoved:touches withEvent:event];
+
+    if (self.actionBitmask ^ SKButtonActionTypeTouchDown) {
+
+        CGPoint location = [[touches anyObject] locationInNode:self];
+
+        BOOL containsPoint = [self isPoint:location inNode:self];
+
+        if (containsPoint) {
+            if (!self.originalBackgroundColor) {
+                [self setOriginalBackgroundColor:self.color];
+                [self setColor:[self highlightedColor]];
+            }
+        }else{
+            if (self.originalBackgroundColor) {
+                [self setColor:self.originalBackgroundColor];
+                [self setOriginalBackgroundColor:nil];
+            }
+        }
+    }
+}
+
+- (BOOL)isPoint:(CGPoint)point inNode:(SKSpriteNode *)node
+{
+    CGFloat width = node.size.width;
+    CGFloat height = node.size.height;
+
+    point.x += width / 2.0;
+    point.y += height / 2.0;
+
+    CGRect bounds = CGRectMake(0.0, 0.0, width, height);
+
+    return CGRectContainsPoint(bounds, point);
 }
 
 - (void)addActionOfType:(SKButtonActionType)type withBlock:(ActionBlock)actionBlock;
