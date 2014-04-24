@@ -122,8 +122,10 @@
     [super touchesEnded:touches withEvent:event];
 
     if (self.actionBitmask ^ SKButtonActionTypeTouchDown) {
-        [self setColor:self.originalBackgroundColor];
-        [self setOriginalBackgroundColor:nil];
+        if (self.originalBackgroundColor) {
+            [self setColor:self.originalBackgroundColor];
+            [self setOriginalBackgroundColor:nil];            
+        }
     }
 
     if (self.actionBitmask > 0) {
