@@ -71,23 +71,17 @@
 
     [self setLeaderBoard:previousScoresKey];
 
-    NSArray *legacyRecoveryAttempt = [self attemptToLoadLegacyScores];
-    NSArray *newScoresArray = nil;
-
+    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
-    if (legacyRecoveryAttempt) {
-        newScoresArray = legacyRecoveryAttempt;
-    }else{
-        newScoresArray = [defaults objectForKey:previousScoresKey];
-    }
+    NSArray *newScoresArray = [defaults objectForKey:previousScoresKey];
 
     NSMutableSet *workingMutableArray = [NSMutableSet new];
 
     if (newScoresArray) {
         [workingMutableArray addObjectsFromArray:newScoresArray];
     }
-
+    NSLog(@"++++ %@",workingMutableArray);
     NSNumber *newNumber = @([[NSString stringWithFormat:@"%.3f",newScore] doubleValue]);
     if (newScore > 0) {
         [workingMutableArray addObject:newNumber];
@@ -155,40 +149,6 @@
     [self.subTitleLabel setText:@"Tap any score to share"];
 }
 
-- (NSArray *)attemptToLoadLegacyScores
-{
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-
-    if (self.gameType == GameTypeSprint) {
-
-        NSString *key = @"bestSprintTimeKey";
-
-        NSArray *candidate = [[defaults objectForKey:key] copy];
-        if (candidate) {
-
-            [defaults removeObjectForKey:key];
-            [defaults synchronize];
-            return candidate;
-        }
-        return nil;
-
-    }else if (self.gameType == GameTypeMarathon) {
-
-        NSString *key = @"bestMarathonTimeKey";
-
-        NSArray *candidate = [[defaults objectForKey:key] copy];
-        if (candidate) {
-
-            [defaults removeObjectForKey:key];
-            [defaults synchronize];
-            return candidate;
-        }
-        return nil;
-
-    }else{
-        return nil;
-    }
-}
 
 - (void)addButtonsAndLabels
 {
