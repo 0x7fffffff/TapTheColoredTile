@@ -5,15 +5,15 @@ TapTheColoredTile
 
 
 TODO 1.6
-========
+--------
 
-Stats tracking
-In app purchase (remove ads)
+1. Stats tracking
+2. In app purchase (remove ads)
 
 
 
 
 
 Stats to Track
-==============
+--------------
 
