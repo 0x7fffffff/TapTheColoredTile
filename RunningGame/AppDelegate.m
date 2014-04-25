@@ -21,7 +21,7 @@
     [Appirater setUsesUntilPrompt:30];
     [Appirater setSignificantEventsUntilPrompt:20];
     [Appirater setTimeBeforeReminding:2];
-    [Appirater setOpenInAppStore:NO];
+    [Appirater setOpenInAppStore:YES];
     [Appirater setDebug:NO];
 
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
