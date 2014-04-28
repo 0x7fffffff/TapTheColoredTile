@@ -127,7 +127,6 @@
     if (newScore > 0) {
         if (index == 0) {
             titleText = @"New Record!";
-            [self attemptGameCenterScoreReporting];
         }else if (index <= 4) {
             if (self.gameType == GameTypeFallingTiles) {
                 titleText = @"Nice Score!";
@@ -137,6 +136,9 @@
         }else{
             titleText = [scoresList listStringFromScore:newNumber forGameType:self.gameType];
         }
+        
+        [self attemptGameCenterScoreReporting];
+
     }else{
         if (self.gameType == GameTypeFallingTiles) {
             titleText = @"Best Scores";
