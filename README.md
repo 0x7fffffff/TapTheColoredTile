@@ -1,19 +1,4 @@
-TapTheColoredTile
+Tap the Colored Tile
 =================
 
-
-
-
-TODO 1.6
---------
-
-1. Stats tracking
-2. In app purchase (remove ads)
-
-
-
-
-
-Stats to Track
---------------
-
+Just another Don't Step the White Tile clone.
